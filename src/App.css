@@ -1,0 +1,369 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: volvoFont;
+}
+
+/*  Layout  JE  */
+
+.header {
+  width: 100%;
+  height: 170px;
+  background-color: #474646;
+  text-align: center;
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  transition: 0.5s;
+}
+
+section section {
+  width: 100%;
+  height: calc(100vh - 125px);
+  background-color: white;
+  margin-block-end: 0px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+  section section:first-of-type {
+      margin-top: 170px;
+      height: calc(100vh - 170px);
+      background-color: white;
+  }
+
+.Start h3 {
+  position: absolute;
+  z-index: 10;
+}
+
+
+footer {
+  width: 100%;
+  height: 200px;
+  background-color: #ccc;
+}
+
+/*  Header  JE  */
+
+.headerController {
+  width: 100%;
+  height: 40px;
+  border: none;
+}
+
+.header a {
+  display: block;
+  float: right;
+  line-height: 20px;
+  margin-top: 5px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1em;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+  .header a:first-of-type {
+      margin-right: 15%;
+  }
+
+  .header a:hover {
+      color: white;
+      text-decoration: underline;
+  }
+
+.header h1 {
+  font-size: 2em;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  position: relative;
+  color: white;
+  text-shadow: 1px 2px black;
+  transition: 0.5s;
+}
+
+.header h1:hover {
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin { 
+  0% {
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  } 
+}
+
+.h1Mover {
+  font-size: 1.8em !important;
+}
+
+.headShrinker {
+  height: 130px;
+}
+
+.NavigationBar {
+  width: 70%;
+  float: left;
+  position: absolute;
+  bottom: 20px;
+  margin-left: 15%;
+}
+
+  .NavigationBar a {
+      width: 25%;
+      float: left;
+      margin: 0px !important;
+      cursor: pointer;
+      color: white !important;
+  }
+
+  .NavigationBar > .active {
+      box-shadow: 0 2px 2px -2px white;
+  }
+
+/*  Dropdown in Navbar  */
+
+.dropdown {
+  width: 20%;
+  position: relative;
+  display: block;
+  float: right;
+  margin-right: 15%;
+  cursor: pointer;
+  line-height: 20px;
+  margin-top: 5px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1em;
+  box-sizing: border-box;
+  padding: 5px;
+  text-align: right;
+}
+
+.dropdown p img {
+  width: 12px;
+  transform: rotate(-90deg);
+  margin-left: 10px;
+  transition: 0.3s;
+}
+
+.menyIcon {
+  display: none;
+}
+
+.closeSideMeny {
+  display: none !important;
+}
+
+.dropdown:hover img {
+  transform: rotate(0deg);
+}
+
+.dropdown-content {
+  height: auto;
+  width: auto;
+  display: none;
+  position: absolute;
+  width: 70%;
+  right: 0;
+  background-color: rgba(105,103,100, 0.8);
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,1);
+  z-index: 40;
+  margin-block-start: 5px;
+}
+
+.dropdown-content p {
+    height: 45px;
+    line-height: 45px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.dropdown-content p:hover {
+  text-decoration: underline;
+  background-color: rgba( 0, 0, 0, 0.4);
+}
+
+.dropdown-content p:last-of-type {
+  border-bottom: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content p a {
+  width: 100%;
+  height: 45px;
+  float: none;
+  margin: 0;
+  padding: 0;
+  line-height: 45px;
+}
+
+/*  Scrollbar   JE  */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px black;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/*  Start JE  */
+
+.imgSlider {
+  width: 400%;
+  height:  calc(100vh - 170px);
+  position: relative;
+  transition: 1.5s;
+  /*
+  animation-name: slider;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  */
+}
+
+.imgSlide {
+  width: 25%;
+  height: 100%;
+}
+
+.slideContainer section {
+  position: absolute;
+  height: 10px !important;
+  width: 30%;
+  background-color: transparent !important;
+  margin: 0 !important;
+  z-index: 10;
+  bottom: 20px;
+  right: 35%;
+}
+
+.slideContainer section div {
+  height: 10px;
+  width: 20%;
+  background-color: lightgrey;
+  float: left;
+  margin-right: 5%;
+  cursor: pointer;
+  transition: 1.5s;
+}
+
+.slideContainer section div:hover {
+  background-color: grey !important;
+}
+
+@keyframes slider {
+  0%   {
+    right: 0%;
+  }
+  20%  {
+    right: 0%;
+  }
+  25%  {
+    right: 100%;
+  }
+  45%  {
+    right: 100%;
+  }
+  50%  {
+    right: 200%;
+  }
+  70% {
+    right: 200%;
+  }
+  75% {
+    right: 300%;
+  }
+  95% {
+    right: 300%;
+  }
+  100% {
+    right: 0%;
+  }
+}
+
+/*  Posts JE  */
+
+.Posts a {
+  margin-top: 50px !important;
+  display: block;
+}
+
+/*  Make new post JE  */
+
+.New_Post {
+  padding-top: 40px;
+}
+
+/*  About JE  */
+
+/*  Log & Reg Form  JE  */
+
+/*  Account Page    JE  */
+
+textarea {
+  height: 200px;
+  resize: none !important;
+}
+
+img {
+  height: 150px;
+}
+
+.accountPage header {
+  height: 50px;
+  position: relative;
+}
+
+.accountPage header h1 {
+  font-size: 1.5em !important;
+  position: absolute;
+  top: 10px;
+  left: 15%;
+  width: 50%;
+  text-align: left;
+  transition: none !important;
+}
+
+.accountPage .dropdown {
+  height: 50px;
+}
+
+.accountPage .dropdown p {
+  line-height: 25px;
+}
+
+.uploadsLink {
+  border-bottom: 1px solid black !important;
+}
+
+.accountPage .dropdown div p {
+  line-height: 45px;
+}

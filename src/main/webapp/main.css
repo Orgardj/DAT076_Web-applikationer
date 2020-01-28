@@ -1,0 +1,54 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 24, 2020, 12:20:02 PM
+    Author     : david
+*/
+
+h1 {
+    
+}
+
+body {
+    
+}
+
+.recipehead{
+    background-color: lightcyan;
+    text-align: center;
+}
+
+.recipehead img{
+    width: 80%;
+    height: 80%;
+    border-radius: 12px;
+}
+a, a:hover{
+    text-decoration: none;
+    color: inherit;
+}
+
+.ingredients {
+    border: 8px double lightcoral;
+    
+}
+
+@keyframes example {
+  0%   {left:0px; top:0px;}
+  50%  {left:85%; top:0px;}
+  100% {left:0px; top:0px;}
+}
+
+/* The element to apply the animation to */
+#animation {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  background-color: white; 
+  animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}

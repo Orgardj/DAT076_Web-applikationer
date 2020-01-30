@@ -3,16 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function() {
-    var timer = document.getElementById("btnId");
+//$( document ).ready(function() {});
+window.onload = function() {
+    var timer1min = document.getElementById("1mintimer");
+    var animation = document.getElementById("animation");
 
     function countdown () {
+        
+      
+      animation.style.animationPlayState="running";
       var hide = document.getElementById("animation");
       hide.style.backgroundColor = "red";
 
       var yourDateToGo = new Date();
       yourDateToGo.setDate(yourDateToGo.getDate());
-      yourDateToGo = new Date(yourDateToGo.getTime() + timer.value*1000 + 1000); //minutes + 1 second offset
+      yourDateToGo = new Date(yourDateToGo.getTime() + timer1min.value*60000 + 1000); //minutes + 1 second offset
 
       var timing = setInterval(
       function () {
@@ -25,21 +30,20 @@ $(document).ready(function() {
           var secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
           if (secondsLeft < 10) secondsLeft="0"+secondsLeft;
 
-          document.getElementById("countdown2").innerHTML = minutesLeft + "m " + secondsLeft + "s";  
+          document.getElementById("countdown").innerHTML = minutesLeft + "m " + secondsLeft + "s";  
 
 
           if (timeLeft <= 0) {
             clearInterval(timing);
-            document.getElementById("countdown2").innerHTML = "It's over"; 
+            document.getElementById("countdown").innerHTML = "It's over"; 
             hide.style.backgroundColor = "white";
 
           }
-      }, 1000);
+      },0);
 
     }
 
-timer.addEventListener('click', countdown);
-});
-
+timer1min.addEventListener('click', countdown);
+}
 
             

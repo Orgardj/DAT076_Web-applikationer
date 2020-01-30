@@ -47,8 +47,10 @@ a, a:hover{
   width: 100px;
   height: 100px;
   position: relative;
-  background-color: white; 
+  background-color: white;
+  border-radius:50%;
   animation-name: example;
   animation-duration: 4s;
   animation-iteration-count: infinite;
+  animation-play-state: paused;
 }

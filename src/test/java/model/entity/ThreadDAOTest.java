@@ -5,8 +5,8 @@ import java.util.Date;
 import javax.ejb.EJB;
 import org.junit.Assert;
 import model.dao.PostDAO;
-import model.dao.SectionDAO;
-import model.dao.TopicDAO;
+import model.dao.CategoryDAO;
+import model.dao.ThreadDAO;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -17,44 +17,43 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
 @RunWith(Arquillian.class)
-public class TopicDAOTest {
+public class ThreadDAOTest {
 
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(TopicDAO.class, Topic.class, Post.class,Account.class,PostDAO.class,Section.class,SectionDAO.class)
+                .addClasses(ThreadDAO.class, Thread.class, Post.class, Account.class, PostDAO.class, Category.class, CategoryDAO.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
+
     @EJB
-    private TopicDAO topicDAO;
+    private ThreadDAO threadDAO;
     @EJB
-    private SectionDAO sectionDAO;
+    private CategoryDAO categoryDAO;
+
     @Before
     public void init() {
-        
-        Section section = new Section(new ArrayList<>(), "Douche","Im a douche");
-        sectionDAO.create(section);
-        
-        topicDAO.create(new Topic(section,new ArrayList<>(),"Data","sten",Long.valueOf(5),new Date()));
-    
+        Category category = new Category("Douche", "Im a douche", new ArrayList<>());
+        categoryDAO.create(category);
+
+        threadDAO.create(new Thread("Data", Long.valueOf(5), new Date(), category, new ArrayList<>()));
     }
 
     @Test
-    public void checkThatFindTopicMatchingTitleMatchesCorrectly() {
-        Assert.assertEquals("Data", new ArrayList<>(topicDAO.findTopicMatchingTitle("Data")).get(0).getTitle());
+    public void checkThatFindThreadMatchingTitleMatchesCorrectly() {
+        Assert.assertEquals("Data", threadDAO.findThreadMatchingTitle("Data").getTitle());
     }
-    
+
     @After
     public void clear() {
-        topicDAO.findAll().forEach((topic) -> {
-            topicDAO.remove(topic);
+        threadDAO.findAll().forEach((thread) -> {
+            threadDAO.remove(thread);
         });
-        
-        sectionDAO.findAll().forEach((section) -> {
-            sectionDAO.remove(section);
+
+        categoryDAO.findAll().forEach((category) -> {
+            categoryDAO.remove(category);
         });
     }
 

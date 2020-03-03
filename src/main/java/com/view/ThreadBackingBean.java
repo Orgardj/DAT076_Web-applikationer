@@ -7,31 +7,28 @@ package com.view;
 
 /**
  *
- * @author jblom
+ * @author Team J
  */
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Data;
-import model.dao.SectionDAO;
-import model.entity.Section;
+import model.dao.ThreadDAO;
+import model.entity.Thread;
 
 @Data
 @Named
 @ViewScoped
-public class SectionBackingBean implements Serializable {
+public class ThreadBackingBean implements Serializable {
 
-    @EJB    
-    private SectionDAO sectionDAO;
-    
-    private List<Section> sections;
+    @EJB
+    private ThreadDAO threadDAO;
 
-    @PostConstruct
-    private void init() {
-        sections = new ArrayList<>(sectionDAO.findAll());
+    private List<Thread> threads;
+
+    public List<Thread> getMatchingThreads(Long tId) {
+        return threadDAO.findThreadsMatchingCategory(tId);
     }
 }

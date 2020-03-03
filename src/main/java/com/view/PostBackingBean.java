@@ -7,7 +7,7 @@ package com.view;
 
 /**
  *
- * @author jblom
+ * @author Team J
  */
 import java.io.Serializable;
 import java.util.Date;
@@ -19,9 +19,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Data;
 import model.dao.PostDAO;
-import model.dao.TopicDAO;
+import model.dao.ThreadDAO;
 import model.entity.Post;
-import model.entity.Topic;
+import model.entity.Thread;
 import org.omnifaces.cdi.Param;
 
 @Data
@@ -35,7 +35,7 @@ public class PostBackingBean implements Serializable {
     private PostDAO postDAO;
 
     @EJB
-    private TopicDAO topicDAO;
+    private ThreadDAO threadDAO;
 
     @Inject
     @Param
@@ -43,28 +43,28 @@ public class PostBackingBean implements Serializable {
 
     private Post post;
 
+    private Thread thread;
+
     private List<Post> posts;
 
-    /*public Post getActivePost() {
-        return postDAO.find(id);
-    }*/
     @PostConstruct
     private void init() {
-        posts = postDAO.findPostsMatchingPId(id);
+        thread = getThread();
+        posts = postDAO.findPostsMatchingUser(id);
         post = posts.get(0);
     }
 
-    public Topic getTopic() {
-        return topicDAO.find(id);
+    public Thread getThread() {
+        return threadDAO.find(id);
     }
 
     public void createComment() {
-        postDAO.create(new Post(post.getUser(), post.getTopic(), "Scrum is not best", enteredMessage, new Date()));
-        posts = postDAO.findPostsMatchingPId(id);
+        postDAO.create(new Post(enteredMessage, new Date(), post.getUser(), post.getThread()));
+        posts = postDAO.findPostsMatchingUser(id);
     }
 
-    public Topic getMatchingTopic(Long tId) {
-        return topicDAO.findTopicMatchingId(tId);
+    public Thread getMatchingPost(Long pId) {
+        return threadDAO.findThreadMatchingTId(pId);
     }
 
 }

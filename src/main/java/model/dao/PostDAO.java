@@ -8,8 +8,6 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 import model.entity.Post;
 import model.entity.QPost;
-import model.entity.QTopic;
-import model.entity.Topic;
 
 /**
  *
@@ -26,31 +24,34 @@ public class PostDAO extends AbstractDAO<Post, Long> {
         super(Post.class);
     }
 
-    public List<Post> findPostMatchingTitle(String title) {
-        return (List<Post>) entityManager.createQuery("SELECT t FROM Post t WHERE t.title = :title")
-                .setParameter("title", title).getResultList();
-    }
-    
-    public Post findPostMatchingPId(Long tId) {
-        //return (List<Post>) entityManager.createQuery("SELECT t FROM Post t WHERE t.tId = :tId")
-          //      .setParameter("tId", tId).getResultList();
-          JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
-        QPost post = QPost.post;
-        
-        return queryFactory.selectFrom(post)
-               .where(post.topic.tId.eq(tId))
-               .fetchFirst();
-    }
-    
-    public List<Post> findPostsMatchingPId(Long tId) {
+    public List<Post> findPostsMatchingUserName(String userName) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QPost post = QPost.post;
-        
+
         List<Post> l = queryFactory.selectFrom(post)
-                        .where(post.topic.tId.eq(tId))
-                        .fetch();
-        
+                .where(post.user.userName.eq(userName))
+                .fetch();
+
+        return l;
+    }
+
+    public Post findPostMatchingPId(Long pId) {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+        QPost post = QPost.post;
+
+        return queryFactory.selectFrom(post)
+                .where(post.post.pId.eq(pId))
+                .fetchFirst();
+    }
+
+    public List<Post> findPostsMatchingUser(Long tId) {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+        QPost post = QPost.post;
+
+        List<Post> l = queryFactory.selectFrom(post)
+                .where(post.thread.tId.eq(tId))
+                .fetch();
+
         return l;
     }
 }
-

@@ -16,19 +16,21 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Section implements Serializable {
-     
-    @NonNull
-    @OneToMany(mappedBy = "section") private List<Topic> topics;
-    
+public class Category implements Serializable {
+    //Section is a reserved SQL keyword
+
     @Id
     @GeneratedValue
-    private Long sId;
-    
+    private Long cId;
+
     @NonNull
-    @Column(unique=true)
+    @Column(unique = true)
     private String name;
-    
+
     @NonNull
-    private String message;
+    private String description;
+
+    @NonNull
+    @OneToMany(mappedBy = "category")
+    private List<Thread> threads;
 }

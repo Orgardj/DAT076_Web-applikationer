@@ -18,28 +18,27 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Topic implements Serializable {
-    
-    @JoinColumn(name = "sId", nullable = false)
-    @NonNull
-    @ManyToOne private Section section;
-    
+public class Thread implements Serializable {
+
     @Id
     @GeneratedValue
     private Long tId;
-    
-    @NonNull
-    @OneToMany(mappedBy = "topic") private List<Post> posts;
-    
+
     @NonNull
     private String title;
-    
-    @NonNull
-    private String text;
-    
+
     @NonNull
     private Long views;
-    
+
     @NonNull
     private Date creationTimestamp;
+
+    @JoinColumn(name = "cId", nullable = false)
+    @NonNull
+    @ManyToOne
+    private Category category;
+
+    @NonNull
+    @OneToMany(mappedBy = "thread")
+    private List<Post> posts;
 }

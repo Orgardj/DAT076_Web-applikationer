@@ -8,13 +8,13 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Post</title>
+        <title>Thread</title>
     </h:head>
     <h:body>
-        <h1>#{postBackingBean.topic.title}</h1>
+        <h1>#{postBackingBean.thread.title}</h1>
         <c:forEach var="post" items="#{postBackingBean.posts}">
-            <div>#{post.timestamp}</div>
-            <h:panelGrid id = "panel_#{post.pid}" columns = "2" border = "1"
+            <div>#{post.creationTimestamp}</div>
+            <h:panelGrid id = "panel_#{post.PId}" columns = "2" border = "1"
                          cellpadding = "10" cellspacing = "1">
                 <h:panelGrid id = "panel2" columns = "1" border = "0"
                              cellpadding = "10" cellspacing = "1">
@@ -31,7 +31,9 @@ and open the template in the editor.
         <h:form> 
             <div class="ui-inputgroup">
                 <p:inputText placeholder="comment" value="#{postBackingBean.enteredMessage}"/>  
-                <p:commandButton value="Comment" action="#{postBackingBean.createComment}" onclick="setTimeout(function(){window.location.reload()}, 200);"/>
+                <p:commandButton value="Comment" action="#{postBackingBean.createComment}" onclick="setTimeout(function () {
+                            window.location.reload()
+                        }, 200);"/>
             </div>
         </h:form>
 

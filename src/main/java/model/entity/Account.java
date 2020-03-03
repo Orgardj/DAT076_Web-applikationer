@@ -18,30 +18,31 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class Account implements Serializable {
- 
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "user") private List<Post> posts;
-    
+
     @Id
     @NonNull
     private String userName;
-    
+
     @NonNull
-    @Column(unique=true)
-    private String email;
-    
-    @NonNull 
-    private String role;
-    
-    @NonNull 
-    private String firstName;
-    
-    @NonNull 
-    private String lastName;
-    
-    @NonNull 
     private String password;
-    
-    @NonNull 
+
+    @NonNull
+    @Column(unique = true)
+    private String email;
+
+    @NonNull
+    private String role;
+
+    @NonNull
+    private String firstName;
+
+    @NonNull
+    private String lastName;
+
+    @NonNull
     private Date registerDate;
+
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 }

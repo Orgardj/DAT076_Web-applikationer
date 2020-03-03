@@ -32,15 +32,15 @@ public abstract class AbstractDAO<T, K> {
     public void create(T entity) {
         getEntityManager().persist(entity);
     }
-    
+
     public T find(K key) {
         return getEntityManager().find(entityType, key);
     }
-    
+
     public void update(T entity) {
         getEntityManager().merge(entity);
     }
-    
+
     public List<T> findAll() {
         final CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityType));

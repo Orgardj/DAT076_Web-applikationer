@@ -26,15 +26,15 @@ public class AccountDAO extends AbstractDAO<Account, String> {
         return (Account) entityManager.createQuery("SELECT a FROM Account a WHERE a.userName = :userName")
                 .setParameter("userName", userName).getSingleResult();
     }
-    
+
     public Account findAccountMatchingEmail(String email) {
         return (Account) entityManager.createQuery("SELECT a FROM Account a WHERE a.email = :email")
                 .setParameter("email", email).getSingleResult();
     }
-    
+
     public List<Account> findAccountsMatchingRole(String role) {
         return (List<Account>) entityManager.createQuery("SELECT a FROM Account a WHERE a.role = :role")
                 .setParameter("role", role).getResultList();
     }
-    
+
 }

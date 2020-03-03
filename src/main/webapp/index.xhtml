@@ -4,10 +4,10 @@
     </h:head>
     <h:body>
         <h1>Welcome to Forum</h1>
-        <p:dataTable value="#{sectionBackingBean.sections}" var="section"
+        <p:dataTable value="#{categoryBackingBean.categories}" var="category"
                      paginator="true" rows="10">
-            <p:column headerText="Name" sortBy="#{section.name}"> <a href="/lab3/section.xhtml?id=#{section.SId}">#{section.name}</a></p:column>
-            <p:column headerText="Description" sortBy="#{section.message}">#{section.message}</p:column>
+            <p:column headerText="Name" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
+            <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
         </p:dataTable>
     </h:body>
 </html>

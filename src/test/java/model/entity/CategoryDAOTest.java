@@ -3,7 +3,7 @@ package model.entity;
 import java.util.ArrayList;
 import javax.ejb.EJB;
 import org.junit.Assert;
-import model.dao.SectionDAO;
+import model.dao.CategoryDAO;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -14,42 +14,39 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
 @RunWith(Arquillian.class)
-public class SectionDAOTest {
+public class CategoryDAOTest {
 
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(SectionDAO.class, Section.class,Topic.class,Account.class,Post.class)
+                .addClasses(CategoryDAO.class, Category.class, Thread.class, Account.class, Post.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
     @EJB
-    private SectionDAO sectionDAO;
+    private CategoryDAO categoryDAO;
 
     @Before
     public void init() {
-        
-        sectionDAO.create(new Section(new ArrayList<>(), "Douche","Im a douche"));
-       
+        categoryDAO.create(new Category("Douche", "Im a douche", new ArrayList<>()));
     }
 
     @Test
-    public void checkThatFindSectionMatchingNameMatchesCorrectly() {
-        Assert.assertEquals("Douche", sectionDAO.findSectionMatchingName("Douche").getName());
+    public void checkThatFindCategoryMatchingNameMatchesCorrectly() {
+        Assert.assertEquals("Douche", categoryDAO.findCategoryMatchingName("Douche").getName());
     }
-    
+
     @Test
-    public void checkThatUpdateSectionUpdatesCorrectly() {
-        sectionDAO.update(new Section(new ArrayList<>(), "Not douche","Im not a douche"));
-        Assert.assertEquals("Not douche", sectionDAO.findSectionMatchingName("Not douche").getName());
+    public void checkThatUpdateCategoryUpdatesCorrectly() {
+        categoryDAO.update(new Category("Not douche", "Im not a douche", new ArrayList<>()));
+        Assert.assertEquals("Not douche", categoryDAO.findCategoryMatchingName("Not douche").getName());
     }
-    
+
     @After
     public void clear() {
-        sectionDAO.findAll().forEach((section) -> {
-            sectionDAO.remove(section);
+        categoryDAO.findAll().forEach((category) -> {
+            categoryDAO.remove(category);
         });
     }
 }

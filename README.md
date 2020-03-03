@@ -6,7 +6,7 @@ Orgardj - Jonathan Örgård\
 jonte134 - Jonathan Edfeldt\
 davherm - David Hermansson\
 uhrej - Jonathan Uhre\
-Orgardj-Makalunga-uhrej - Jonathan Örgård, Johan Blom, Jonathan Uhre\
+Orgardj-Makalunga-uhrej - Jonathan Örgård, Johan Blom, Jonathan Uhre
 
 
 ### Google Drive

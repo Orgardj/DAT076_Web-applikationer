@@ -32,26 +32,49 @@ public class AccountBackingBean implements Serializable {
 
     private String passwordInput;
 
-    @PostConstruct
+    /*@PostConstruct
     private void init() {
         users = new ArrayList<>(accountDAO.findAll());
-    }
-
+    }*/
     public String validateAccount() {
-        Account t = accountDAO.findMatchingUserCredentials(userNameInput,passwordInput);
-//t.getPassword().equals(passwordInput)
-        if (t != null) {
-            /*HttpSession session = SessionUtils.getSession();
-            session.setAttribute("username", userNameInput);
-             */
-            return "index";
-        } else {
+
+        if (userNameInput.isEmpty() || passwordInput.isEmpty()) {
+
             FacesContext.getCurrentInstance().addMessage(
                     "studentForm:loginButton",
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Incorrect Username and Password",
-                            "Please enter correct username and Password"));
+                            "Please enter a username and Password"));
+
             return "login";
+        } else {
+
+            Account t = accountDAO.findAccountMatchingUserName(userNameInput);
+
+            if (t != null) {
+
+                if (t.getPassword().equals(passwordInput)) {
+                    /*HttpSession session = SessionUtils.getSession();
+            session.setAttribute("username", userNameInput);
+                     */
+                    return "index";
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(
+                            "studentForm:loginButton",
+                            new FacesMessage(FacesMessage.SEVERITY_WARN,
+                                    "Incorrect Username and Password",
+                                    "Please enter correct username and Password"));
+                    return "login";
+                }
+            } else {
+                FacesContext.getCurrentInstance().addMessage(
+                        "studentForm:loginButton",
+                        new FacesMessage(FacesMessage.SEVERITY_WARN,
+                                "Incorrect Username and Password",
+                                "Please enter correct username and Password"));
+
+                return "login";
+            }
         }
     }
 }

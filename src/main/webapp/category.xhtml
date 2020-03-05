@@ -10,7 +10,7 @@ and open the template in the editor.
         <title>Category</title>
     </h:head>
     <h:body>
-        <h1>Welcome to Category</h1>
+        <h1>Categories</h1>
         <p:dataTable value="#{threadBackingBean.getMatchingThreads(param['id'])}" var="thread"
                      paginator="true" rows="10">
             <Post title="#{thread.title}" />

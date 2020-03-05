@@ -59,8 +59,10 @@ public class PostBackingBean implements Serializable {
     }
 
     public void createComment() {
+        if(!enteredMessage.isEmpty()){
         postDAO.create(new Post(enteredMessage, new Date(), post.getUser(), post.getThread()));
         posts = postDAO.findPostsMatchingUser(id);
+        }
     }
 
     public Thread getMatchingPost(Long pId) {

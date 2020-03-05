@@ -16,7 +16,7 @@ public class CategoryDAO extends AbstractDAO<Category, Long> {
     @Getter
     @PersistenceContext(unitName = "Forum")
     private EntityManager entityManager;
-
+    
     public CategoryDAO() {
         super(Category.class);
     }

@@ -54,5 +54,4 @@ public class AccountDAO extends AbstractDAO<Account, String> {
         return (List<Account>) entityManager.createQuery("SELECT a FROM Account a WHERE a.role = :role")
                 .setParameter("role", role).getResultList();
     }
-
 }

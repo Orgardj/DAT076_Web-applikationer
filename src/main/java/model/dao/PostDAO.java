@@ -35,13 +35,13 @@ public class PostDAO extends AbstractDAO<Post, Long> {
         return l;
     }
 
-    public Post findPostMatchingPId(Long pId) {
+    public List<Post> findPostMatchingTId(Long tId) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QPost post = QPost.post;
 
         return queryFactory.selectFrom(post)
-                .where(post.post.pId.eq(pId))
-                .fetchFirst();
+                .where(post.post.thread.tId.eq(tId))
+                .fetch();
     }
 
     public List<Post> findPostsMatchingUser(Long tId) {

@@ -27,7 +27,7 @@
             <div class="ui-inputgroup">
                 <p:inputText placeholder="comment" value="#{postBackingBean.enteredMessage}"/>  
                 <p:commandButton value="Comment" action="#{postBackingBean.createComment}" onclick="setTimeout(function () {
-                            window.location.reload()
+                            window.location.reload();
                         }, 200);"/>
             </div>
         </h:form>
@@ -36,8 +36,5 @@
             <h:commandButton action = "index" value = "home page"/>
         </h:form>
         <p:commandButton onclick="window.history.back();" value ="back"/>
-
-
-
     </h:body>
 </html>

@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class Category implements Serializable {
-    //Section is a reserved SQL keyword
 
     @Id
     @GeneratedValue

@@ -15,3 +15,7 @@ https://drive.google.com/drive/u/0/folders/12ib2I8RKfrkTMoDQByapnOqIHmUyv33W
 
 ### Discord
 https://discordapp.com/invite/qKBz3Ye
+
+
+### Trello
+https://trello.com/invite/b/GVBg75BU/4418507a800ad4c06ea5088755438d64/dat076web-applikationer

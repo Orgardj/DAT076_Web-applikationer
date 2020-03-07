@@ -7,9 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lombok.Getter;
 import model.entity.Account;
-import model.entity.Post;
 import model.entity.QAccount;
-import model.entity.QPost;
 
 /**
  *
@@ -35,15 +33,16 @@ public class AccountDAO extends AbstractDAO<Account, String> {
                 .fetchFirst();
         return l;
     }
-    public Account findMatchingUserCredentials(String userName,String password){
-         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+
+    public Account findMatchingUserCredentials(String userName, String password) {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QAccount account = QAccount.account;
 
         Account l = queryFactory.selectFrom(account)
                 .where(account.userName.eq("john23")).where(account.password.eq("kakao20"))
                 .fetchFirst();
         return l;
-          
+
     }
 
     public Account findAccountMatchingEmail(String email) {

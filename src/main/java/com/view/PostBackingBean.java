@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.view;
 
 /**
@@ -59,9 +54,9 @@ public class PostBackingBean implements Serializable {
     }
 
     public void createComment() {
-        if(!enteredMessage.isEmpty()){
-        postDAO.create(new Post(enteredMessage, new Date(), post.getUser(), post.getThread()));
-        posts = postDAO.findPostsMatchingUser(id);
+        if (!enteredMessage.isEmpty()) {
+            postDAO.create(new Post(enteredMessage, new Date(), post.getUser(), post.getThread()));
+            posts = postDAO.findPostsMatchingUser(id);
         }
     }
 

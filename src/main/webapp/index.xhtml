@@ -1,8 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Users</title>
-        <script src="resources/js/newjavascript.js"></script>
-        <h:outputStylesheet library="css" name = "newcss.css" /> 
+        <script src="resources/js/index.js"></script>
+        <h:outputStylesheet library="css" name = "index.css" />
     </h:head>
     <h:body>
         <h1 class="headerStyle">Welcome to Forum</h1>
@@ -12,7 +12,7 @@
             <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
         </p:dataTable>
         <h:form>
-        <h:commandButton action = "login" value = "login" />
+            <h:commandButton action = "login" value = "login" />
         </h:form>
     </h:body>
 </html>

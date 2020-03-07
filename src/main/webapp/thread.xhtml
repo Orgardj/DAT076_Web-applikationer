@@ -25,13 +25,16 @@
                 </h:panelGrid>
             </c:forEach>
 
-            <h:form> 
+            <h:form rendered="#{userBean.loggedIn}">
                 <div class="ui-inputgroup">
                     <p:inputText placeholder="comment" value="#{postBackingBean.enteredMessage}"/>  
                     <p:commandButton value="Comment" action="#{postBackingBean.createComment()}" onclick="setTimeout(function () {
                                 window.location.reload();
                             }, 200);"/>
                 </div>
+            </h:form>
+            <h:form rendered="#{!userBean.loggedIn}">
+                <p>Login to add a response</p>
             </h:form>
         </ui:define>
     </ui:decorate>

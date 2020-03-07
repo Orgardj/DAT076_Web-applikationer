@@ -25,4 +25,3 @@
         <param-value>/*.xhtml</param-value>
     </context-param>
 </web-app>
-

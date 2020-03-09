@@ -56,5 +56,4 @@ public class ThreadDAOTest {
             categoryDAO.remove(category);
         });
     }
-
 }

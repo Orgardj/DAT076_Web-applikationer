@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.view;
 
 /**
@@ -51,10 +46,14 @@ public class ThreadBackingBean implements Serializable {
     @Param
     private long id;
 
+    @Inject
+    @Param
+    private long id;
+
     private List<Thread> threads;
-    
-    public List<Thread> getMatchingThreads(Long tId) {
-        return threadDAO.findThreadsMatchingCategory(tId);
+
+    public List<Thread> getMatchingThreads() {
+        return threadDAO.findThreadsMatchingCategory(id);
     }
     
     public void createThread() {

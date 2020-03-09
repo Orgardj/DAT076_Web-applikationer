@@ -1,13 +1,28 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Users</title>
-    </h:head>
-    <h:body>
-        <h1>Welcome to Forum</h1>
-        <p:dataTable value="#{categoryBackingBean.categories}" var="category"
-                     paginator="true" rows="10">
-            <p:column headerText="Name" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
-            <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
-        </p:dataTable>
-    </h:body>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="WEB-INF/template/common.xhtml">
+        <ui:define name="title">Forum</ui:define>
+        <ui:define name="content">
+            <h:outputScript library="javascript" name="index.js" target="head" />
+            <h:outputStylesheet library="css" name = "index.css" />
+            <h1 class="headerStyle">Welcome to Forum</h1>
+            <p:dataTable value="#{categoryBackingBean.categories}" var="category"
+                         paginator="true" rows="10">
+                <p:column headerText="Name" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
+                <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
+            </p:dataTable>
+
+            <h:form rendered="#{userBean.account.role == 'administrator'}">
+                <div class="ui-inputgroup">
+                    <p:inputText placeholder="Category title" value="#{categoryBackingBean.enteredTitle}"/> 
+                    <p:inputText placeholder="Category description" value="#{categoryBackingBean.enteredDescription}"/> 
+                    <p:commandButton value="New Category" action="#{categoryBackingBean.createCategory()}" onclick="setTimeout(function () {
+                                window.location.reload();
+                            }, 200);"/>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:decorate>
 </html>

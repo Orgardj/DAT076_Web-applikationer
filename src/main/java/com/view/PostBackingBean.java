@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.view;
 
 /**
@@ -22,6 +17,7 @@ import model.dao.PostDAO;
 import model.dao.ThreadDAO;
 import model.entity.Post;
 import model.entity.Thread;
+import model.entity.UserBean;
 import org.omnifaces.cdi.Param;
 
 @Data
@@ -38,10 +34,11 @@ public class PostBackingBean implements Serializable {
     private ThreadDAO threadDAO;
 
     @Inject
+    UserBean userBean;
+
+    @Inject
     @Param
     private long id;
-
-    private Post post;
 
     private Thread thread;
 
@@ -50,8 +47,7 @@ public class PostBackingBean implements Serializable {
     @PostConstruct
     private void init() {
         thread = getThread();
-        posts = postDAO.findPostsMatchingUser(id);
-        post = posts.get(0);
+        posts = postDAO.findPostMatchingTId(id);
     }
 
     public Thread getThread() {
@@ -59,12 +55,9 @@ public class PostBackingBean implements Serializable {
     }
 
     public void createComment() {
-        postDAO.create(new Post(enteredMessage, new Date(), post.getUser(), post.getThread()));
-        posts = postDAO.findPostsMatchingUser(id);
+        if (userBean.isLoggedIn() && !enteredMessage.isEmpty()) {
+            postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
+            posts = postDAO.findPostsMatchingUser(id);
+        }
     }
-
-    public Thread getMatchingPost(Long pId) {
-        return threadDAO.findThreadMatchingTId(pId);
-    }
-
 }

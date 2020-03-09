@@ -1,11 +1,13 @@
 package model.dao;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lombok.Getter;
 import model.entity.Account;
+import model.entity.QAccount;
 
 /**
  *
@@ -23,8 +25,24 @@ public class AccountDAO extends AbstractDAO<Account, String> {
     }
 
     public Account findAccountMatchingUserName(String userName) {
-        return (Account) entityManager.createQuery("SELECT a FROM Account a WHERE a.userName = :userName")
-                .setParameter("userName", userName).getSingleResult();
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+        QAccount account = QAccount.account;
+
+        Account l = queryFactory.selectFrom(account)
+                .where(account.userName.eq(userName))
+                .fetchFirst();
+        return l;
+    }
+
+    public Account findMatchingUserCredentials(String userName, String password) {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+        QAccount account = QAccount.account;
+
+        Account l = queryFactory.selectFrom(account)
+                .where(account.userName.eq("john23")).where(account.password.eq("kakao20"))
+                .fetchFirst();
+        return l;
+
     }
 
     public Account findAccountMatchingEmail(String email) {
@@ -36,5 +54,4 @@ public class AccountDAO extends AbstractDAO<Account, String> {
         return (List<Account>) entityManager.createQuery("SELECT a FROM Account a WHERE a.role = :role")
                 .setParameter("role", role).getResultList();
     }
-
 }

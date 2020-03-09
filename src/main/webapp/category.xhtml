@@ -18,6 +18,7 @@ and open the template in the editor.
             <p:column headerText="Views" sortBy="#{thread.views}">#{thread.views}</p:column>
             <p:column headerText="Created" sortBy="#{thread.creationTimestamp}">#{thread.creationTimestamp}</p:column>
         </p:dataTable>
+        <a href='/DAT076_Web-applikationer/create_thread.xhtml?id=51'><button>Create thread</button></a>
         <p:commandButton onclick="window.history.back();" value ="back"/>
     </h:body>
 </html>

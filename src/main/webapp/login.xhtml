@@ -17,23 +17,27 @@
                             <div class="form-group">
                                 <h:outputLabel value="Username" styleClass="control-label col-sm-2" />
                                 <div class="col-sm-10">
-                                    <p:inputText id="Username" value="#{accountBackingBean.userNameInput}" styleClass="form-control" >
+                                    <p:inputText id="Username" value="#{accountBackingBean.userNameInput}" styleClass="form-control">
                                     </p:inputText>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Password" styleClass="control-label col-sm-2" />
                                 <div class="col-sm-10">
-                                    <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" id="Password">
+                                    <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" id="Password"
+                                                redisplay="true"
+                                                autocomplete="off"
+                                                >
                                     </p:password>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <h:commandButton value="Login" id="loginButton" action="#{accountBackingBean.validateAccount()}" styleClass="btn btn-dark" />
+                                    <h:commandButton value="Sign up"  action="register" styleClass="btn btn-primary" />
                                 </div>
                             </div>
-                            <p:message for="loginButton"/>
+                            <p:message for="loginButton" style="color: red"/>
                         </h:form>
                     </div>
                 </div>

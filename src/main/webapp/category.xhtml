@@ -15,7 +15,8 @@
                 <p:column headerText="Views" sortBy="#{thread.views}">#{thread.views}</p:column>
                 <p:column headerText="Created" sortBy="#{thread.creationTimestamp}">#{thread.creationTimestamp}</p:column>
             </p:dataTable>
+            <p:commandButton value="Create Thread" onclick="window.location.href = 
+                            '/DAT076_Web-applikationer/create_thread.xhtml?id=#{categoryBackingBean.findMatchingCategory().CId}'"/>
         </ui:define>
     </ui:decorate>
-        <a href='/DAT076_Web-applikationer/create_thread.xhtml?id=51'><button>Create thread</button></a>
 </html>

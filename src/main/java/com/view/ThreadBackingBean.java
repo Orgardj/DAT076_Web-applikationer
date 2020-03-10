@@ -46,10 +46,6 @@ public class ThreadBackingBean implements Serializable {
     @Param
     private long id;
 
-    @Inject
-    @Param
-    private long id;
-
     private List<Thread> threads;
 
     public List<Thread> getMatchingThreads() {
@@ -59,6 +55,7 @@ public class ThreadBackingBean implements Serializable {
     public void createThread() {
         Thread thread = new Thread(enteredTitle, Long.valueOf(5), new Date(), categoryDAO.find(id), new ArrayList<>());
         threadDAO.create(thread);
+        //Post should probably not be created here. User hardcoded.
         postDAO.create(new Post(enteredMessage, new Date(), accountDAO.findAccountMatchingUserName("john23"), thread));
     }
 }

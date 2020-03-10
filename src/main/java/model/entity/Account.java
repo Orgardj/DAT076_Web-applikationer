@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -17,32 +17,32 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Getter
 public class Account implements Serializable {
-
+ 
+    
+    @OneToMany(mappedBy = "user") private List<Post> posts;
+    
     @Id
     @NonNull
     private String userName;
-
+    
     @NonNull
-    private String password;
-
-    @NonNull
-    @Column(unique = true)
+    @Column(unique=true)
     private String email;
-
-    @NonNull
+    
+    @NonNull 
     private String role;
-
-    @NonNull
+    
+    @NonNull 
     private String firstName;
-
-    @NonNull
+    
+    @NonNull 
     private String lastName;
-
-    @NonNull
+    
+    @NonNull 
+    private String password;
+    
+    @NonNull 
     private Date registerDate;
-
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
 }

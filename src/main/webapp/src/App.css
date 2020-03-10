@@ -1,0 +1,641 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: volvoFont;
+}
+
+/*  Layout  JE  */
+
+section section {
+  width: 100%;
+  height: calc(100vh - 70px);
+  background-color: white;
+  margin-block-end: 0px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+  section section:first-of-type {
+      margin-top: 170px;
+      height: calc(100vh - 170px);
+      background-color: white;
+  }
+
+.Start h3 {
+  position: absolute;
+  z-index: 10;
+}
+
+
+footer {
+  width: 100%;
+  height: 200px;
+  background-color: #ccc;
+}
+
+/*  Header  JE  */
+
+.header {
+  width: 100%;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  transition: 0.5s;
+}
+
+.header h1 {
+  float: left;
+  height: 50px;
+  margin: 10px 5% 0px 0px;
+  width: 10%;
+  padding: 0px 0px 0px 10px;
+  text-align: left;
+}
+
+.NavigationBar {
+  width: 40%;
+  float: right;
+  height: 40px;
+  margin: 15px 0% 0px 0px;
+}
+
+  .NavigationBar a {
+      width: 25%;
+      float: left;
+      margin: 0px !important;
+      cursor: pointer;
+      color: white !important;
+      line-height: 40px;
+  }
+
+  .NavigationBar > .active {
+      box-shadow: 0 3px 3px -3px white;
+  }
+  
+  .NavigationBar a:hover {
+    box-shadow: 0 3px 3px -3px white;
+}
+
+.iconHolder {
+  width: 30%;
+  float: right;
+  height: 50px;
+  margin: 10px 0px 0px 0px;
+
+}
+
+.searchBar {
+  width: auto;
+  height: 100%;
+  float: right;
+  margin: 0px 0px 0px 0px;
+}
+
+.searchBar:focus-within {
+  outline: 2px solid rgb(77, 144, 254);
+}
+
+.searchBar img {
+  height: 100%;
+  float: left;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.searchBar input {
+  height: 100%;
+  float: left;
+  border: none;
+  padding-left: 5px;
+  transition: 2s;
+}
+
+.searchBar input:focus {
+  outline-width: 0px;
+}
+
+.searchBar {
+  border-right: 1px solid white;
+}
+
+.iconHolderIcon {
+  height: 100%;
+  padding: 10px 20px;
+  float: right;
+  cursor: pointer;
+}
+
+.iconHolderIcon:hover {
+  box-shadow: 0 3px 3px -3px white;
+}
+
+.searchBar:hover {
+  box-shadow: 0 3px 3px -3px white;
+}
+
+/*  Dropdown in Navbar  */
+
+/*  Scrollbar   JE  */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px black;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/*  Start JE  */
+
+.imgSlider {
+  width: 400%;
+  height:  calc(100vh - 170px);
+  position: relative;
+  transition: 1.5s;
+  /*
+  animation-name: slider;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  */
+}
+
+.imgSlide {
+  width: 25%;
+  height: 100%;
+}
+
+.slideContainer section {
+  position: absolute;
+  height: 10px !important;
+  width: 30%;
+  background-color: transparent !important;
+  margin: 0 !important;
+  z-index: 10;
+  bottom: 20px;
+  right: 35%;
+}
+
+.slideContainer section div {
+  height: 10px;
+  width: 20%;
+  background-color: lightgrey;
+  float: left;
+  margin-right: 5%;
+  cursor: pointer;
+  transition: 1.5s;
+}
+
+.slideContainer section div:hover {
+  background-color: grey !important;
+}
+
+@keyframes slider {
+  0%   {
+    right: 0%;
+  }
+  20%  {
+    right: 0%;
+  }
+  25%  {
+    right: 100%;
+  }
+  45%  {
+    right: 100%;
+  }
+  50%  {
+    right: 200%;
+  }
+  70% {
+    right: 200%;
+  }
+  75% {
+    right: 300%;
+  }
+  95% {
+    right: 300%;
+  }
+  100% {
+    right: 0%;
+  }
+}
+
+/*  Log & Reg Form  JE  */
+
+.cover {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 100;
+  top: 0;
+}
+
+  .cover form {
+      height: auto !important;
+      width: 40%;
+      max-height: 80% !important;
+      min-height: 50% !important;
+      overflow-y: auto;
+      background-color: white;
+      display: block;
+      margin: auto;
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      box-shadow: 0px 2px 5px 0px black;
+  }
+
+  .cover form article {
+      height: 90%;
+  }
+
+      .cover form h3 {
+          width: 100%;
+          float: left;
+          font-size: 2.4em;
+          text-align: center;
+          margin-bottom: 30px;
+      }
+
+      .cover form div {
+          width: 70%;
+          height: 40px;
+          margin-left: 15%;
+          float: left;
+          margin-bottom: 15px;
+          box-shadow: 0 2px 2px -2px grey;
+          overflow: hidden;
+      }
+
+      .userRegistrationForm div:nth-last-of-type(6) {
+          width: 35% !important;
+      }
+
+      div:nth-last-of-type(5) {
+          width: 35% !important;
+          margin-left: 0% !important;
+      }
+
+
+          .cover form div:focus-within {
+              box-shadow: 0 3px 2px -2px black;
+          }
+
+          .cover form div img {
+              height: 30px;
+              float: left;
+              margin: 5px 0px 0px 10px;
+          }
+
+          .cover form div input {
+              width: 100%;
+              height: 40px;
+              float: right;
+              border: none;
+              background-color: transparent;
+          }
+
+              .cover form div input:focus {
+                  outline: none;
+              }
+
+      .cover form button {
+          width: 30%;
+          height: 45px;
+          background-color: transparent;
+          border: none;
+          box-shadow: 0 2px 2px -2px grey;
+          text-align: center;
+          display: block;
+          float: left;
+          margin: 10px 50% 15px 15%;
+      }
+
+      .userRegistrationForm button {
+          margin: 10px 0% 15px 15% !important;
+      }
+
+      #g-recaptcha {
+          box-shadow: none;
+          box-shadow: none;
+          display: block;
+          float: right;
+          transform: scale(0.6);
+          transform-origin:0 0;
+          margin: 0;
+          width: auto;
+          margin: 10px 0px 60px 10px;
+          overflow: visible;
+      }
+
+      #g-recaptcha div {
+          box-shadow: none;
+          margin: 0;
+          overflow: visible;
+      }
+
+      .closeForm {
+          height: 20px;
+          width: 20px;
+          position: static;
+          float: right;
+          margin: 5px 5px 0px 0px;
+          color: black;
+          text-align: center;
+          text-decoration: none;
+          line-height: 19px;
+          cursor: pointer;
+      }
+
+          .closeForm:hover {
+              background-color: rgba(0,0,0,0.7);
+              border-radius: 25px;
+              color: white;
+          }
+
+      .cover form footer {
+          width: 100%;
+          height: 10%;
+          background-color: gray;
+          position: relative;
+          bottom: 0;
+          clear: both;
+          float: left;
+          padding: 10px 0px 10px 0px;
+      }
+
+          .cover form footer a {
+              width: 100%;
+              float: left;
+              text-align: center;
+              line-height: auto;
+          }
+
+              .cover form footer a:hover {
+                  background-color: transparent !important;
+              }
+
+  .userRegistrationForm div input {
+      width: 100% !important;
+  }
+
+  .termsOffCondition {
+      width: 85%;
+      margin-left: 15%;
+      float: left;
+      padding: 10px 0px 10px 0px;
+  }
+
+.eyeIcon {
+  position: absolute;
+  right: 15%;
+  cursor: pointer;
+}
+
+.errorMsg {
+  color: red;
+  position: absolute;
+  right: 18%;
+}
+
+.registrationCompleted {
+  width: 40%;
+  height: 80%;
+  background-color: white;
+  display: block;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  box-shadow: 0px 2px 5px 0px black;
+  overflow-y: auto;
+}
+
+.logoDesign img {
+  width: 30%;
+  left: 35%;
+  margin-top: 5%;
+}
+
+.registrationCompleted .bottomText {
+  width: 10%;
+  position: absolute;
+  bottom: 10px;
+  left: 45%;
+  font-size: 1.5em;
+}
+
+.messageDesign {
+  text-align: center;
+  color: black;
+  margin-top: 5%;
+}
+
+.divDesign {
+  position: relative;
+  top: 10vh;
+}
+
+.messageDesign2 {
+  text-align: center;
+  color: black;
+  font-size: 1em;
+  margin: 25% 0px 3% 0px;
+}
+
+.linkDesign {
+  text-align: center;
+  cursor: pointer;
+}
+
+.linkDesign:hover {
+  text-decoration: underline;
+}
+
+.logoDesign{
+  text-align: center;
+}
+
+.loginIMG {
+  width: 2.5%;
+  float: right;
+  margin: 0.8% 3% 0px 0px;
+  cursor: pointer;
+  padding-bottom: 0.5%;
+}
+
+.loginIMG:hover {
+  border-bottom: 2px solid black;
+}
+
+.body-component {
+  background-color: white !important;
+  background-image: none;
+}
+
+.manageAccount {
+  width: 15% !important;
+  float: right;
+  text-align: right;
+  margin: 1% 2% 0px 0px;
+  cursor: pointer;
+  border-right: 1px solid black;
+  padding: 0.5% 2% 0.5% 0.5%;
+}
+
+.manageAccount a {
+  text-decoration: none;
+  color: black;
+}
+
+.manageAccount:hover {
+  text-decoration: underline;
+}
+
+.socialAuthentication {
+  width: 25%;
+  cursor: pointer;
+  margin: 0px 0% 2% 0%;
+  float: left;
+}
+
+.socialAuthentication:nth-last-of-type(even) {
+  margin: 0px 2% 0% 24%;
+}
+
+.pageSwitch {
+  width: 20%;
+  float: left;
+  text-align: center;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.pageSwitch:nth-of-type(2) {
+  margin-left: 30%;
+  border-right: 1px solid black;
+}
+
+.pageSwitchActive {
+  color: gray;
+}
+
+.pageSwitch:hover {
+  text-decoration: underline;
+}
+
+.orSocial {
+  width: 50%;
+  text-align: center;
+  float: left;
+  margin: 20px 0px 20px 25%;
+}
+
+.userRegistrationForm .orSocial {
+  margin-top: -20px;
+}
+
+/*  Posts JE  */
+
+.Posts a {
+  margin-top: 50px !important;
+  display: block;
+}
+
+/*  Add Post Page JE  */
+
+.addPostPage {
+  margin: 0 !important;
+}
+
+.addPostPage h1 {
+  text-align: center;
+}
+
+.addPostForm {
+  width: 30%;
+  background-color: brown;
+}
+
+.addPostForm input {
+  width: 100%;
+  float: left;
+  margin-bottom: 10px;
+}
+
+.addPostForm textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  float: left;
+  margin-bottom: 10px;
+}
+
+.addPostForm button {
+  width: 30%;
+  float: left;
+}
+
+/*  About JE  */
+
+/*  Log & Reg Form  JE  */
+
+/*  Account Page    JE  */
+
+textarea {
+  height: 200px;
+  resize: none !important;
+}
+
+.accountPage header {
+  height: 50px;
+  position: relative;
+}
+
+.accountPage header h1 {
+  font-size: 1.5em !important;
+  position: absolute;
+  top: 10px;
+  left: 15%;
+  width: 50%;
+  text-align: left;
+  transition: none !important;
+}
+
+.accountPage .dropdown {
+  height: 50px;
+}
+
+.accountPage .dropdown p {
+  line-height: 25px;
+}
+
+.uploadsLink {
+  border-bottom: 1px solid black !important;
+}
+
+.accountPage .dropdown div p {
+  line-height: 45px;
+}

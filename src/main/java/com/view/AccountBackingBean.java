@@ -122,7 +122,7 @@ public class AccountBackingBean implements Serializable {
     }
 
     public void addAccount() {
-        accountDAO.create(new Account(userNameInput, passwordInput, email, "non-admin", firstName, lastName, new Date())); // hardcoded as non-admin for now
+        accountDAO.create(new Account(userNameInput, passwordInput, email, "member", firstName, lastName, new Date())); // hardcoded as member for now
 
     }
 

@@ -13,13 +13,16 @@
         </div>
         <ui:fragment rendered="#{page.title != 'Forum'}">
             <h:form>
-                <h:button value="home page" outcome="index" />
+                <h:button value="Home Page" outcome="index" />
             </h:form>
-            <p:button value="back" onclick="window.history.back();" />
+            <p:button value="Back" onclick="window.history.back();" />
         </ui:fragment>
         <div rendered="#{page.title != 'Login'}">
             <h:form rendered="#{!userBean.loggedIn}">
-                <h:button value = "login" outcome="login" />
+                <h:button value = "Login" outcome="login" />
+            </h:form>
+            <h:form rendered="#{!userBean.loggedIn}">
+                <h:button value = "Sign up" outcome="register" />
             </h:form>
             <h:form rendered="#{userBean.loggedIn}">
                 <h:commandButton value = "logout" action="#{userBean.setAccount(none)}" />

@@ -19,6 +19,7 @@ import model.dao.PostDAO;
 import model.dao.ThreadDAO;
 import model.entity.Post;
 import model.entity.Thread;
+import model.entity.UserBean;
 import org.omnifaces.cdi.Param;
 
 @Data
@@ -39,8 +40,8 @@ public class ThreadBackingBean implements Serializable {
     @EJB
     private PostDAO postDAO;
     
-    @EJB
-    private AccountDAO accountDAO;
+    @Inject
+    UserBean userBean;
     
     @Inject
     @Param
@@ -53,9 +54,11 @@ public class ThreadBackingBean implements Serializable {
     }
     
     public void createThread() {
-        Thread thread = new Thread(enteredTitle, Long.valueOf(5), new Date(), categoryDAO.find(id), new ArrayList<>());
-        threadDAO.create(thread);
-        //Post should probably not be created here. User hardcoded.
-        postDAO.create(new Post(enteredMessage, new Date(), accountDAO.findAccountMatchingUserName("john23"), thread));
+        if (userBean.isLoggedIn() && !enteredTitle.isEmpty() && !enteredMessage.isEmpty()) {
+            Thread thread = new Thread(enteredTitle, Long.valueOf(5), new Date(), categoryDAO.find(id), new ArrayList<>());
+            threadDAO.create(thread);
+            //Post should probably not be created here.
+            postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
+        }
     }
 }

@@ -1,9 +1,10 @@
-package model.entity;
+package com.view;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import model.entity.Account;
 
 @Named
 @SessionScoped

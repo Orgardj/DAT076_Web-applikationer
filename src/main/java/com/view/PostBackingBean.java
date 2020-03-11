@@ -17,7 +17,6 @@ import model.dao.PostDAO;
 import model.dao.ThreadDAO;
 import model.entity.Post;
 import model.entity.Thread;
-import model.entity.UserBean;
 import org.omnifaces.cdi.Param;
 
 @Data
@@ -48,6 +47,7 @@ public class PostBackingBean implements Serializable {
     private void init() {
         thread = getThread();
         posts = postDAO.findPostMatchingTId(id);
+        threadDAO.incrementViewCount(id);
     }
 
     public Thread getThread() {

@@ -47,7 +47,7 @@ public class PostBackingBean implements Serializable {
     @PostConstruct
     private void init() {
         thread = getThread();
-        posts = postDAO.findPostMatchingTId(id);
+        posts = postDAO.findPostsMatchingTId(id);
     }
 
     public Thread getThread() {

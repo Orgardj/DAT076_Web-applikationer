@@ -16,7 +16,6 @@ import javax.inject.Named;
 import lombok.Data;
 import model.dao.AccountDAO;
 import model.entity.Account;
-import model.entity.UserBean;
 
 @Data
 @Named

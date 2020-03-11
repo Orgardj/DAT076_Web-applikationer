@@ -13,13 +13,11 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Data;
-import model.dao.AccountDAO;
 import model.dao.CategoryDAO;
 import model.dao.PostDAO;
 import model.dao.ThreadDAO;
 import model.entity.Post;
 import model.entity.Thread;
-import model.entity.UserBean;
 import org.omnifaces.cdi.Param;
 
 @Data

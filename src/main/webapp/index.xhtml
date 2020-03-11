@@ -14,7 +14,7 @@
                 <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
             </p:dataTable>
 
-            <h:form rendered="#{userDAO.account.role == 'administrator'}">
+            <h:form rendered="#{userBean.account.role == 'administrator'}">
                 <div class="ui-inputgroup">
                     <p:inputText placeholder="Category title" value="#{categoryBackingBean.enteredTitle}"/> 
                     <p:inputText placeholder="Category description" value="#{categoryBackingBean.enteredDescription}"/> 

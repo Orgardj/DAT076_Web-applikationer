@@ -53,7 +53,7 @@ public class ThreadBackingBean implements Serializable {
     
     public void createThread() {
         if (userBean.isLoggedIn() && !enteredTitle.isEmpty() && !enteredMessage.isEmpty()) {
-            Thread thread = new Thread(enteredTitle, Long.valueOf(5), new Date(), categoryDAO.find(id), new ArrayList<>());
+            Thread thread = new Thread(enteredTitle, Long.valueOf(0), new Date(), categoryDAO.find(id), new ArrayList<>());
             threadDAO.create(thread);
             //Post should probably not be created here.
             postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));

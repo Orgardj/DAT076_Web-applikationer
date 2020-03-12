@@ -16,7 +16,11 @@ import javax.inject.Named;
 import lombok.Data;
 import model.dao.AccountDAO;
 import model.entity.Account;
+
 import model.entity.UserBean;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 @Data
 @Named
@@ -49,7 +53,12 @@ public class AccountBackingBean implements Serializable {
 
     private Boolean accountDontExist = false;
 
-    public String checkAccountInfo() {
+    private String hashedPassword;
+
+    public static final String salt = "saltSecurityText";
+
+    public String checkAccountInfo() throws NoSuchAlgorithmException {
+        hashPassword();
 
         checkIfAccountExists();
         checkIfEmailExists();
@@ -61,7 +70,30 @@ public class AccountBackingBean implements Serializable {
             return "";
         }
 
-        
+    }
+
+    public void hashPassword() throws NoSuchAlgorithmException {
+        String passwordToHash = passwordInput;
+
+        hashedPassword = get_SHA_512_hashedPassword(passwordToHash, salt);
+
+    }
+
+    private static String get_SHA_512_hashedPassword(String passwordToHash, String salt) {
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+
+            byte[] bytes = md.digest(passwordToHash.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 
     public void checkIfPasswordsMatch() {
@@ -122,11 +154,12 @@ public class AccountBackingBean implements Serializable {
     }
 
     public void addAccount() {
-        accountDAO.create(new Account(userNameInput, passwordInput, email, "member", firstName, lastName, new Date())); // hardcoded as member for now
+        accountDAO.create(new Account(userNameInput, hashedPassword, email, "member", firstName, lastName, new Date())); // hardcoded as member for now
 
     }
 
-    public String validateAccount() {
+    public String validateAccount() throws NoSuchAlgorithmException {
+
         if (userNameInput.isEmpty() || passwordInput.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(
                     "studentForm:loginButton",
@@ -135,10 +168,13 @@ public class AccountBackingBean implements Serializable {
                             "Please enter a username and Password"));
             return "";
         } else {
+            String passwordToHash = passwordInput;
+
             Account account = accountDAO.findAccountMatchingUserName(userNameInput);
+            hashedPassword = get_SHA_512_hashedPassword(passwordToHash, salt);
 
             if (account != null) {
-                if (account.getPassword().equals(passwordInput)) {
+                if (account.getPassword().equals(hashedPassword)) {
                     userBean.setAccount(account);
                     return "index";
                 } else {

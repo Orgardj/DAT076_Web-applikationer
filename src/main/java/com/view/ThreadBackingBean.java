@@ -13,13 +13,11 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Data;
-import model.dao.AccountDAO;
 import model.dao.CategoryDAO;
 import model.dao.PostDAO;
 import model.dao.ThreadDAO;
 import model.entity.Post;
 import model.entity.Thread;
-import model.entity.UserBean;
 import org.omnifaces.cdi.Param;
 
 @Data
@@ -55,7 +53,7 @@ public class ThreadBackingBean implements Serializable {
     
     public void createThread() {
         if (userBean.isLoggedIn() && !enteredTitle.isEmpty() && !enteredMessage.isEmpty()) {
-            Thread thread = new Thread(enteredTitle, Long.valueOf(5), new Date(), categoryDAO.find(id), new ArrayList<>());
+            Thread thread = new Thread(enteredTitle, Long.valueOf(0), new Date(), categoryDAO.find(id), new ArrayList<>());
             threadDAO.create(thread);
             //Post should probably not be created here.
             postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));

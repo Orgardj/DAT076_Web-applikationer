@@ -16,11 +16,8 @@ import javax.inject.Named;
 import lombok.Data;
 import model.dao.AccountDAO;
 import model.entity.Account;
-
-import model.entity.UserBean;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 
 @Data
 @Named

@@ -17,6 +17,11 @@
                                  cellpadding = "10" cellspacing = "1">
                         <div>#{post.user.userName}</div>
                         <div>#{post.user.role}</div>
+                        <h:form rendered="#{userBean.account.role == 'administrator' and post.user.role != 'administrator' and post.user.role != 'banned'}">
+                             <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(post.user)}" onclick="setTimeout(function () {
+                                window.location.reload();
+                            }, 200);"/>
+                        </h:form>
                     </h:panelGrid>
                     <h:panelGrid id = "panel3" columns = "1" border = "0"
                                  cellpadding = "10" cellspacing = "1">
@@ -38,8 +43,11 @@
                             }, 200);"/>
                 </div>
             </h:form>
-            <h:form rendered="#{!userBean.loggedIn}">
+            <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">
                 <p>Login to add a response</p>
+            </h:form>
+            <h:form rendered="#{!userBean.loggedIn and userBean.account.role == 'banned'}">
+                <p>Banned users cannot add a response</p>
             </h:form>
         </ui:define>
     </ui:decorate>

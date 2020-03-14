@@ -24,8 +24,11 @@
                 <p:commandButton value="Create Thread" onclick="window.location.href =
                                 '/DAT076_Web-applikationer/create_thread.xhtml?id=#{categoryBackingBean.findMatchingCategory().CId}'"/>
             </h:form>
-            <h:form rendered="#{!userBean.loggedIn}">
+            <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">
                 <p>Login to create threads</p>
+            </h:form>
+            <h:form rendered="#{!userBean.loggedIn and userBean.account.role == 'banned'}">
+                <p>Banned users cannot create threads</p>
             </h:form>
         </ui:define>
     </ui:decorate>

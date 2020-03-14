@@ -1,3 +1,126 @@
-.headerStyle{
-    color: lightcoral;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/*  Header JE   */
+
+.pageHeader {
+    width: 100%;
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0px 10px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+}
+
+.headerStyle {
+    width: 25%;
+    color: black;
+    line-height: 70px;
+    float: left;
+}
+
+    /*  NavBar      JE   */
+    .navBar {
+        width: 50%;
+        height: 70px;
+        float: left;
+    }
+    
+    .navBar a {
+        display: block;
+        width: 25%;
+        float: left;
+        text-align: center;
+        line-height: 50px;
+        color: black;
+        text-decoration: none;
+        border-right: 1px solid black;
+        box-sizing: border-box;
+        margin: 10px 0px;
+    }
+    
+    .navBar a:hover {
+        text-decoration: underline;
+    }
+    
+    .navBar a:last-of-type {
+        border-right: none;
+    }
+
+    /*  IconHolder in Header    JE   */
+    
+    .iconHolder {
+        width: 25%;
+        height: 70px;
+        float: left;
+    }
+    
+    .iconHolder img {
+        height: 66%;
+        float: right;
+        margin: 0px 0px 0px 0px;
+        padding: 5px 20px;
+        top: calc(17% - 0px);
+        position: relative; 
+        cursor: pointer;
+    }
+    
+    .iconHolder img:first-of-type {
+        border-left: 1px solid black;
+    }
+    
+    .iconHolder img:hover {
+        box-shadow: 0 4px 2px -2px lightgrey;
+    }
+    
+    .iconHolder input {
+        width: 0%;
+        height: 40px;
+        margin: 15px 0px 0px 0px;
+        float: right;
+        padding: 0px 0px 0px 0px;
+        border: none;
+        transition: 1s;
+    }
+    
+    .iconHolder input:focus {
+        box-shadow: inset 0 2px 2px #8f8f8f;
+    }
+    
+    .expandSearchBar {
+        width: 50% !important;
+        margin-right: 10px !important;
+        padding: 0px 0px 0px 10px !important;
+    }
+    
+   
+
+/*  Layout  JE  */
+
+section {
+    height: calc(100vh - 70px);
+    width: 100%;
+    background-color: pink;
+    border-bottom: 1px solid black;
+}
+
+footer {
+    height: 150px;
+    width: 100%;
+    background-color: grey;
+}
+
+/*  Start   JE    */
+
+.start {
+    margin: 70px 0px 0px 0px;
 }

@@ -5,24 +5,65 @@
     <ui:decorate template="WEB-INF/template/common.xhtml">
         <ui:define name="title">Forum</ui:define>
         <ui:define name="content">
-            <h:outputScript library="javascript" name="index.js" target="head" />
+            <h:outputScript library="js" name="index.js" target="body" />
             <h:outputStylesheet library="css" name = "index.css" />
-            <h1 class="headerStyle">Welcome to Forum</h1>
-            <p:dataTable value="#{categoryBackingBean.categories}" var="category"
-                         paginator="true" rows="10">
-                <p:column headerText="Name" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
-                <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
-            </p:dataTable>
-
-            <h:form rendered="#{userBean.account.role == 'administrator'}">
-                <div class="ui-inputgroup">
-                    <p:inputText placeholder="Category title" value="#{categoryBackingBean.enteredTitle}"/> 
-                    <p:inputText placeholder="Category description" value="#{categoryBackingBean.enteredDescription}"/> 
-                    <p:commandButton value="New Category" action="#{categoryBackingBean.createCategory()}" onclick="setTimeout(function () {
-                                window.location.reload();
-                            }, 200);"/>
+            
+            <header class="pageHeader">
+                <h1 class="headerStyle">Welcome to Forum</h1>
+                
+                <nav class="navBar">
+                    <a href="#start">Start</a>
+                    <a href="#posts">Posts</a>
+                    <a href="#create">Create</a>
+                    <a href="#about">About</a>
+                 </nav>
+                
+                
+                <div class="iconHolder">
+                    <img src="./resources/img/account_icon.png" alt="Account icon"></img>
+                    <p:inputText placeholder="Search..." class="searchBar" value=""/>
+                    <img src="./resources/img/search_icon.png" alt="Search icon" class="searchIcon"></img>
                 </div>
-            </h:form>
+                
+                
+            </header>
+            
+            <section class="start" id="start">
+                <p:dataTable value="#{categoryBackingBean.categories}" var="category"
+                         paginator="true" rows="10">
+                    <p:column headerText="Name" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
+                    <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
+                </p:dataTable>
+
+                <h:form rendered="#{userBean.account.role == 'administrator'}">
+                    <div class="ui-inputgroup">
+                        <p:inputText placeholder="Category title" value="#{categoryBackingBean.enteredTitle}"/> 
+                        <p:inputText placeholder="Category description" value="#{categoryBackingBean.enteredDescription}"/> 
+                        <p:commandButton value="New Category" action="#{categoryBackingBean.createCategory()}" onclick="setTimeout(function () {
+                                    window.location.reload();
+                                }, 200);"/>
+                    </div>
+                </h:form>
+            </section>
+            
+            
+            <section class="posts" id="posts">
+            
+            </section>
+            
+            <section class="create" id="create">
+            
+            </section>
+            
+            <section class="about" id="about">
+            
+            </section>
+            
+            <footer>
+            
+            </footer>
+            
+            
         </ui:define>
     </ui:decorate>
 </html>

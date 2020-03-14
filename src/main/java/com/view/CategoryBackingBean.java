@@ -15,6 +15,7 @@ import javax.inject.Named;
 import lombok.Data;
 import model.dao.CategoryDAO;
 import model.entity.Category;
+import model.entity.UserBean;
 import org.omnifaces.cdi.Param;
 
 @Data

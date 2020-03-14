@@ -11,12 +11,15 @@
         <div class="container">
             <ui:insert name="content" />
         </div>
+        
+        <!--
         <ui:fragment rendered="#{page.title != 'Forum'}">
             <h:form>
                 <h:button value="Home Page" outcome="index" />
             </h:form>
             <p:button value="Back" onclick="window.history.back();" />
         </ui:fragment>
+        
         <div rendered="#{page.title != 'Login'}">
             <h:form rendered="#{!userBean.loggedIn}">
                 <h:button value = "Login" outcome="login" />
@@ -29,7 +32,9 @@
             </h:form>
             <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
         </div>
-
+-->
+        
+        
         <!-- TODO footer -->        
     </h:body>
 </html>

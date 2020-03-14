@@ -48,14 +48,4 @@ public class ThreadDAO extends AbstractDAO<Thread, Long> {
                 .where(thread.tId.eq(tId))
                 .fetchFirst();
     }
-    
-    public void incrementViewCount(Long tId) {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
-        QThread thread = QThread.thread;
-        
-        queryFactory.update(thread)
-                .where(thread.tId.eq(tId))
-                .set(thread.views, thread.views.add(1))
-                .execute();
-    }
 }

@@ -5,6 +5,7 @@ package com.view;
  * @author Team J
  */
 import java.io.Serializable;
+import static java.lang.Integer.min;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -69,6 +70,8 @@ public class ThreadBackingBean implements Serializable {
     }
     
     public String truncateComment(String comment) {
-        return comment.substring(0, 50) + "...";
+        if(comment.length() > 50)
+            return comment.substring(0, 50) + "...";
+        return comment;
     }
 }

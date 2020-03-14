@@ -33,7 +33,6 @@ public class Post implements Serializable {
 
     @JoinColumn(name = "userName", nullable = false)
     @NonNull
-    @EqualsAndHashCode.Exclude
     @ManyToOne
     private Account user;
 

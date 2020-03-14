@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -40,6 +41,7 @@ public class Thread implements Serializable {
     private Category category;
 
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @NonNull
     @OneToMany(mappedBy = "thread", orphanRemoval = true)
     private List<Post> posts;

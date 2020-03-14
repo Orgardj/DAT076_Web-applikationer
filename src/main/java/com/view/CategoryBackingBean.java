@@ -15,6 +15,7 @@ import javax.inject.Named;
 import lombok.Data;
 import model.dao.CategoryDAO;
 import model.entity.Category;
+import model.entity.Thread;
 import org.omnifaces.cdi.Param;
 
 @Data
@@ -56,5 +57,9 @@ public class CategoryBackingBean implements Serializable {
 
     public void removeCategory(Category category) {
         categoryDAO.remove(category);
+    }
+    
+    public Thread latestThread(Category category) {
+        return categoryDAO.latestThread(category);
     }
 }

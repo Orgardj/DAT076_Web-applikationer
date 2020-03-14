@@ -63,4 +63,12 @@ public class ThreadBackingBean implements Serializable {
     public void removeThread(Thread thread) {
         threadDAO.remove(thread);
     }
+    
+    public Post latestPost(Thread thread) {
+        return threadDAO.latestPost(thread);
+    }
+    
+    public String truncateComment(String comment) {
+        return comment.substring(0, 50) + "...";
+    }
 }

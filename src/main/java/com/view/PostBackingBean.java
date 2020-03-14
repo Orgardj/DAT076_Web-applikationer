@@ -60,4 +60,8 @@ public class PostBackingBean implements Serializable {
             posts = postDAO.findPostsMatchingUser(id);
         }
     }
+    
+    public void removePost(Long pId) {
+        postDAO.remove(postDAO.find(pId));
+    }
 }

@@ -16,8 +16,8 @@
                     <div>Username: #{accountPageBackingBean.account.userName}</div><br/>
                     <div>Role: #{accountPageBackingBean.account.role}</div><br/>
                     <div>Created: #{accountPageBackingBean.account.registerDate}</div><br/>
-                    <h:form rendered="#{userBean.account.role == 'administrator' and post.user.role != 'administrator' and post.user.role != 'banned'}">
-                        <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(post.user)}" onclick="setTimeout(function () {
+                    <h:form rendered="#{userBean.account.role == 'administrator' and accountPageBackingBean.account.role != 'administrator' and accountPageBackingBean.account.role != 'banned'}">
+                        <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(accountPageBackingBean.account)}" onclick="setTimeout(function () {
                                     window.location.reload();
                                 }, 200);"/>
                     </h:form>

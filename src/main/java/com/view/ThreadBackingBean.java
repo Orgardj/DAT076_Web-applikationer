@@ -59,4 +59,8 @@ public class ThreadBackingBean implements Serializable {
             postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
         }
     }
+    
+    public void removeThread(Long tId) {
+        threadDAO.remove(threadDAO.find(tId));
+    }
 }

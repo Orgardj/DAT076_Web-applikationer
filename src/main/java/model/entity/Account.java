@@ -43,6 +43,6 @@ public class Account implements Serializable {
     private Date registerDate;
 
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Post> posts;
 }

@@ -64,4 +64,8 @@ public class PostBackingBean implements Serializable {
     public void removePost(Post post) {
         postDAO.remove(post);
     }
+    
+    public List<Post> findPostsMatchingUserName(String userName) {
+        return postDAO.findPostsMatchingUserName(userName);
+    }
 }

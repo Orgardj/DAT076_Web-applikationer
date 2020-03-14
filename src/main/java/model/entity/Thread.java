@@ -3,6 +3,7 @@ package model.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -43,6 +44,6 @@ public class Thread implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @NonNull
-    @OneToMany(mappedBy = "thread", orphanRemoval = true)
+        @OneToMany(mappedBy = "thread", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Post> posts;
 }

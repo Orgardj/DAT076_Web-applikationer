@@ -2,6 +2,7 @@ package model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,6 @@ public class Category implements Serializable {
     @NonNull
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "category", orphanRemoval = true)
+    @OneToMany(mappedBy = "category", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Thread> threads;
 }

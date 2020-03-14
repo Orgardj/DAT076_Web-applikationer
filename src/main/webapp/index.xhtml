@@ -13,7 +13,7 @@
                 <p:column headerText="Name" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
                 <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
                 <p:column headerText="Remove" rendered="#{userBean.account.role == 'administrator'}">
-                    <p:commandButton value="Remove Category" action="#{categoryBackingBean.removeCategory(category.CId)}" onclick="setTimeout(function () {
+                    <p:commandButton value="Remove Category" action="#{categoryBackingBean.removeCategory(category)}" onclick="setTimeout(function () {
                                 window.location.reload();
                             }, 200);"/>
                 </p:column>

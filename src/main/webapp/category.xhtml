@@ -15,7 +15,7 @@
                 <p:column headerText="Views" sortBy="#{thread.views}">#{thread.views}</p:column>
                 <p:column headerText="Created" sortBy="#{thread.creationTimestamp}">#{thread.creationTimestamp}</p:column>
                 <p:column headerText="Remove" rendered="#{userBean.account.role == 'administrator'}">
-                    <p:commandButton value="Remove Thread" action="#{threadBackingBean.removeThread(thread.TId)}" onclick="setTimeout(function () {
+                    <p:commandButton value="Remove Thread" action="#{threadBackingBean.removeThread(thread)}" onclick="setTimeout(function () {
                                 window.location.reload();
                             }, 200);"/>
                 </p:column>

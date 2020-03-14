@@ -60,7 +60,7 @@ public class ThreadBackingBean implements Serializable {
         }
     }
     
-    public void removeThread(Long tId) {
-        threadDAO.remove(threadDAO.find(tId));
+    public void removeThread(Thread thread) {
+        threadDAO.remove(thread);
     }
 }

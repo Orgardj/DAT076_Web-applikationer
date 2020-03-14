@@ -54,7 +54,7 @@ public class CategoryBackingBean implements Serializable {
         return categoryDAO.find(id);
     }
     
-    public void removeCategory(Long CId) {
-        categoryDAO.remove(categoryDAO.find(CId));
+    public void removeCategory(Category category) {
+        categoryDAO.remove(category);
     }
 }

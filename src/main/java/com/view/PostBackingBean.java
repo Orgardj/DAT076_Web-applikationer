@@ -61,7 +61,7 @@ public class PostBackingBean implements Serializable {
         }
     }
     
-    public void removePost(Long pId) {
-        postDAO.remove(postDAO.find(pId));
+    public void removePost(Post post) {
+        postDAO.remove(post);
     }
 }

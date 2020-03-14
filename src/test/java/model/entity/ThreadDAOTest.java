@@ -32,7 +32,7 @@ public class ThreadDAOTest {
     private ThreadDAO threadDAO;
     @EJB
     private CategoryDAO categoryDAO;
-    
+
     Category category;
     Thread thread;
 
@@ -49,12 +49,12 @@ public class ThreadDAOTest {
     public void checkThatFindThreadMatchingTitleMatchesCorrectly() {
         Assert.assertEquals("Data", threadDAO.findThreadMatchingTitle("Data").getTitle());
     }
-    
+
     @Test
     public void checkThatFindThreadsMatchingCategoryMatchesCorrectly() {
-            Assert.assertEquals("Douche", threadDAO.findThreadsMatchingCategory(category.getCId()).get(0).getCategory().getName());
+        Assert.assertEquals("Douche", threadDAO.findThreadsMatchingCategory(category.getCId()).get(0).getCategory().getName());
     }
-    
+
     @Test
     public void checkThatFindThreadMatchingTIdMatchesCorrectly() {
         Assert.assertEquals(thread.getTId(), threadDAO.findThreadMatchingTId(thread.getTId()).getTId());

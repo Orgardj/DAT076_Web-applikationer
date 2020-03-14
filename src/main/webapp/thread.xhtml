@@ -18,18 +18,18 @@
                         <div>#{post.user.userName}</div>
                         <div>#{post.user.role}</div>
                         <h:form rendered="#{userBean.account.role == 'administrator' and post.user.role != 'administrator' and post.user.role != 'banned'}">
-                             <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(post.user)}" onclick="setTimeout(function () {
-                                window.location.reload();
-                            }, 200);"/>
+                            <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(post.user)}" onclick="setTimeout(function () {
+                                         window.location.reload();
+                                     }, 200);"/>
                         </h:form>
                     </h:panelGrid>
                     <h:panelGrid id = "panel3" columns = "1" border = "0"
                                  cellpadding = "10" cellspacing = "1">
                         <div>#{post.text}</div>
                         <h:form rendered="#{userBean.account.role == 'administrator'}">
-                             <p:commandButton value="Remove Post" action="#{postBackingBean.removePost(post)}" onclick="setTimeout(function () {
-                                window.location.reload();
-                            }, 200);"/>
+                            <p:commandButton value="Remove Post" action="#{postBackingBean.removePost(post)}" onclick="setTimeout(function () {
+                                         window.location.reload();
+                                     }, 200);"/>
                         </h:form>
                     </h:panelGrid>
                 </h:panelGrid>
@@ -52,4 +52,3 @@
         </ui:define>
     </ui:decorate>
 </html>
-

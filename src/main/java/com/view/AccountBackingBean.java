@@ -6,7 +6,6 @@ package com.view;
  */
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -54,24 +53,20 @@ public class AccountBackingBean implements Serializable {
 
     public String checkAccountInfo() throws NoSuchAlgorithmException {
         hashPassword();
-
         checkIfAccountExists();
         checkIfEmailExists();
         checkIfPasswordsMatch();
+
         if (passwordValid && emailDontExist && accountDontExist) {
             addAccount();
             return "login";
-        } else {
-            return "";
         }
-
+        return "";
     }
 
     public void hashPassword() throws NoSuchAlgorithmException {
         String passwordToHash = passwordInput;
-
         hashedPassword = get_SHA_512_hashedPassword(passwordToHash, salt);
-
     }
 
     private static String get_SHA_512_hashedPassword(String passwordToHash, String salt) {
@@ -86,7 +81,6 @@ public class AccountBackingBean implements Serializable {
             }
             generatedPassword = sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
         return generatedPassword;
     }
@@ -99,29 +93,22 @@ public class AccountBackingBean implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Password must match",
                             "Password must match"));
-
         } else {
             passwordValid = true;
         }
-
     }
 
     public void checkIfAccountExists() {
         accountDontExist = false;
-        if (userNameInput.isEmpty()) {
-
-        } else {
+        if (!userNameInput.isEmpty()) {
             Account account = accountDAO.findAccountMatchingUserName(userNameInput);
-
             if (account != null) {
                 FacesContext.getCurrentInstance().addMessage(
                         "registerForm:userName",
                         new FacesMessage(FacesMessage.SEVERITY_WARN,
                                 "Username already taken",
                                 "Username already taken"));
-
             } else {
-
                 accountDontExist = true;
             }
         }
@@ -129,20 +116,15 @@ public class AccountBackingBean implements Serializable {
 
     public void checkIfEmailExists() {
         emailDontExist = false;
-        if (email.isEmpty()) {
-
-        } else {
+        if (!email.isEmpty()) {
             Account account = accountDAO.findAccountMatchingEmail(email);
-
             if (account != null) {
                 FacesContext.getCurrentInstance().addMessage(
                         "registerForm:email",
                         new FacesMessage(FacesMessage.SEVERITY_WARN,
                                 "Email already used",
                                 "Email already used"));
-
             } else {
-
                 emailDontExist = true;
             }
         }
@@ -150,11 +132,9 @@ public class AccountBackingBean implements Serializable {
 
     public void addAccount() {
         accountDAO.create(new Account(userNameInput, hashedPassword, email, "member", firstName, lastName, new Date())); // hardcoded as member for now
-
     }
 
     public String validateAccount() throws NoSuchAlgorithmException {
-
         if (userNameInput.isEmpty() || passwordInput.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(
                     "studentForm:loginButton",
@@ -162,44 +142,41 @@ public class AccountBackingBean implements Serializable {
                             "Incorrect Username and Password",
                             "Please enter a username and Password"));
             return "";
-        } else {
-            String passwordToHash = passwordInput;
+        }
 
-            Account account = accountDAO.findAccountMatchingUserName(userNameInput);
-            hashedPassword = get_SHA_512_hashedPassword(passwordToHash, salt);
+        String passwordToHash = passwordInput;
+        Account account = accountDAO.findAccountMatchingUserName(userNameInput);
+        hashedPassword = get_SHA_512_hashedPassword(passwordToHash, salt);
 
-            if (account != null) {
-                if (account.getPassword().equals(hashedPassword)) {
-                    if (account.getRole().equals("banned")) {
-                        FacesContext.getCurrentInstance().addMessage(
-                                "studentForm:loginButton",
-                                new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                        "Contact an administrator if you want to appeal",
-                                        "Banned user"));
-                        return "";
-                    }
-                    userBean.setAccount(account);
-                    return "index";
-                } else {
+        if (account != null) {
+            if (account.getPassword().equals(hashedPassword)) {
+                if (account.getRole().equals("banned")) {
                     FacesContext.getCurrentInstance().addMessage(
                             "studentForm:loginButton",
                             new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                    "Incorrect Username and Password",
-                                    "Please enter a correct username and Password"));
+                                    "Contact an administrator if you want to appeal",
+                                    "Banned user"));
                     return "";
                 }
-            } else {
-                FacesContext.getCurrentInstance().addMessage(
-                        "studentForm:loginButton",
-                        new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                "Incorrect Username and Password",
-                                "Please enter a correct username and password"));
-                return "";
+                userBean.setAccount(account);
+                return "index";
             }
+            FacesContext.getCurrentInstance().addMessage(
+                    "studentForm:loginButton",
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Incorrect Username and Password",
+                            "Please enter a correct username and Password"));
+            return "";
         }
+        FacesContext.getCurrentInstance().addMessage(
+                "studentForm:loginButton",
+                new FacesMessage(FacesMessage.SEVERITY_WARN,
+                        "Incorrect Username and Password",
+                        "Please enter a correct username and password"));
+        return "";
     }
-    
-    public void banAccount (Account account) {
+
+public void banAccount(Account account) {
         account.setRole("banned");
         accountDAO.update(account);
     }

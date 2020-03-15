@@ -30,8 +30,6 @@ public class AccountBackingBean implements Serializable {
     @Inject
     UserBean userBean;
 
-    private List<Account> users;
-
     private String userNameInput;
 
     private String passwordInput;
@@ -172,6 +170,14 @@ public class AccountBackingBean implements Serializable {
 
             if (account != null) {
                 if (account.getPassword().equals(hashedPassword)) {
+                    if (account.getRole().equals("banned")) {
+                        FacesContext.getCurrentInstance().addMessage(
+                                "studentForm:loginButton",
+                                new FacesMessage(FacesMessage.SEVERITY_WARN,
+                                        "Contact an administrator if you want to appeal",
+                                        "Banned user"));
+                        return "";
+                    }
                     userBean.setAccount(account);
                     return "index";
                 } else {
@@ -192,5 +198,9 @@ public class AccountBackingBean implements Serializable {
             }
         }
     }
-
+    
+    public void banAccount (Account account) {
+        account.setRole("banned");
+        accountDAO.update(account);
+    }
 }

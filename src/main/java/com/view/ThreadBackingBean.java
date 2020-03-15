@@ -46,8 +46,6 @@ public class ThreadBackingBean implements Serializable {
     @Param
     private long id;
 
-    private List<Thread> threads;
-
     public List<Thread> getMatchingThreads() {
         return threadDAO.findThreadsMatchingCategory(id);
     }
@@ -56,22 +54,35 @@ public class ThreadBackingBean implements Serializable {
         if (userBean.isLoggedIn() && !enteredTitle.isEmpty() && !enteredMessage.isEmpty()) {
             Thread thread = new Thread(enteredTitle, Long.valueOf(0), new Date(), categoryDAO.find(id), new ArrayList<>());
             threadDAO.create(thread);
-            //Post should probably not be created here.
             postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
+            /* 
+            If we create an entity and add a child entity and then add another child entity to
+            that one we are unable to remove the the "grand" parent entity until the application 
+            had been restarted and the entity was refreshed. So we found a work around to do this
+            after every creation instead. Not sure if this is a bug in hibernate or if it's something
+            we have missed.
+             */
+            categoryDAO.refresh(categoryDAO.find(id));
+            threadDAO.refresh(thread);
         }
     }
 
     public void removeThread(Thread thread) {
         threadDAO.remove(thread);
     }
-    
+
+    public Post firstPost(Thread thread) {
+        return threadDAO.latestPost(thread);
+    }
+
     public Post latestPost(Thread thread) {
         return threadDAO.latestPost(thread);
     }
-    
+
     public String truncateComment(String comment) {
-        if(comment.length() > 50)
+        if (comment.length() > 50) {
             return comment.substring(0, 50) + "...";
+        }
         return comment;
     }
 }

@@ -44,7 +44,7 @@ public class PostDAO extends AbstractDAO<Post, Long> {
                 .fetch();
     }
 
-    public List<Post> findPostsMatchingUser(Long tId) {
+    public List<Post> findPostsMatchingThread(Long tId) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QPost post = QPost.post;
 

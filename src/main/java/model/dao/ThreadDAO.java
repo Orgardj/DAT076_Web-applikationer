@@ -59,10 +59,18 @@ public class ThreadDAO extends AbstractDAO<Thread, Long> {
                 .set(thread.views, thread.views.add(1))
                 .execute();
     }
-    
-    public Post latestPost(Thread thread) {
-        if(thread.getPosts().isEmpty())
+
+    public Post firstPost(Thread thread) {
+        if (thread.getPosts().isEmpty()) {
             return null;
+        }
         return thread.getPosts().get(0);
+    }
+
+    public Post latestPost(Thread thread) {
+        if (thread.getPosts().isEmpty()) {
+            return null;
+        }
+        return thread.getPosts().get(thread.getPosts().size() - 1);
     }
 }

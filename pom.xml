@@ -29,7 +29,6 @@
         </dependencies>
     </dependencyManagement>
     
-    
     <dependencies>
         <dependency>
             <groupId>org.primefaces</groupId>

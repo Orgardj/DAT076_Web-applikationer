@@ -26,10 +26,11 @@ public class CategoryDAO extends AbstractDAO<Category, Long> {
         return (Category) entityManager.createQuery("SELECT c FROM Category c WHERE c.name = :name")
                 .setParameter("name", name).getSingleResult();
     }
-    
+
     public Thread latestThread(Category category) {
-        if(category.getThreads().isEmpty())
+        if (category.getThreads().isEmpty()) {
             return null;
-        return category.getThreads().get(0);
+        }
+        return category.getThreads().get(category.getThreads().size() - 1);
     }
 }

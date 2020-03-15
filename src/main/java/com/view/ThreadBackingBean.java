@@ -24,23 +24,23 @@ import org.omnifaces.cdi.Param;
 @Named
 @ViewScoped
 public class ThreadBackingBean implements Serializable {
-    
+
     private String enteredTitle;
-    
+
     private String enteredMessage;
-    
+
     @EJB
     private ThreadDAO threadDAO;
-    
+
     @EJB
     private CategoryDAO categoryDAO;
-    
+
     @EJB
     private PostDAO postDAO;
-    
+
     @Inject
     UserBean userBean;
-    
+
     @Inject
     @Param
     private long id;
@@ -50,7 +50,7 @@ public class ThreadBackingBean implements Serializable {
     public List<Thread> getMatchingThreads() {
         return threadDAO.findThreadsMatchingCategory(id);
     }
-    
+
     public void createThread() {
         if (userBean.isLoggedIn() && !enteredTitle.isEmpty() && !enteredMessage.isEmpty()) {
             Thread thread = new Thread(enteredTitle, Long.valueOf(0), new Date(), categoryDAO.find(id), new ArrayList<>());
@@ -59,7 +59,7 @@ public class ThreadBackingBean implements Serializable {
             postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
         }
     }
-    
+
     public void removeThread(Thread thread) {
         threadDAO.remove(thread);
     }

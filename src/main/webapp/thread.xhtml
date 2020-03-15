@@ -21,6 +21,11 @@
                     <h:panelGrid id = "panel3" columns = "1" border = "0"
                                  cellpadding = "10" cellspacing = "1">
                         <div>#{post.text}</div>
+                        <h:form rendered="#{userBean.account.role == 'administrator'}">
+                             <p:commandButton value="Remove Post" action="#{postBackingBean.removePost(post)}" onclick="setTimeout(function () {
+                                window.location.reload();
+                            }, 200);"/>
+                        </h:form>
                     </h:panelGrid>
                 </h:panelGrid>
             </c:forEach>

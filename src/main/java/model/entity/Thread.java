@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,8 @@ public class Thread implements Serializable {
     @ManyToOne
     private Category category;
 
+    @EqualsAndHashCode.Exclude
     @NonNull
-    @OneToMany(mappedBy = "thread")
+    @OneToMany(mappedBy = "thread", orphanRemoval = true)
     private List<Post> posts;
 }

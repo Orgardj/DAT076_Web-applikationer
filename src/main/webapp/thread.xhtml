@@ -36,6 +36,14 @@
                                         window.location.reload();
                                     }, 200);"/>
                         </h:form>
+                        <h:form rendered="#{userBean.account.role == 'administrator'}">
+                            <div class="ui-inputgroup">
+                                <p:inputText placeholder="#{post.text}" value="#{postBackingBean.editedMessage}"/>  
+                                <p:commandButton value="Edit" action="#{postBackingBean.editPost()}" onclick="setTimeout(function () {
+                                            window.location.reload();
+                                        }, 200);"/>
+                            </div>
+                        </h:form>
                     </h:panelGrid>
                 </h:panelGrid>
             </c:forEach>
@@ -43,7 +51,7 @@
             <h:form rendered="#{userBean.loggedIn}">
                 <div class="ui-inputgroup">
                     <p:inputText placeholder="comment" value="#{postBackingBean.enteredMessage}"/>  
-                    <p:commandButton value="Comment" action="#{postBackingBean.createComment()}" onclick="setTimeout(function () {
+                    <p:commandButton value="Comment" action="#{postBackingBean.createPost()}" onclick="setTimeout(function () {
                                 window.location.reload();
                             }, 200);"/>
                 </div>

@@ -25,6 +25,8 @@ import org.omnifaces.cdi.Param;
 public class PostBackingBean implements Serializable {
 
     private String enteredMessage;
+    
+    private String editedMessage;
 
     @EJB
     private PostDAO postDAO;
@@ -54,7 +56,7 @@ public class PostBackingBean implements Serializable {
         return threadDAO.find(id);
     }
 
-    public void createComment() {
+    public void createPost() {
         if (userBean.isLoggedIn() && !enteredMessage.isEmpty()) {
             postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
             posts = postDAO.findPostsMatchingUser(id);
@@ -62,6 +64,10 @@ public class PostBackingBean implements Serializable {
     }
 
     public void removePost(Post post) {
+        postDAO.remove(post);
+    }
+    
+    public void editPost(Post post) {
         postDAO.remove(post);
     }
     

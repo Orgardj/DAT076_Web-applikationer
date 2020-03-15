@@ -89,6 +89,22 @@
                                     <h:message for="confirmPassword" style="color: red"/>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <h:outputLabel value="Choose Profile Picture" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10"> 
+                                    <h:selectOneRadio value="#{accountBackingBean.chooseProfilePicture}" id="chooseProfilePicture" required="true" requiredMessage="Please choose a profile picture">
+                                        <f:selectItem itemValue="1" itemLabel="Picture 1" />
+                                        <h:graphicImage library="images" name="profile1.png" alt="picture not found" />  
+                                        <f:selectItem itemValue="2" itemLabel="Picture 2" />
+                                        <h:graphicImage library="images" name="profile2.png" alt="picture not found" /> 
+                                        <f:selectItem itemValue="3" itemLabel="Picture 3" />
+                                        <h:graphicImage library="images" name="profile3.png" alt="picture not found" /> 
+                                    </h:selectOneRadio>
+                                    <h:message for="chooseProfilePicture" style="color: red"/>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <h:commandButton value="Create Account" id="createAccountButton" action="#{accountBackingBean.checkAccountInfo()}" styleClass="btn btn-dark" />

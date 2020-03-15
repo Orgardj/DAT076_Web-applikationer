@@ -14,10 +14,11 @@
                 <h:panelGrid id = "panel2" columns = "1" border = "0"
                              cellpadding = "10" cellspacing = "1">
                     <div>Username: #{accountPageBackingBean.account.userName}</div><br/>
+                    <div><h:graphicImage library="images" name="#{accountBackingBean.viewProfilePicture(accountPageBackingBean.account)}" alt="picture not found"/></div>
                     <div>Role: #{accountPageBackingBean.account.role}</div><br/>
                     <div>Created: #{accountPageBackingBean.account.registerDate}</div><br/>
-                    <h:form rendered="#{userBean.account.role == 'administrator' and post.user.role != 'administrator' and post.user.role != 'banned'}">
-                        <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(post.user)}" onclick="setTimeout(function () {
+                    <h:form rendered="#{userBean.account.role == 'administrator' and accountPageBackingBean.account.role != 'administrator' and accountPageBackingBean.account.role != 'banned'}">
+                        <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(accountPageBackingBean.account)}" onclick="setTimeout(function () {
                                     window.location.reload();
                                 }, 200);"/>
                     </h:form>
@@ -33,8 +34,8 @@
                         <p:column headerText="Posted" sortBy="#{post.creationTimestamp}">#{post.creationTimestamp}</p:column>
                         <p:column headerText="Remove" rendered="#{userBean.account.role == 'administrator'}">
                             <p:commandButton value="Remove Post" action="#{postBackingBean.removePost(post)}" onclick="setTimeout(function () {
-                                window.location.reload();
-                            }, 200);"/>
+                                        window.location.reload();
+                                    }, 200);"/>
                         </p:column>
                     </p:dataTable>
                 </h:panelGrid>

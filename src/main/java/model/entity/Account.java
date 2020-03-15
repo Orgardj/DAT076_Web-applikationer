@@ -45,4 +45,7 @@ public class Account implements Serializable {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Post> posts;
+    
+    @NonNull
+    private int profilePicture;
 }

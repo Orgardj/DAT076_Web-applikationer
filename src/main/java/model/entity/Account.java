@@ -48,4 +48,7 @@ public class Account implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Post> posts;
+    
+    @NonNull
+    private int profilePicture;
 }

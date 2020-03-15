@@ -40,6 +40,8 @@ public class AccountBackingBean implements Serializable {
     private String email;
 
     private String confirmPassword;
+    
+    private int chooseProfilePicture;
 
     private Boolean passwordValid = false;
 
@@ -131,7 +133,7 @@ public class AccountBackingBean implements Serializable {
     }
 
     public void addAccount() {
-        accountDAO.create(new Account(userNameInput, hashedPassword, email, "member", firstName, lastName, new Date())); // hardcoded as member for now
+        accountDAO.create(new Account(userNameInput, hashedPassword, email, "member", firstName, lastName, new Date(), chooseProfilePicture)); // hardcoded as member for now
     }
 
     public String validateAccount() throws NoSuchAlgorithmException {
@@ -179,5 +181,10 @@ public class AccountBackingBean implements Serializable {
 public void banAccount(Account account) {
         account.setRole("banned");
         accountDAO.update(account);
+    }
+    
+    public String viewProfilePicture (Account account) {
+        return "profile" + account.getProfilePicture() + ".png";
+        
     }
 }

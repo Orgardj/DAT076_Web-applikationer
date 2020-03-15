@@ -16,6 +16,7 @@
                     <h:panelGrid id = "panel2" columns = "1" border = "0"
                                  cellpadding = "10" cellspacing = "1">
                         <div>#{post.user.userName}</div>
+                        <div><h:graphicImage library="images" name="#{accountBackingBean.viewProfilePicture(post.user)}" alt="picture not found"/></div>
                         <div>#{post.user.role}</div>
                         <h:form rendered="#{userBean.account.role == 'administrator' and post.user.role != 'administrator' and post.user.role != 'banned'}">
                              <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(post.user)}" onclick="setTimeout(function () {

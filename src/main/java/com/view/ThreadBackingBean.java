@@ -4,8 +4,8 @@ package com.view;
  *
  * @author Team J
  */
+import model.UserBean;
 import java.io.Serializable;
-import static java.lang.Integer.min;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

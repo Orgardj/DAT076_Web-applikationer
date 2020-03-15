@@ -43,7 +43,7 @@ public class PostDAOTest {
     
     @Before
     public void init() {
-        Account user = new Account("john23", "kakao20", "douche@hotmail.com", "administrator", "John", "Douche", new Date());
+        Account user = new Account("john23", "kakao20", "douche@hotmail.com", "administrator", "John", "Douche", new Date(), 1);
         accountDAO.create(user);
 
         Category category = new Category("Douche", "Im a douche", new ArrayList<>());

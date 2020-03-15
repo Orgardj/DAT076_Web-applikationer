@@ -31,7 +31,7 @@ public class AccountDAOTest {
 
     @Before
     public void init() {
-        accountDAO.create(new Account("john23", "kakao20", "douche@hotmail.com", "administrator", "John", "Douche", new Date()));
+        accountDAO.create(new Account("john23", "kakao20", "douche@hotmail.com", "administrator", "John", "Douche", new Date(), 1));
     }
 
     @Test

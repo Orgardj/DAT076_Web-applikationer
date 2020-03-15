@@ -43,6 +43,14 @@ public abstract class AbstractDAO<T, K> {
     }
 
     public void remove(T entity) {
+        /* 
+            If we create an entity and add a child entity and then add another child entity to
+            that one we are unable to remove the the "grand" parent entity until the application 
+            had been restarted and the entity was refreshed. So we found a work around to do this
+            before every delete instead. Not sure if this is a bug in hibernate or if it's something
+            we have missed.
+        */
+        getEntityManager().refresh(getEntityManager().merge(entity));
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 }

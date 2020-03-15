@@ -44,6 +44,6 @@ public class Thread implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @NonNull
-        @OneToMany(mappedBy = "thread", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "thread", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Post> posts;
 }

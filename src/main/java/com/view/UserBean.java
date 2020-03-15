@@ -23,8 +23,8 @@ public class UserBean implements Serializable {
     public Account getAccount() {
         return account;
     }
-    
-    public boolean isLoggedIn(){
+
+    public boolean isLoggedIn() {
         return account != null;
     }
 }

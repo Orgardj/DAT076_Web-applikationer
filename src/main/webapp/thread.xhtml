@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:decorate template="WEB-INF/template/common.xhtml">
@@ -15,22 +17,22 @@
                              cellpadding = "10" cellspacing = "1">
                     <h:panelGrid id = "panel2" columns = "1" border = "0"
                                  cellpadding = "10" cellspacing = "1">
-                        <div>#{post.user.userName}</div>
+                        <div><a href="/DAT076_Web-applikationer/account_page?userName=#{post.user.userName}">#{post.user.userName}</a></div>
                         <div><h:graphicImage library="images" name="#{accountBackingBean.viewProfilePicture(post.user)}" alt="picture not found"/></div>
                         <div>#{post.user.role}</div>
                         <h:form rendered="#{userBean.account.role == 'administrator' and post.user.role != 'administrator' and post.user.role != 'banned'}">
-                             <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(post.user)}" onclick="setTimeout(function () {
-                                window.location.reload();
-                            }, 200);"/>
+                            <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(post.user)}" onclick="setTimeout(function () {
+                                         window.location.reload();
+                                     }, 200);"/>
                         </h:form>
                     </h:panelGrid>
                     <h:panelGrid id = "panel3" columns = "1" border = "0"
                                  cellpadding = "10" cellspacing = "1">
                         <div>#{post.text}</div>
                         <h:form rendered="#{userBean.account.role == 'administrator'}">
-                             <p:commandButton value="Remove Post" action="#{postBackingBean.removePost(post)}" onclick="setTimeout(function () {
-                                window.location.reload();
-                            }, 200);"/>
+                            <p:commandButton value="Remove Post" action="#{postBackingBean.removePost(post)}" onclick="setTimeout(function () {
+                                         window.location.reload();
+                                     }, 200);"/>
                         </h:form>
                     </h:panelGrid>
                 </h:panelGrid>
@@ -53,4 +55,3 @@
         </ui:define>
     </ui:decorate>
 </html>
-

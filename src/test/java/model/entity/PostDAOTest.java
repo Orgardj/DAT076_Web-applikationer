@@ -40,7 +40,7 @@ public class PostDAOTest {
 
     private String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     Thread thread;
-    
+
     @Before
     public void init() {
         Account user = new Account("john23", "kakao20", "douche@hotmail.com", "administrator", "John", "Douche", new Date(), 1);
@@ -59,7 +59,7 @@ public class PostDAOTest {
     public void checkThatFindPostMatchingUserNameMatchesCorrectly() {
         Assert.assertEquals(text, postDAO.findPostsMatchingUserName("john23").get(0).getText());
     }
-         
+
     @Test
     public void checkThatFindPostMatchingTIdMatchesCorrectly() {
         Assert.assertEquals(text, postDAO.findPostsMatchingTId(thread.getTId()).get(0).getText());

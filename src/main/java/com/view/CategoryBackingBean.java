@@ -49,11 +49,11 @@ public class CategoryBackingBean implements Serializable {
         categoryDAO.create(new Category(enteredTitle, enteredDescription, new ArrayList<>()));
         categories = categoryDAO.findAll();
     }
-    
+
     public Category findMatchingCategory() {
         return categoryDAO.find(id);
     }
-    
+
     public void removeCategory(Category category) {
         categoryDAO.remove(category);
     }

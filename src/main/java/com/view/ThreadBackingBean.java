@@ -72,7 +72,7 @@ public class ThreadBackingBean implements Serializable {
     }
 
     public Post firstPost(Thread thread) {
-        return threadDAO.latestPost(thread);
+        return threadDAO.firstPost(thread);
     }
 
     public Post latestPost(Thread thread) {

@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="WEB-INF/template/common.xhtml">
         <ui:define name="title">Thread</ui:define>
         <ui:define name="content">
@@ -30,7 +31,7 @@
                     </h:panelGrid>
                     <h:panelGrid id = "panel3" columns = "1" border = "0"
                                  cellpadding = "10" cellspacing = "1">
-                        <div>#{post.text}</div>
+                        <h:outputText value="#{post.text}" escape="false" />
                         <h:form rendered="#{userBean.account.role == 'administrator'}">
                             <p:commandButton value="Remove Post" action="#{postBackingBean.removePost(post)}" onclick="setTimeout(function () {
                                         window.location.reload();
@@ -42,14 +43,27 @@
 
             <h:form rendered="#{userBean.loggedIn}">
                 <div class="ui-inputgroup">
-                    <p:inputText placeholder="comment" value="#{postBackingBean.enteredMessage}"/>  
+                    <p:textEditor widgetVar="editor2" value="#{postBackingBean.enteredMessage}" height="300" style="margin-bottom:10px" placeholder="Write your comment here">
+                        <f:facet name="toolbar">
+                            <span>
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-strike"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-font"></select>
+                                <select class="ql-size"></select>
+                            </span>
+                        </f:facet>
+                    </p:textEditor>
                     <p:commandButton value="Comment" action="#{postBackingBean.createComment()}" onclick="setTimeout(function () {
                                 window.location.reload();
                             }, 200);"/>
                 </div>
             </h:form>
             <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">
-                <p>Login to add a response</p>
+                <p class="testasd">Login to add a response</p>
             </h:form>
             <h:form rendered="#{!userBean.loggedIn and userBean.account.role == 'banned'}">
                 <p>Banned users cannot add a response</p>

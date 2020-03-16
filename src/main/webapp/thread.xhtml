@@ -63,7 +63,7 @@
                 </div>
             </h:form>
             <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">
-                <p class="testasd">Login to add a response</p>
+                <p>Login to add a response</p>
             </h:form>
             <h:form rendered="#{!userBean.loggedIn and userBean.account.role == 'banned'}">
                 <p>Banned users cannot add a response</p>

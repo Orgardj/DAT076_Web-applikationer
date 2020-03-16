@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 import model.entity.QThread;
 import model.entity.Thread;
+import model.entity.Post;
 
 /**
  *
@@ -57,5 +58,19 @@ public class ThreadDAO extends AbstractDAO<Thread, Long> {
                 .where(thread.tId.eq(tId))
                 .set(thread.views, thread.views.add(1))
                 .execute();
+    }
+
+    public Post firstPost(Thread thread) {
+        if (thread.getPosts().isEmpty()) {
+            return null;
+        }
+        return thread.getPosts().get(0);
+    }
+
+    public Post latestPost(Thread thread) {
+        if (thread.getPosts().isEmpty()) {
+            return null;
+        }
+        return thread.getPosts().get(thread.getPosts().size() - 1);
     }
 }

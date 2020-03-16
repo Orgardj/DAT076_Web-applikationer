@@ -2,6 +2,7 @@ package model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -29,9 +31,10 @@ public class Category implements Serializable {
 
     @NonNull
     private String description;
-
-    @EqualsAndHashCode.Exclude
+    
     @NonNull
-    @OneToMany(mappedBy = "category", orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "category", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Thread> threads;
 }

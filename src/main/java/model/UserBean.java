@@ -1,4 +1,4 @@
-package com.view;
+package model;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;

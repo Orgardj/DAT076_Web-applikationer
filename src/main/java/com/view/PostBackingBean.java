@@ -4,6 +4,7 @@ package com.view;
  *
  * @author Team J
  */
+import model.UserBean;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -41,13 +42,14 @@ public class PostBackingBean implements Serializable {
 
     private Thread thread;
 
-    private List<Post> posts;
-
     @PostConstruct
     private void init() {
         thread = getThread();
-        posts = postDAO.findPostsMatchingTId(id);
         threadDAO.incrementViewCount(id);
+    }
+
+    public List<Post> getMatchingPosts() {
+        return postDAO.findPostsMatchingTId(id);
     }
 
     public Thread getThread() {
@@ -57,14 +59,13 @@ public class PostBackingBean implements Serializable {
     public void createComment() {
         if (userBean.isLoggedIn() && !enteredMessage.isEmpty()) {
             postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
-            posts = postDAO.findPostsMatchingUser(id);
         }
     }
 
     public void removePost(Post post) {
         postDAO.remove(post);
     }
-    
+
     public List<Post> findPostsMatchingUserName(String userName) {
         return postDAO.findPostsMatchingUserName(userName);
     }

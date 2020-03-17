@@ -4,10 +4,10 @@ package com.view;
  *
  * @author Team J
  */
+import model.UserBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -15,6 +15,7 @@ import javax.inject.Named;
 import lombok.Data;
 import model.dao.CategoryDAO;
 import model.entity.Category;
+import model.entity.Thread;
 import org.omnifaces.cdi.Param;
 
 @Data
@@ -32,14 +33,11 @@ public class CategoryBackingBean implements Serializable {
     @Param
     private long id;
 
-    private List<Category> categories;
-
     private String enteredTitle;
     private String enteredDescription;
 
-    @PostConstruct
-    private void init() {
-        categories = new ArrayList<>(categoryDAO.findAll());
+    public List<Category> getAllCategories() {
+        return categoryDAO.findAll();
     }
 
     public void createCategory() {
@@ -47,7 +45,6 @@ public class CategoryBackingBean implements Serializable {
             return;
         }
         categoryDAO.create(new Category(enteredTitle, enteredDescription, new ArrayList<>()));
-        categories = categoryDAO.findAll();
     }
 
     public Category findMatchingCategory() {
@@ -56,5 +53,9 @@ public class CategoryBackingBean implements Serializable {
 
     public void removeCategory(Category category) {
         categoryDAO.remove(category);
+    }
+
+    public Thread latestThread(Category category) {
+        return categoryDAO.latestThread(category);
     }
 }

@@ -9,6 +9,7 @@
     <ui:decorate template="WEB-INF/template/common.xhtml">
         <ui:define name="title">Category</ui:define>
         <h:outputScript library="javascript" name="category.js" target="head" />
+        <h:outputStylesheet library="css" name = "quill.css" />
         <h:outputStylesheet library="css" name = "category.css" />
         <ui:define name="content">
             <h1>Categories</h1>
@@ -17,9 +18,11 @@
                 <p:dataTable value="#{threadBackingBean.matchingThreads}" var="thread"
                              paginator="true" rows="10">
                     <Post title="#{thread.title}" />
-                    <p:column headerText="Title" sortBy="#{thread.name}"> <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{thread.TId}">#{thread.title}</a></p:column>
+                    <p:column headerText="Title" sortBy="#{thread.name}"> 
+                        <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{thread.TId}">#{thread.title}</a>
+                    </p:column>
                     <p:column headerText="Comment" sortBy="#{threadBackingBean.firstPost(thread).text}">
-                        #{threadBackingBean.truncateComment(threadBackingBean.firstPost(thread).text)}
+                        <h:outputText value="#{threadBackingBean.truncateComment(threadBackingBean.firstPost(thread).text)}" escape="false" />
                     </p:column>
                     <p:column headerText="By user" sortBy="#{threadBackingBean.firstPost(thread).user.userName}">
                         <a href="/DAT076_Web-applikationer/account_page?userName=#{threadBackingBean.firstPost(thread).user.userName}">

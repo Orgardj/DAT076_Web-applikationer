@@ -10,6 +10,7 @@
     <ui:decorate template="WEB-INF/template/common.xhtml">
         <ui:define name="title">Thread</ui:define>
         <h:outputScript library="javascript" name="thread.js" target="head" />
+        <h:outputStylesheet library="css" name = "quill.css" />
         <h:outputStylesheet library="css" name = "thread.css" />
         <ui:define name="content">
             <h1>#{postBackingBean.thread.title}</h1>
@@ -44,24 +45,16 @@
                         <h:panelGrid id = "panel3" columns = "1" border = "0"
                                      cellpadding = "10" cellspacing = "1">
                             <div>
-                                #{post.text}
+                                <h:outputText value="#{post.text}" escape="false" />
                             </div>
                             <h:form rendered="#{userBean.account.role == 'administrator'}">
                                 <p:commandButton value="Remove Post" action="#{postController.removePost(post)}" />
                             </h:form>
                         </h:panelGrid>
                     </h:panelGrid>
-                    <h:panelGrid id = "panel3" columns = "1" border = "0"
-                                 cellpadding = "10" cellspacing = "1">
-                        <h:outputText value="#{post.text}" escape="false" />
-                        <h:form rendered="#{userBean.account.role == 'administrator'}">
-                            <p:commandButton value="Remove Post" action="#{postBackingBean.removePost(post)}" onclick="setTimeout(function () {
-                                        window.location.reload();
-                                    }, 200);"/>
-                        </h:form>
-                    </h:panelGrid>
-                </h:panelGrid>
-            </c:forEach>
+                    </c:forEach>
+                </h:panelGroup>
+            
 
             <h:form rendered="#{userBean.loggedIn}">
                 <div class="ui-inputgroup">
@@ -79,11 +72,9 @@
                             </span>
                         </f:facet>
                     </p:textEditor>
-                    <p:commandButton value="Comment" action="#{postBackingBean.createComment()}" onclick="setTimeout(function () {
+                    <p:commandButton value="Comment" action="#{postController.newPost()}" onclick="setTimeout(function () {
                                 window.location.reload();
                             }, 200);"/>
-                    <p:inputText placeholder="comment" value="#{postBackingBean.enteredMessage}"/>  
-                    <p:commandButton value="Comment" action="#{postController.newPost()}" />
                 </div>
             </h:form>
             <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">

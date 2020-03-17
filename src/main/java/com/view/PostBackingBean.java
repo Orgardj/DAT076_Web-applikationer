@@ -68,7 +68,8 @@ public class PostBackingBean implements Serializable {
     }
     
     public void editPost(Post post) {
-        postDAO.remove(post);
+        post.setText(editedMessage);
+        postDAO.update(post);
     }
     
     public List<Post> findPostsMatchingUserName(String userName) {

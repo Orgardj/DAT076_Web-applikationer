@@ -28,6 +28,8 @@ public class PostBackingBean implements Serializable {
     private String enteredMessage;
     
     private String editedMessage;
+    
+    private boolean badEditCheck;
 
     @EJB
     private PostDAO postDAO;
@@ -60,7 +62,7 @@ public class PostBackingBean implements Serializable {
 
     public void createPost() {
         if (userBean.isLoggedIn() && !enteredMessage.isEmpty()) {
-            postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
+            postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread, "0"));
         }
     }
 
@@ -70,6 +72,7 @@ public class PostBackingBean implements Serializable {
     
     public void editPost(Post post) {
         post.setText(editedMessage);
+        post.setEditTimestamp("last edited by " + userBean.getAccount().getUserName() + ", " +  new Date());
         postDAO.update(post);
     }
     

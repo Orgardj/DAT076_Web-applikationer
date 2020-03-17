@@ -31,7 +31,10 @@ public class PostController implements Serializable {
     }
     
     public void editPost(Post post) {
-        postBackingBean.editPost(post);
+        if (!postBackingBean.getEditedMessage().equals(post.getText()) 
+                && !postBackingBean.getEditedMessage().equals("") ) 
+            postBackingBean.editPost(post);
         push.send("update_posts");
+        postBackingBean.setEditedMessage("");
     }
 }

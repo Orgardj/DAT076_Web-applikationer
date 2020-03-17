@@ -40,5 +40,6 @@ public class Post implements Serializable {
     @ManyToOne
     private Thread thread;
     
+    @NonNull
     private String editTimestamp;
 }

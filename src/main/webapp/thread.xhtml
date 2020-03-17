@@ -4,48 +4,66 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="WEB-INF/template/common.xhtml">
         <ui:define name="title">Thread</ui:define>
+        <h:outputScript library="javascript" name="thread.js" target="head" />
+        <h:outputStylesheet library="css" name = "thread.css" />
         <ui:define name="content">
-            <h:outputScript library="javascript" name="thread.js" target="head" />
-            <h:outputStylesheet library="css" name = "thread.css" />
             <h1>#{postBackingBean.thread.title}</h1>
-            <c:forEach var="post" items="#{postBackingBean.posts}">
-                <div>#{post.creationTimestamp}</div>
-                <h:panelGrid id = "panel_#{post.PId}" columns = "2" border = "1"
-                             cellpadding = "10" cellspacing = "1">
-                    <h:panelGrid id = "panel2" columns = "1" border = "0"
+
+            <h:panelGroup id="posts">
+                <c:forEach var="post" items="#{postBackingBean.matchingPosts}">
+                    <div>#{post.creationTimestamp}</div>
+                    <h:panelGrid id = "panel_#{post.PId}" columns = "2" border = "1"
                                  cellpadding = "10" cellspacing = "1">
-                        <div><a href="/DAT076_Web-applikationer/account_page?userName=#{post.user.userName}">#{post.user.userName}</a></div>
-                        <p:link href="/DAT076_Web-applikationer/account_page?userName=#{post.user.userName}">
-                            <div><h:graphicImage library="images" name="#{accountBackingBean.viewProfilePicture(post.user)}" alt="picture not found"/></div>
-                        </p:link>
-                        <div>#{post.user.role}</div>
-                        <h:form rendered="#{userBean.account.role == 'administrator' and post.user.role != 'administrator' and post.user.role != 'banned'}">
-                            <p:commandButton value="Ban User" action="#{accountBackingBean.banAccount(post.user)}" onclick="setTimeout(function () {
-                                        window.location.reload();
-                                    }, 200);"/>
+                        <h:panelGrid id = "panel2" columns = "1" border = "0"
+                                     cellpadding = "10" cellspacing = "1">
+                            <div>
+                                <a href="/DAT076_Web-applikationer/account_page?userName=#{post.user.userName}">
+                                    #{post.user.userName}
+                                </a>
+                            </div>
+
+                            <p:link href="/DAT076_Web-applikationer/account_page?userName=#{post.user.userName}">
+                                <div>
+                                    <h:graphicImage library="images" name="#{accountBackingBean.viewProfilePicture(post.user)}" alt="picture not found"/>
+                                </div>
+                            </p:link>
+
+                            <div>
+                                #{post.user.role}
+                            </div>
+                            <h:form rendered="#{userBean.account.role == 'administrator' and post.user.role != 'administrator' and post.user.role != 'banned'}">
+                                <p:commandButton value="Ban User" action="#{accountController.banAccount(post.user)}" />
+                            </h:form>
+                        </h:panelGrid>
+
+                        <h:panelGrid id = "panel3" columns = "1" border = "0"
+                                     cellpadding = "10" cellspacing = "1">
+                            <div>
+                                #{post.text}
+                            </div>
+                            <h:form rendered="#{userBean.account.role == 'administrator'}">
+                                <p:commandButton value="Remove Post" action="#{postController.removePost(post)}" />
+                            </h:form>
+                            <h:form rendered="#{userBean.account.role == 'administrator'}">
+                            <div class="ui-inputgroup">
+                                <p:inputText value="#{postBackingBean.editedMessage}"/>  
+                                <p:commandButton value="Edit" action="#{postController.editPost(post)}" />
+                            </div>
                         </h:form>
+                        </h:panelGrid>
                     </h:panelGrid>
-                    <h:panelGrid id = "panel3" columns = "1" border = "0"
-                                 cellpadding = "10" cellspacing = "1">
-                        <div>#{post.text}</div>
-                        <h:form rendered="#{userBean.account.role == 'administrator'}">
-                            <p:commandButton value="Remove Post" action="#{postBackingBean.removePost(post)}" onclick="setTimeout(function () {
-                                        window.location.reload();
-                                    }, 200);"/>
-                        </h:form>
-                    </h:panelGrid>
-                </h:panelGrid>
-            </c:forEach>
+                </c:forEach>
+            </h:panelGroup>
 
             <h:form rendered="#{userBean.loggedIn}">
                 <div class="ui-inputgroup">
                     <p:inputText placeholder="comment" value="#{postBackingBean.enteredMessage}"/>  
-                    <p:commandButton value="Comment" action="#{postBackingBean.createComment()}" onclick="setTimeout(function () {
-                                window.location.reload();
-                            }, 200);"/>
+                    <p:commandButton value="Comment" action="#{postController.newPost()}" />
                 </div>
             </h:form>
             <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">
@@ -56,4 +74,7 @@
             </h:form>
         </ui:define>
     </ui:decorate>
+    <o:socket scope="application" channel="main">
+        <f:ajax event="update_posts" render=":posts"/>
+    </o:socket>
 </html>

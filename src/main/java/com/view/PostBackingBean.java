@@ -4,6 +4,7 @@ package com.view;
  *
  * @author Team J
  */
+import model.UserBean;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,8 @@ import org.omnifaces.cdi.Param;
 public class PostBackingBean implements Serializable {
 
     private String enteredMessage;
+    
+    private String editedMessage;
 
     @EJB
     private PostDAO postDAO;
@@ -41,28 +44,33 @@ public class PostBackingBean implements Serializable {
 
     private Thread thread;
 
-    private List<Post> posts;
-
     @PostConstruct
     private void init() {
         thread = getThread();
-        posts = postDAO.findPostsMatchingTId(id);
         threadDAO.incrementViewCount(id);
+    }
+
+    public List<Post> getMatchingPosts() {
+        return postDAO.findPostsMatchingTId(id);
     }
 
     public Thread getThread() {
         return threadDAO.find(id);
     }
 
-    public void createComment() {
+    public void createPost() {
         if (userBean.isLoggedIn() && !enteredMessage.isEmpty()) {
             postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
-            posts = postDAO.findPostsMatchingUser(id);
         }
     }
 
     public void removePost(Post post) {
         postDAO.remove(post);
+    }
+    
+    public void editPost(Post post) {
+        post.setText(editedMessage);
+        postDAO.update(post);
     }
     
     public List<Post> findPostsMatchingUserName(String userName) {

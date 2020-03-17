@@ -16,21 +16,19 @@
             <h:button value="Home Page" outcome="index" />
         </h:form>
         <p:button value="Back" onclick="window.history.back();" />
-        <div rendered="#{page.title != 'Login'}">
-            <h:form rendered="#{!userBean.loggedIn}">
-                <h:button value = "Login" outcome="login" />
-            </h:form>
-            <h:form rendered="#{!userBean.loggedIn}">
-                <h:button value = "Sign up" outcome="register" />
-            </h:form>
-            <h:form rendered="#{userBean.loggedIn}">
-                <h:commandButton value = "logout" action="#{userBean.setAccount(none)}" />
-            </h:form>
-            <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
-            <h:form rendered="#{userBean.loggedIn}">
-                <h:commandButton value = "Account settings" action="settings" />
-            </h:form>
-        </div>
+        <h:form rendered="#{!userBean.loggedIn}">
+            <h:button value = "Login" outcome="login" />
+        </h:form>
+        <h:form rendered="#{!userBean.loggedIn}">
+            <h:button value = "Sign up" outcome="register" />
+        </h:form>
+        <h:form rendered="#{userBean.loggedIn}">
+            <h:commandButton value = "logout" action="#{userBean.setAccount(none)}" />
+        </h:form>
+        <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
+        <h:form rendered="#{userBean.loggedIn}">
+            <h:commandButton value = "Account settings" action="settings" />
+        </h:form>
 
         <!-- TODO footer -->        
     </h:body>

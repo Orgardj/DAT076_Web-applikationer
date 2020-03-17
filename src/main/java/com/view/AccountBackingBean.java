@@ -4,6 +4,7 @@ package com.view;
  *
  * @author jblom
  */
+import model.UserBean;
 import java.io.Serializable;
 import java.util.Date;
 import javax.ejb.EJB;

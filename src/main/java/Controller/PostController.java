@@ -21,12 +21,17 @@ public class PostController implements Serializable {
     private PushContext push;
 
     public void newPost() {
-        postBackingBean.createComment();
+        postBackingBean.createPost();
         push.send("update_posts");
     }
 
-    public void removePost(Post post) throws InterruptedException {
+    public void removePost(Post post) {
         postBackingBean.removePost(post);
+        push.send("update_posts");
+    }
+    
+    public void editPost(Post post) {
+        postBackingBean.editPost(post);
         push.send("update_posts");
     }
 }

@@ -52,7 +52,7 @@ public class PostDAOTest {
         thread = new Thread("Data", Long.valueOf(5), new Date(), category, new ArrayList<>());
         threadDAO.create(thread);
 
-        postDAO.create(new Post(text, new Date(), user, thread));
+        postDAO.create(new Post(text, new Date(), user, thread, "0"));
     }
 
     @Test

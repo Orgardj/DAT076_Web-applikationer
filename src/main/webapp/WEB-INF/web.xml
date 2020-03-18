@@ -28,4 +28,7 @@
         <param-name>org.omnifaces.SOCKET_ENDPOINT_ENABLED</param-name>
         <param-value>true</param-value>
     </context-param>
+    <listener>
+        <listener-class>controller.SessionListener</listener-class>
+    </listener>
 </web-app>

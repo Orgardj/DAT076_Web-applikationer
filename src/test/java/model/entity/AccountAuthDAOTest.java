@@ -1,8 +1,8 @@
 package model.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import javax.ejb.EJB;
+import model.dao.AccountAuthDAO;
 import org.junit.Assert;
 import model.dao.AccountDAO;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -16,42 +16,40 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class AccountDAOTest {
+public class AccountAuthDAOTest {
 
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(AccountDAO.class, Account.class, Post.class, Thread.class, Category.class, AccountAuth.class)
+                .addClasses(AccountAuthDAO.class, AccountDAO.class, Account.class, Post.class, Thread.class, Category.class, AccountAuth.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
+
+    @EJB
+    private AccountAuthDAO accountAuthDAO;
 
     @EJB
     private AccountDAO accountDAO;
 
     @Before
     public void init() {
-        accountDAO.create(new Account("john23", "kakao20", "douche@hotmail.com", "administrator", "John", "Douche", new Date(), 1));
+        Account account = new Account("john23", "kakao20", "douche@hotmail.com", "administrator", "John", "Douche", new Date(), 1);
+        accountDAO.create(account);
+        accountAuthDAO.create(new AccountAuth("selector", "validator", account));
     }
 
     @Test
-    public void checkThatFindAccountMatchingNameMatchesCorrectly() {
-        Assert.assertEquals("john23", accountDAO.findAccountMatchingUserName("john23").getUserName());
-    }
-
-    @Test
-    public void checkThatFindAccountMatchingEmailMatchesCorrectly() {
-        Assert.assertEquals("douche@hotmail.com", accountDAO.findAccountMatchingEmail("douche@hotmail.com").getEmail());
-    }
-
-    @Test
-    public void checkThatFindAccountsMatchingRoleMatchesCorrectly() {
-        Assert.assertEquals("administrator", new ArrayList<>(
-                accountDAO.findAccountsMatchingRole("administrator")).get(0).getRole());
+    public void checkThatFindMatchingAccountAuthMatchesCorrectly() {
+        Assert.assertEquals("john23", accountAuthDAO.findMatchingAccountAuth("selector", "validator").getAccount().getUserName());
     }
 
     @After
     public void clear() {
+        accountAuthDAO.findAll().forEach((accountAuth) -> {
+            accountAuthDAO.remove(accountAuth);
+        });
+        
         accountDAO.remove(accountDAO.find("john23"));
     }
 }

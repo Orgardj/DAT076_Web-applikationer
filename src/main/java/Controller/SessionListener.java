@@ -37,7 +37,7 @@ public class SessionListener implements HttpSessionListener {
         if (cookies.containsKey("selector") && cookies.containsKey("validator")) {
             Cookie selector = (Cookie) cookies.get("selector");
             Cookie validator = (Cookie) cookies.get("validator"); 
-            AccountAuth accountAuth = accountAuthDAO.findMatchingAccount(selector.getValue(), validator.getValue());
+            AccountAuth accountAuth = accountAuthDAO.findMatchingAccountAuth(selector.getValue(), validator.getValue());
             if (accountAuth != null) {
                 userBean.setAccount(accountAuth.getAccount());
             }

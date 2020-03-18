@@ -25,7 +25,7 @@ public class PostDAOTest {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
                 .addClasses(PostDAO.class, AccountDAO.class, ThreadDAO.class,
-                        Post.class, Account.class, Thread.class, Category.class, CategoryDAO.class)
+                        Post.class, Account.class, Thread.class, Category.class, CategoryDAO.class, AccountAuth.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }

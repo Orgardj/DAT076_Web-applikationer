@@ -23,7 +23,7 @@ public class AccountAuthDAO extends AbstractDAO<AccountAuth, Long> {
         super(AccountAuth.class);
     }
     
-    public AccountAuth findMatchingAccount(String selector, String validator) {
+    public AccountAuth findMatchingAccountAuth(String selector, String validator) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QAccountAuth accountAuth = QAccountAuth.accountAuth;
 

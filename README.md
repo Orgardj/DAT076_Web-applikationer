@@ -6,7 +6,7 @@ Orgardj - Jonathan Örgård\
 jonte134 - Jonathan Edfeldt\
 davherm - David Hermansson\
 uhrej - Jonathan Uhre\
-Orgardj-Makalunga-uhrej - Jonathan Örgård, Johan Blom, Jonathan Uhre
+Orgardj-Makalunga-uhrej - Everyone, unfair to not give the rest credit for their lab that we didn't end up using
 
 
 ### Google Drive

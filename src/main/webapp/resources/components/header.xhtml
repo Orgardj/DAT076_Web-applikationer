@@ -22,11 +22,11 @@
                 <div class="iconHolder">
                     <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
                         onclick="displayForm('open')"
-                        rendered="#{userBean.loggedIn}" 
+                        rendered="#{!userBean.loggedIn}" 
                         />
                     <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
                         class="loggedInUserIcon"
-                        rendered="#{!userBean.loggedIn}" 
+                        rendered="#{userBean.loggedIn}" 
                         />
                     <div class="dropMenu">
                         <p>Well hello there</p>

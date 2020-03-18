@@ -9,6 +9,7 @@
     </h:head>
     <h:body>
         <!-- TODO header -->
+        
         <div class="container">
             <ui:insert name="content" />
         </div>
@@ -23,7 +24,7 @@
             <h:button value = "Sign up" outcome="register" />
         </h:form>
         <h:form rendered="#{userBean.loggedIn}">
-            <h:commandButton value = "logout" action="#{userBean.setAccount(none)}" />
+            <h:commandButton value = "Logout" action="#{accountBackingBean.logout()}" />
         </h:form>
         <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
         <h:form rendered="#{userBean.loggedIn}">

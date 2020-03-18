@@ -8,7 +8,6 @@ import model.UserBean;
 import java.io.Serializable;
 import java.util.Date;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -18,8 +17,13 @@ import model.dao.AccountDAO;
 import model.entity.Account;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlInputText;
+import javax.faces.context.ExternalContext;
+import model.dao.AccountAuthDAO;
+import model.entity.AccountAuth;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.omnifaces.util.Messages;
 
 @Data
@@ -29,6 +33,9 @@ public class AccountBackingBean implements Serializable {
 
     @EJB
     private AccountDAO accountDAO;
+
+    @EJB
+    private AccountAuthDAO accountAuthDAO;
 
     @Inject
     UserBean userBean;
@@ -62,6 +69,8 @@ public class AccountBackingBean implements Serializable {
     private Boolean showPassword = false;
 
     private Boolean showEmail = false;
+
+    private Boolean rememberMe = true;
 
     public static final String SALT = "saltSecurityText";
 
@@ -210,14 +219,28 @@ public class AccountBackingBean implements Serializable {
         if (account != null) {
             if (account.getPassword().equals(hashedPassword)) {
                 if (account.getRole().equals("banned")) {
-                    FacesContext.getCurrentInstance().addMessage(
-                            "studentForm:loginButton",
-                            new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                    "Contact an administrator if you want to appeal",
-                                    "Banned user"));
+                    Messages.addError("studentForm:loginButton", "Banned user");
                     return "";
                 }
                 userBean.setAccount(account);
+                if (rememberMe) {
+                    AccountAuth newToken = new AccountAuth();
+
+                    String selector = RandomStringUtils.randomAlphanumeric(12);
+                    String rawValidator = RandomStringUtils.randomAlphanumeric(64);
+
+                    String hashedValidator = get_SHA_512_hashedPassword(rawValidator, SALT);
+
+                    newToken.setSelector(selector);
+                    newToken.setValidator(hashedValidator);
+                    newToken.setAccount(account);
+
+                    accountAuthDAO.create(newToken);
+
+                    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                    ec.addResponseCookie("selector", selector, Map.of("maxAge", 604800));
+                    ec.addResponseCookie("validator", hashedValidator, Map.of("maxAge", 604800));
+                }
                 return "index";
             }
             Messages.addError("studentForm:loginButton", "Please enter a correct username and password");
@@ -234,6 +257,14 @@ public class AccountBackingBean implements Serializable {
 
     public String viewProfilePicture(Account account) {
         return "profile" + account.getProfilePicture() + ".png";
+    }
 
+    public void logout() {
+        userBean.setAccount(null);
+        
+        //Remove cookies
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.addResponseCookie("selector", "", Map.of("maxAge", 0));
+        ec.addResponseCookie("validator", "", Map.of("maxAge", 0));
     }
 }

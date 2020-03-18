@@ -3,17 +3,16 @@
       xmlns:cc="http://java.sun.com/jsf/composite"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:o="http://omnifaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 	<cc:interface>
 		<cc:attribute name="value"/>
+                <cc:facet name="singInLink" />
 	</cc:interface>
 	<cc:implementation>
         
             
-            <footer class="footer">
-            ds
-            
+            <footer class="footer #{cc.attrs.value}">
+                <cc:renderFacet name="singInLink" />
             </footer>
 
         

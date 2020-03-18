@@ -1,12 +1,10 @@
 package model.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,29 +15,20 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Post implements Serializable {
+public class AccountAuth implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long pId;
+    private Long aAId;
 
     @NonNull
-    @Lob
-    private String text;
+    private String selector;
 
     @NonNull
-    private Date creationTimestamp;
+    private String validator;
 
     @JoinColumn(name = "userName", nullable = false)
     @NonNull
     @ManyToOne
-    private Account user;
-
-    @JoinColumn(name = "tId", nullable = false)
-    @NonNull
-    @ManyToOne
-    private Thread thread;
-    
-    @NonNull
-    private String editTimestamp;
+    private Account account;
 }

@@ -50,6 +50,18 @@
                             <h:form rendered="#{userBean.account.role == 'administrator'}">
                                 <p:commandButton value="Remove Post" action="#{postController.removePost(post)}" />
                             </h:form>
+                            <h:form rendered="#{userBean.account.role == 'administrator' or post.user == userBean.account}">
+                                <div class="ui-inputgroup">
+                                    <p:inputText value="#{postBackingBean.editedMessage}"/>  
+                                    <p:commandButton value="Edit" action="#{postController.editPost(post)}" />
+                                </div>
+                            </h:form>
+                            <h:form rendered="#{post.editTimestamp != 0}">
+                                <div>
+                                    #{post.editTimestamp}
+                                </div>
+                            </h:form>
+
                         </h:panelGrid>
                     </h:panelGrid>
                     </c:forEach>

@@ -54,7 +54,7 @@ public class ThreadBackingBean implements Serializable {
         if (userBean.isLoggedIn() && !enteredTitle.isEmpty() && !enteredMessage.isEmpty()) {
             Thread thread = new Thread(enteredTitle, Long.valueOf(0), new Date(), categoryDAO.find(id), new ArrayList<>());
             threadDAO.create(thread);
-            postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
+            postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread, "0"));
             /* 
             If we create an entity and add a child entity and then add another child entity to
             that one we are unable to remove the the "grand" parent entity until the application 

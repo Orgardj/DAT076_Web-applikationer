@@ -43,12 +43,17 @@ public class Account implements Serializable {
 
     @NonNull
     private Date registerDate;
+    
+    @NonNull
+    private int profilePicture;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Post> posts;
-    
-    @NonNull
-    private int profilePicture;
+
+    @OneToMany(mappedBy = "account", orphanRemoval = true, cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<AccountAuth> accountAuths;
 }

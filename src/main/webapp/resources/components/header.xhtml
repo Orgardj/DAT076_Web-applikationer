@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:cc="http://java.sun.com/jsf/composite"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -8,7 +8,7 @@
 		<cc:attribute name="value"/>
 	</cc:interface>
 	<cc:implementation>
-        
+
           <header class="pageHeader">
                 <h1 class="headerStyle">Welcome to Forum</h1>
 
@@ -23,12 +23,16 @@
                     <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
                         onclick="displayForm('open')"
                         class="userIcon"
-                        rendered="#{!userBean.loggedIn}" 
+                        rendered="#{!userBean.loggedIn}"
+                        />
+                    <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
+                        class="loggedInUserIcon"
+                        rendered="#{userBean.loggedIn}" 
                         />
                     <div class="dropMenu">
                         <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
                             class="loggedInUserIcon"
-                            rendered="#{userBean.loggedIn}" 
+                            rendered="#{userBean.loggedIn}"
                             />
                         <div class="dropContent">
                             <p>Well hello there</p>
@@ -43,7 +47,7 @@
                 </div>
             </header>
 
-        
-        
+
+
         </cc:implementation>
 </html>

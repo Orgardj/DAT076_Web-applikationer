@@ -1,11 +1,9 @@
 /* Temporary css to make the inputs look decent */
-.te-edit {
-    height: 100px;
-    margin-bottom: 30px;
+.inputTitle, .editorPost {
+    width: 500px;
 }
 
-.te-comment {
+.editorPost {
     height: 300px;
-    width: 620px;
     margin-bottom: 50px;
 }

@@ -8,9 +8,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="WEB-INF/template/common.xhtml">
         <ui:define name="title">Account page</ui:define>
-        <h:outputScript library="javascript" name="account_page.js" target="head" />
-        <h:outputStylesheet library="css" name = "account_page.css" />
         <ui:define name="content">
+            <h:outputScript library="javascript" name="account_page.js" target="head" />
+            <h:outputStylesheet library="css" name = "account_page.css" />
             <h:panelGrid id = "account_info" columns = "2" border = "1"
                          cellpadding = "10" cellspacing = "1">
                 <h:panelGroup id="user">

@@ -9,10 +9,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="WEB-INF/template/common.xhtml">
         <ui:define name="title">Thread</ui:define>
-        <h:outputScript library="javascript" name="thread.js" target="head" />
-        <h:outputStylesheet library="css" name = "quill.css" />
-        <h:outputStylesheet library="css" name = "thread.css" />
         <ui:define name="content">
+            <h:outputScript library="javascript" name="thread.js" target="head" />
+            <h:outputStylesheet library="css" name = "quill.css" />
+            <h:outputStylesheet library="css" name = "thread.css" />
+
             <h1>#{postBackingBean.thread.title}</h1>
 
             <h:panelGroup id="posts">
@@ -52,7 +53,20 @@
                             </h:form>
                             <h:form rendered="#{userBean.account.role == 'administrator' or post.user == userBean.account}">
                                 <div class="ui-inputgroup">
-                                    <p:inputText value="#{postBackingBean.editedMessage}"/>  
+                                    <p:textEditor widgetVar="editor2" value="#{postBackingBean.editedMessage}" height="300" style="margin-bottom:10px" placeholder="Write your comment here">
+                                        <f:facet name="toolbar">
+                                            <span>
+                                                <button class="ql-bold"></button>
+                                                <button class="ql-italic"></button>
+                                                <button class="ql-underline"></button>
+                                                <button class="ql-strike"></button>
+                                            </span>
+                                            <span class="ql-formats">
+                                                <select class="ql-font"></select>
+                                                <select class="ql-size"></select>
+                                            </span>
+                                        </f:facet>
+                                    </p:textEditor>
                                     <p:commandButton value="Edit" action="#{postController.editPost(post)}" />
                                 </div>
                             </h:form>
@@ -61,12 +75,11 @@
                                     #{post.editTimestamp}
                                 </div>
                             </h:form>
-
                         </h:panelGrid>
                     </h:panelGrid>
-                    </c:forEach>
-                </h:panelGroup>
-            
+                </c:forEach>
+            </h:panelGroup>
+
 
             <h:form rendered="#{userBean.loggedIn}">
                 <div class="ui-inputgroup">
@@ -84,9 +97,7 @@
                             </span>
                         </f:facet>
                     </p:textEditor>
-                    <p:commandButton value="Comment" action="#{postController.newPost()}" onclick="setTimeout(function () {
-                                window.location.reload();
-                            }, 200);"/>
+                    <p:commandButton value="Comment" action="#{postController.newPost()}"/>
                 </div>
             </h:form>
             <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">

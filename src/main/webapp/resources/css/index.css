@@ -83,18 +83,19 @@ html {
         float: left;
     }
 
-    .iconHolder img {
+    .iconHolder img,
+    .dropMenu {
         height: 66%;
         float: right;
         margin: 0px 0px 0px 0px;
-        padding: 5px 20px;
         top: calc(17% - 0px);
         position: relative; 
-        cursor: pointer;
     }
 
-    .iconHolder img:first-of-type {
-        border-left: 1px solid black;
+    .iconHolder img:last-child {
+        border-right: 1px solid black;
+        padding: 0px 20px;
+        cursor: pointer;
     }
 
     .iconHolder img:hover {
@@ -121,33 +122,37 @@ html {
         padding: 0px 0px 0px 10px !important;
     }
     
-    .loggedInUserIcon {
-        
+    .dropMenu img {
+        height: 100%;
+        top: 0;
+        padding: 0px 20px;
+        cursor: pointer;
     }
     
-    .dropMenu {
+    .dropContent {
         width: 200px;
         height: 150px;
         background-color: red;
         position: absolute;
         right: 0;
-        top: 70px;
+        top: 59px;
         visibility: hidden;
         opacity: 0;
         transition: 0.5s;
     }
     
-    .loggedInUserIcon:hover + div {
+    .dropMenu:hover div {
         visibility: visible;
         opacity: 1;
     }
     
-    .dropMenu input {
+    .dropContent input {
         width: 80%;
         height: 30px;
         float: left;
         margin: 0px 0px 10px 10%;
         transition: 0s !important;
+        cursor: pointer;
     }
 
     

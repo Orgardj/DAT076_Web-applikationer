@@ -24,16 +24,18 @@
                         onclick="displayForm('open')"
                         rendered="#{userBean.loggedIn}" 
                         />
-                    <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
-                        class="loggedInUserIcon"
-                        rendered="#{!userBean.loggedIn}" 
-                        />
                     <div class="dropMenu">
-                        <p>Well hello there</p>
-                        <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
-                        
-                        <h:commandButton value="Account settings" action="settings" />
-                        <h:commandButton value="logout" action="#{userBean.setAccount(none)}" />
+                        <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
+                            class="loggedInUserIcon"
+                            rendered="#{!userBean.loggedIn}" 
+                            />
+                        <div class="dropContent">
+                            <p>Well hello there</p>
+                            <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
+
+                            <h:commandButton value="Account settings" action="settings" />
+                            <h:commandButton value="logout" action="#{userBean.setAccount(none)}" />
+                        </div>
                     </div>
                     <p:inputText placeholder="Search..." class="searchBar" value=""/>
                     <img src="./resources/images/search_icon.png" alt="Search icon" class="searchIcon"></img>

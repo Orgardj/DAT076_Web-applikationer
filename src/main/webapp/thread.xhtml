@@ -52,8 +52,10 @@
                                 <p:commandButton value="Remove Post" action="#{postController.removePost(post)}" />
                             </h:form>
                             <h:form rendered="#{userBean.account.role == 'administrator' or post.user == userBean.account}">
+                                <!-- ui-inputgroup has to be removed if you don't want textEditor
+                                    and commandButton on the same row. -->
                                 <div class="ui-inputgroup">
-                                    <p:textEditor widgetVar="editor2" value="#{postBackingBean.editedMessage}" height="300" style="margin-bottom:10px" placeholder="Write your comment here">
+                                    <p:textEditor class="te-edit" value="#{postBackingBean.editedMessage}" placeholder="Edit your comment here">
                                         <f:facet name="toolbar">
                                             <span>
                                                 <button class="ql-bold"></button>
@@ -82,8 +84,10 @@
 
 
             <h:form rendered="#{userBean.loggedIn}">
+                <!-- ui-inputgroup has to be removed if you don't want textEditor
+                    and commandButton on the same row. -->
                 <div class="ui-inputgroup">
-                    <p:textEditor widgetVar="editor2" value="#{postBackingBean.enteredMessage}" height="300" style="margin-bottom:10px" placeholder="Write your comment here">
+                    <p:textEditor class="te-comment" value="#{postBackingBean.enteredMessage}" placeholder="Write your comment here">
                         <f:facet name="toolbar">
                             <span>
                                 <button class="ql-bold"></button>

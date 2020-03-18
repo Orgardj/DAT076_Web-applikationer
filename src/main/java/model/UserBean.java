@@ -1,9 +1,10 @@
-package model.entity;
+package model;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import model.entity.Account;
 
 @Named
 @SessionScoped
@@ -22,8 +23,8 @@ public class UserBean implements Serializable {
     public Account getAccount() {
         return account;
     }
-    
-    public boolean isLoggedIn(){
+
+    public boolean isLoggedIn() {
         return account != null;
     }
 }

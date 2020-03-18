@@ -1,27 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="WEB-INF/template/common.xhtml">
         <ui:define name="title">Category</ui:define>
+        <h:outputScript library="javascript" name="category.js" target="head" />
+        <h:outputStylesheet library="css" name = "category.css" />
         <ui:define name="content">
-            <h:outputScript library="javascript" name="category.js" target="head" />
-            <h:outputStylesheet library="css" name = "category.css" />
             <h1>Categories</h1>
-            <p:dataTable value="#{threadBackingBean.matchingThreads}" var="thread"
-                         paginator="true" rows="10">
-                <Post title="#{thread.title}" />
-                <p:column headerText="Title" sortBy="#{thread.name}"> <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{thread.TId}">#{thread.title}</a></p:column>
-                <p:column headerText="Views" sortBy="#{thread.views}">#{thread.views}</p:column>
-                <p:column headerText="Created" sortBy="#{thread.creationTimestamp}">#{thread.creationTimestamp}</p:column>
-            </p:dataTable>
+
+            <h:panelGroup id="threads">
+                <p:dataTable value="#{threadBackingBean.matchingThreads}" var="thread"
+                             paginator="true" rows="10">
+                    <Post title="#{thread.title}" />
+                    <p:column headerText="Title" sortBy="#{thread.name}"> <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{thread.TId}">#{thread.title}</a></p:column>
+                    <p:column headerText="Comment" sortBy="#{threadBackingBean.firstPost(thread).text}">
+                        #{threadBackingBean.truncateComment(threadBackingBean.firstPost(thread).text)}
+                    </p:column>
+                    <p:column headerText="By user" sortBy="#{threadBackingBean.firstPost(thread).user.userName}">
+                        <a href="/DAT076_Web-applikationer/account_page?userName=#{threadBackingBean.firstPost(thread).user.userName}">
+                            #{threadBackingBean.firstPost(thread).user.userName}
+                        </a>
+                    </p:column>
+                    <p:column headerText="Post Count" sortBy="#{thread.posts.size}">#{thread.posts.size()}</p:column>
+                    <p:column headerText="Views" sortBy="#{thread.views}">#{thread.views}</p:column>
+                    <p:column headerText="Created" sortBy="#{thread.creationTimestamp}">#{thread.creationTimestamp}</p:column>
+                    <p:column headerText="Remove" rendered="#{userBean.account.role == 'administrator'}">
+                        <p:commandButton value="Remove Thread" action="#{threadController.removeThread(thread)}" />
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+
             <h:form rendered="#{userBean.loggedIn}">
-                <p:commandButton value="Create Thread" onclick="window.location.href = 
+                <p:commandButton value="Create Thread" onclick="window.location.href =
                                 '/DAT076_Web-applikationer/create_thread.xhtml?id=#{categoryBackingBean.findMatchingCategory().CId}'"/>
             </h:form>
-            <h:form rendered="#{!userBean.loggedIn}">
+            <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">
                 <p>Login to create threads</p>
             </h:form>
+            <h:form rendered="#{!userBean.loggedIn and userBean.account.role == 'banned'}">
+                <p>Banned users cannot create threads</p>
+            </h:form>
+
         </ui:define>
     </ui:decorate>
+    <o:socket scope="application" channel="main">
+        <f:ajax event="update_threads" render=":threads"/>
+    </o:socket>
 </html>

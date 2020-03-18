@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+        <h:outputStylesheet library="css" name = "settings.css" />
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <title>Settings</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+
+        <h:form styleClass="form-horizontal" id="formId">
+            <div style = "color: white; background-color:#001f3f">
+                Account details
+            </div>
+            <div class="form-group" >
+                <h:graphicImage library="images" name="#{accountBackingBean.viewProfilePicture(userBean.account)}" alt="picture not found"/>
+            </div>
+            <div class="form-group" >
+                <h:outputLabel styleClass="control-label col-sm-2">Username:</h:outputLabel>
+                <h:outputLabel value="#{userBean.account.userName}" styleClass="control-label col-sm-2" />
+            </div>
+            <div class="form-group" >
+                <h:outputLabel styleClass="control-label col-sm-2">FirstName:</h:outputLabel>
+                <h:outputLabel value="#{userBean.account.firstName}" styleClass="control-label col-sm-2" />
+            </div>
+            <div class="form-group" >
+                <h:outputLabel styleClass="control-label col-sm-2">LastName:</h:outputLabel>
+                <h:outputLabel value="#{userBean.account.lastName}" styleClass="control-label col-sm-2" />
+            </div>
+            <div class="form-group" >
+                <h:outputLabel styleClass="control-label col-sm-2">Email:</h:outputLabel>
+                <h:outputLabel value="#{userBean.account.email}" styleClass="control-label col-sm-2" />
+            </div>
+            <div class="form-group" >
+                <h:outputLabel styleClass="control-label col-sm-2">Role:</h:outputLabel>
+                <h:outputLabel value="#{userBean.account.role}" styleClass="control-label col-sm-2" />
+            </div>
+            <div class="form-group" >
+                <h:outputLabel styleClass="control-label col-sm-2">Created:</h:outputLabel>
+                <h:outputLabel value="#{userBean.account.registerDate}" styleClass="control-label col-sm-2" />
+            </div>
+        </h:form>
+        <h:form>
+            <h:commandButton value="Change password"  styleClass="btn btn-info"  action="#{accountBackingBean.togglePasswordWindow()}" 
+                             style="width: 150px;"
+                             />
+        </h:form>
+        <h:form id="changePasswordForm" styleClass="form-horizontal" rendered="#{accountBackingBean.showPassword}">
+            <div class="form-group">
+                <h:outputLabel value="Old password" styleClass="control-label col-sm-2" />
+                <div class="col-sm-10">
+                    <p:password id="oldPassword" value="#{accountBackingBean.passwordInput}" styleClass="form-control" required="true" 
+                                requiredMessage="Enter your current password"
+                                redisplay="true"
+                                autocomplete="off"
+                                style="width: 300px;"
+                                >
+                    </p:password>
+                    <h:message for="oldPassword" style="color: red"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="New password" styleClass="control-label col-sm-2" />
+                <div class="col-sm-10">
+                    <p:password id="password2" value="#{accountBackingBean.passwordInput2}" styleClass="form-control" required="true" 
+                                requiredMessage="Enter your new password"
+                                promptLabel="Password should contain atleast 8 characters and 1 number"
+                                feedback="true"
+                                redisplay="true"
+                                autocomplete="off"
+                                validatorMessage="Password should contain atleast 8 characters and 1 number"
+                                style="width: 300px;"
+                                >
+                        <f:validateRegex pattern="((?=.*\d)(?=.*[a-z]).{8,20})" />
+                    </p:password>
+                    <h:message for="password2" style="color: red"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Confirm new password" styleClass="control-label col-sm-2" />
+                <div class="col-sm-10">
+                    <p:password id="confirmPassword" value="#{accountBackingBean.confirmPassword}" styleClass="form-control" required="true" 
+                                requiredMessage="Confirm your new password"
+                                redisplay="true"
+                                autocomplete="off"
+                                style="width: 300px;"
+                                >
+                    </p:password>
+                    <h:message for="confirmPassword" style="color: red"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <h:commandButton value="Save password" id="changePasswordButton" action="#{accountBackingBean.changePassword(userBean.account)}" styleClass="btn btn-primary" />
+                </div>
+                <p:message for="changePasswordButton" style="color: red"/>
+            </div>
+        </h:form>
+        <br></br>
+        <h:form>
+            <h:commandButton value="Change email"  styleClass="btn btn-info" action="#{accountBackingBean.toggleEmailWindow()}" 
+                             style="width: 150px;"
+                             />
+        </h:form>
+        <h:form id="changeEmailForm" styleClass="form-horizontal" rendered="#{accountBackingBean.showEmail}">
+            <div class="form-group">
+                <h:outputLabel value="Current password" styleClass="control-label col-sm-2" />
+                <div class="col-sm-10">
+                    <p:password id="currentPassword2" value="#{accountBackingBean.passwordInput}" styleClass="form-control" required="true" 
+                                requiredMessage="Enter your current password"
+                                redisplay="true"
+                                autocomplete="off"
+                                style="width: 300px;"
+                                >
+                    </p:password>
+                    <h:message for="currentPassword2" style="color: red"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="New email" styleClass="control-label col-sm-2" />
+                <div class="col-sm-10">
+                    <p:inputText id="email" value="#{accountBackingBean.email}" styleClass="form-control" required="true" 
+                                 requiredMessage="Please enter your new email"
+                                 validatorMessage="Email is invalid"
+                                 style="width: 300px;"
+                                 >
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                    </p:inputText>
+                    <h:message for="email" style="color: red"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <h:commandButton value="Save email" id="changeEmailButton" action="#{accountBackingBean.changeEmail(userBean.account)}" styleClass="btn btn-primary" />
+                </div>
+                <p:message for="changeEmailButton" style="color: red"/>
+            </div>
+        </h:form>
+        <br></br>
+        <h:form>
+            <p:commandButton value="Home" action="index.xhtml" styleClass="btn btn-dark" />
+        </h:form>
+        <br></br>
+         <h:form>
+            <p:button value="Back" onclick="window.history.back();" styleClass="btn btn-dark" />
+        </h:form>
+    </body>
+</html>

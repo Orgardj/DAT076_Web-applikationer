@@ -4,6 +4,7 @@ package com.view;
  *
  * @author Team J
  */
+import model.UserBean;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,6 @@ import model.dao.PostDAO;
 import model.dao.ThreadDAO;
 import model.entity.Post;
 import model.entity.Thread;
-import model.entity.UserBean;
 import org.omnifaces.cdi.Param;
 
 @Data
@@ -26,6 +26,10 @@ import org.omnifaces.cdi.Param;
 public class PostBackingBean implements Serializable {
 
     private String enteredMessage;
+    
+    private String editedMessage;
+    
+    private boolean badEditCheck;
 
     @EJB
     private PostDAO postDAO;
@@ -42,22 +46,37 @@ public class PostBackingBean implements Serializable {
 
     private Thread thread;
 
-    private List<Post> posts;
-
     @PostConstruct
     private void init() {
         thread = getThread();
-        posts = postDAO.findPostMatchingTId(id);
+        threadDAO.incrementViewCount(id);
+    }
+
+    public List<Post> getMatchingPosts() {
+        return postDAO.findPostsMatchingTId(id);
     }
 
     public Thread getThread() {
         return threadDAO.find(id);
     }
 
-    public void createComment() {
+    public void createPost() {
         if (userBean.isLoggedIn() && !enteredMessage.isEmpty()) {
-            postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread));
-            posts = postDAO.findPostsMatchingUser(id);
+            postDAO.create(new Post(enteredMessage, new Date(), userBean.getAccount(), thread, "0"));
         }
+    }
+
+    public void removePost(Post post) {
+        postDAO.remove(post);
+    }
+    
+    public void editPost(Post post) {
+        post.setText(editedMessage);
+        post.setEditTimestamp("last edited by " + userBean.getAccount().getUserName() + ", " +  new Date());
+        postDAO.update(post);
+    }
+    
+    public List<Post> findPostsMatchingUserName(String userName) {
+        return postDAO.findPostsMatchingUserName(userName);
     }
 }

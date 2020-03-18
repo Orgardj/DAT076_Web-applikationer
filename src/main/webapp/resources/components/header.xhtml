@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<cc:interface>
+		<cc:attribute name="value"/>
+	</cc:interface>
+	<cc:implementation>
+        
+          <header class="pageHeader">
+                <h1 class="headerStyle">Welcome to Forum</h1>
+
+                <nav class="navBar">
+                    <a href="#start">Start</a>
+                    <a href="#posts">Posts</a>
+                    <a href="#create">Create</a>
+                    <a href="#about">About</a>
+                </nav>
+
+                <div class="iconHolder">
+                    <img src="./resources/images/account_icon.png" class="accountIcon" alt="Account icon" onclick="displayForm('open')"></img>
+                    <p:inputText placeholder="Search..." class="searchBar" value=""/>
+                    <img src="./resources/images/search_icon.png" alt="Search icon" class="searchIcon"></img>
+                </div>
+            </header>
+
+        
+        
+        </cc:implementation>
+</html>

@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,6 @@ public class Post implements Serializable {
 
     @JoinColumn(name = "userName", nullable = false)
     @NonNull
-    @EqualsAndHashCode.Exclude
     @ManyToOne
     private Account user;
 
@@ -41,4 +39,7 @@ public class Post implements Serializable {
     @NonNull
     @ManyToOne
     private Thread thread;
+    
+    @NonNull
+    private String editTimestamp;
 }

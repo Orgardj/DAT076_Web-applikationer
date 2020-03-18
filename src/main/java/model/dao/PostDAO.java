@@ -35,7 +35,7 @@ public class PostDAO extends AbstractDAO<Post, Long> {
         return l;
     }
 
-    public List<Post> findPostMatchingTId(Long tId) {
+    public List<Post> findPostsMatchingTId(Long tId) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QPost post = QPost.post;
 
@@ -44,7 +44,7 @@ public class PostDAO extends AbstractDAO<Post, Long> {
                 .fetch();
     }
 
-    public List<Post> findPostsMatchingUser(Long tId) {
+    public List<Post> findPostsMatchingThread(Long tId) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QPost post = QPost.post;
 

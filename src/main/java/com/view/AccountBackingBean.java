@@ -33,7 +33,7 @@ public class AccountBackingBean implements Serializable {
 
     @EJB
     private AccountDAO accountDAO;
-    
+
     @EJB
     private AccountAuthDAO accountAuthDAO;
 
@@ -239,7 +239,7 @@ public class AccountBackingBean implements Serializable {
 
                     ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
                     ec.addResponseCookie("selector", selector, Map.of("maxAge", 604800));
-                    ec.addResponseCookie("validator", rawValidator, Map.of("maxAge", 604800));
+                    ec.addResponseCookie("validator", hashedValidator, Map.of("maxAge", 604800));
                 }
                 return "index";
             }
@@ -257,6 +257,14 @@ public class AccountBackingBean implements Serializable {
 
     public String viewProfilePicture(Account account) {
         return "profile" + account.getProfilePicture() + ".png";
+    }
 
+    public void logout() {
+        userBean.setAccount(null);
+        
+        //Remove cookies
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.addResponseCookie("selector", "", Map.of("maxAge", 0));
+        ec.addResponseCookie("validator", "", Map.of("maxAge", 0));
     }
 }

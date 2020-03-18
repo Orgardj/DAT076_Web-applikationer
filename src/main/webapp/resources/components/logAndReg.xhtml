@@ -27,7 +27,7 @@
                 
                 
                 <div class="usernameInput">
-                    <p:inputText id="Username" value="#{accountBackingBean.userNameInput}" onkeydown="inputValue('usernameInput')">
+                    <p:inputText id="Username" value="#{accountBackingBean.userNameInput}" onchange="inputValue('usernameInput')">
                     </p:inputText>
                     <label for="Username">Username</label>
                 </div>
@@ -36,7 +36,7 @@
                     <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" id="Password"
                                 redisplay="true"
                                 autocomplete="off"
-                                onkeydown="inputValue('passwordInput')"
+                                onchange="inputValue('passwordInput')"
                                 >
                     </p:password>
                     <label for="Password">Password</label>
@@ -75,6 +75,7 @@
                     <p:inputText id="userName" value="#{accountBackingBean.userNameInput}" styleClass="form-control" 
                                  required="true"
                                  requiredMessage="Username is required"
+                                 onchange="inputValue('regUsername')"
                                  />
                     <label for="userName">Username</label>
                     <h:message for="userName" style="color: red"/>
@@ -85,6 +86,7 @@
                     <p:inputText id="firstName" value="#{accountBackingBean.firstName}" styleClass="form-control" 
                                  required="true"
                                  requiredMessage="Please enter your firstname"
+                                 onchange="inputValue('regFirstname')"
                                  />
                     <label for="firstName">Firstname</label>
                     <h:message for="firstName" style="color: red"/>
@@ -95,6 +97,7 @@
                     <p:inputText id="lastName" value="#{accountBackingBean.lastName}" styleClass="form-control" 
                                  required="true"
                                  requiredMessage="Please enter your lastname"
+                                 onchange="inputValue('regLastname')"
                                  />
                     <label for="lastName">Lastname</label>
                     <h:message for="lastName" style="color: red"/>
@@ -105,7 +108,8 @@
                 <div class="regEmail">
                     <p:inputText id="email" value="#{accountBackingBean.email}" styleClass="form-control" required="true" 
                                  requiredMessage="Email is required"
-                                 validatorMessage="Email is invalid">
+                                 validatorMessage="Email is invalid"
+                                 onchange="inputValue('regEmail')">
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                     </p:inputText>
                     <label for="email">Email</label>
@@ -124,6 +128,7 @@
                                 validatorMessage="Password is invalid"
                                 autocomplete="off"
                                 redisplay="true"
+                                onchange="inputValue('regPassword')"
                                 >
                         <f:validateRegex pattern="((?=.*\d)(?=.*[a-z]).{8,20})" />
                     </p:password>
@@ -133,13 +138,14 @@
                     
                 
                 
-                <div class="regPassword">
+                <div class="regPasswordConfirm">
                     <p:password value="#{accountBackingBean.confirmPassword}" styleClass="form-control" 
                                 id="confirmPassword"
                                 required="true"
                                 requiredMessage="Please confirm your password"
                                 redisplay="true"
                                 autocomplete="off"
+                                onchange="inputValue('regPasswordConfirm')"
                                 />
                     <label for="confirmPassword">Confirm Password</label>
                     <h:message for="confirmPassword" style="color: red"/>
@@ -161,8 +167,8 @@
                 </div>
                     
                 
-                <div class="">
-                    <h:commandButton value="Create Account" id="createAccountButton" action="#{accountBackingBean.checkAccountInfo()}" styleClass="btn btn-dark" />
+                <div class="buttonLogin">
+                    <h:commandButton value="Create Account" id="createAccountButton" action="#{accountBackingBean.checkAccountInfo()}" class="" />
                 </div>
                 
                 <p:message for="createAccountButton" style="color:red"/>

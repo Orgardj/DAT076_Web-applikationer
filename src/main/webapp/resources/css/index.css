@@ -5,7 +5,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
 }
 
 /* width */
@@ -121,6 +120,35 @@ html {
         margin-right: 10px !important;
         padding: 0px 0px 0px 10px !important;
     }
+    
+    .loggedInUserIcon {
+        
+    }
+    
+    .dropMenu {
+        width: 200px;
+        height: 150px;
+        background-color: red;
+        position: absolute;
+        right: 0;
+        top: 70px;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.5s;
+    }
+    
+    .loggedInUserIcon:hover + div {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    .dropMenu input {
+        width: 80%;
+        height: 30px;
+        float: left;
+        margin: 0px 0px 10px 10%;
+        transition: 0s !important;
+    }
 
     
 /*  Login and register  JE  */
@@ -132,6 +160,7 @@ html {
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 100;
     top: 0;
+    display: none;
 }
 
 .loginForm,
@@ -206,8 +235,11 @@ html {
 
 .loginForm input:hover + label, 
 .loginForm input:focus + label,
-.loginForm label:hover {
-    top: -20px;
+.loginForm label:hover,
+.regForm input:hover + label, 
+.regForm input:focus + label,
+.regForm label:hover {
+    top: -20px !important;
 }
 
 .keepOverHeadPlaceholder {
@@ -249,7 +281,7 @@ html {
     .loginForm {
     }
     
-    .logOrReg p:first-of-type {
+    .loginForm p:first-of-type {
         color: grey;
     }
 
@@ -277,34 +309,76 @@ html {
         display: none;
     }
     
+    .regForm p:last-of-type {
+        color: grey;
+    }
+    
     .regUsername,
     .regFirstname,
     .regLastname,
     .regEmail,
-    .regPassword {
-        width: 50%;
+    .regPassword,
+    .regPasswordConfirm {
+        width: 35%;
         position: relative;
         float: left;
-        margin: 30px 0px 20px 0px;
+        margin: 30px 0px 0px 2%;
+    }
+    
+    .regForm span {
+    }
+    
+    .regUsername,
+    .regLastname,
+    .regPassword {
+        margin-left: 13%;
+        margin-right: 2%;
     }
     
     .regUsername input,
     .regFirstname input,
     .regLastname input,
     .regEmail input,
-    .regPassword input {
-        width: 80%;
-    }
-    
-    .regForm div input:nth-child(odd) {
+    .regPassword input,
+    .regPasswordConfirm input {
+        width: 100%;
     }
     
     .profileAlternative {
         width: 100%;
+        height: 100px;
+        display: block;
+        float: left;
+        margin: 40px 0px 0px 0px;
+        padding-left: 13%;
     }
     
     .profileAlternative img {
-        width: 25%;
+        width: 70px;
+        margin: 0px 40px 0px 0px;
+    }
+    
+    .profileAlternative td {
+        padding-right: 40px;
+    }
+    
+    .profileAlternative input[type=radio] {
+        float: left;
+    }
+    
+    .profileAlternative label {
+        position: relative;
+        float: left;
+    }
+    
+    .profileAlternative input:hover + label, 
+    .profileAlternative input:focus + label {
+        top: 0 !important;
+    }
+    
+    .regForm input[type=submit] {
+        float: left;
+        margin: 30px 0px 30px 0px;
     }
     
 /*  Layout  JE  */

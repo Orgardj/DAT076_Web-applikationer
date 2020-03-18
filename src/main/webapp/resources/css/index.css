@@ -97,6 +97,11 @@ html {
         padding: 0px 20px;
         cursor: pointer;
     }
+    
+    .userIcon {
+        padding: 0px 20px;
+        cursor: pointer;
+    }
 
     .iconHolder img:hover {
         box-shadow: 0 4px 2px -2px lightgrey;

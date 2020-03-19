@@ -50,6 +50,7 @@ public class PostBackingBean implements Serializable {
     private void init() {
         thread = getThread();
         threadDAO.incrementViewCount(id);
+        editedMessage = "";
     }
 
     public List<Post> getMatchingPosts() {

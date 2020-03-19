@@ -17,7 +17,7 @@ import model.dao.AccountDAO;
 import model.entity.Account;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Map;
+import java.util.HashMap;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ExternalContext;
@@ -238,8 +238,10 @@ public class AccountBackingBean implements Serializable {
                     accountAuthDAO.create(newToken);
 
                     ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-                    ec.addResponseCookie("selector", selector, Map.of("maxAge", 604800));
-                    ec.addResponseCookie("validator", hashedValidator, Map.of("maxAge", 604800));
+                    HashMap map = new HashMap();
+                    map.put("maxAge", 604800);
+                    ec.addResponseCookie("selector", selector, map);
+                    ec.addResponseCookie("validator", hashedValidator, map);
                 }
                 return "index";
             }
@@ -264,7 +266,9 @@ public class AccountBackingBean implements Serializable {
         
         //Remove cookies
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.addResponseCookie("selector", "", Map.of("maxAge", 0));
-        ec.addResponseCookie("validator", "", Map.of("maxAge", 0));
+        HashMap map = new HashMap();
+        map.put("maxAge", 604800);
+        ec.addResponseCookie("selector", "", map);
+        ec.addResponseCookie("validator", "", map);
     }
 }

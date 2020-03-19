@@ -12,13 +12,13 @@
         <ui:define name="content">
             <h:outputScript library="js" name="index.js" target="body" />
             <h:outputStylesheet library="css" name = "index.css" />
-            
-            
+
+
             <components:logAndReg /> 
-            
-            
+
+
             <components:header />
-           
+
 
             <section class="start" id="start">
                 <h:panelGroup id="categories">
@@ -73,6 +73,34 @@
             </section>
 
             <section class="create" id="create">
+                <h:form rendered="#{!userBean.loggedIn}">
+                    <!-- ui-inputgroup was removed because it forced inputText,
+                        textEditor and commandButton to the same row. -->
+                    <div>
+                        <p:inputText class="inputTitle" placeholder="Title" value="#{threadBackingBean.enteredTitle}"/>
+                        <p:textEditor class="editorPost" widgetVar="editorPost" value="#{threadBackingBean.enteredMessage}" placeholder="Write your post here">
+                            <f:facet name="toolbar">
+                                <span>
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-underline"></button>
+                                    <button class="ql-strike"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <select class="ql-font"></select>
+                                    <select class="ql-size"></select>
+                                </span>
+                            </f:facet>
+                        </p:textEditor>
+                        <p:commandButton value="Create" action="#{threadBackingBean.createThread}" onclick="setTimeout(function () {
+                                    window.location.href =
+                                            '/DAT076_Web-applikationer/category.xhtml?id=#{categoryBackingBean.findMatchingCategory().CId}';
+                                }, 200);"/>
+                    </div>
+                </h:form>
+                <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">
+                    <p>Login to create threads</p>
+                </h:form>
             </section>
 
             <section class="about" id="about">

@@ -64,16 +64,20 @@ function switchForm(type) {
 }
 
 
-if ($(".regForm span").length) {
-    //alert($(".regForm span").length);
+function controllError(){
 
-    var i;
+    if($(".regForm span").length) {
+        //alert($(".regForm span").length);
 
-    for (i = 0; i < $(".regForm span").length; i++) {
-        //console.log($(".regForm span").parent().get( 0 ).tagName);
-        $(".regForm span").parent().children("label").css("top", "calc(50% - 1em)");
-    }
+        var i;
+
+        for (i = 0; i < $(".regForm span").length; i++) {
+            //console.log($(".regForm span").parent().get( 0 ).tagName);
+            $(".regForm span").parent().children("label").css("top", "calc(50% - 1em)");
+        }
+    }    
 }
+
 
 for (i = 0; i <= $(".regForm div input").length; i++) {
     //console.log($(".regForm div:nth-child(" + i + ") input").val());
@@ -81,3 +85,4 @@ for (i = 0; i <= $(".regForm div input").length; i++) {
         $(".regForm div:nth-child(" + i + ") label").addClass("keepOverHeadPlaceholder");
     }
 }
+

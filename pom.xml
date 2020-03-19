@@ -78,7 +78,7 @@
             <groupId>fish.payara.extras</groupId>
             <artifactId>payara-embedded-all</artifactId>
             <version>5.181</version>
-            <scope>test</scope>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.querydsl</groupId>

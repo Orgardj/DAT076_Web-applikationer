@@ -15,163 +15,177 @@
 
             <h:form id="studentForm" class="loginForm">
 
-                <p class="closeForm" onclick="displayForm('close')">X</p>
+                <h:panelGroup id="logPanel">
+                    <p class="closeForm" onclick="displayForm('close')">X</p>
 
 
-                <h1>Best Forum</h1>
-                
-                <div class="logOrReg">
-                    <p onclick="switchForm('reg')">login</p>
-                    <p onclick="switchForm('log')">Register</p>
-                </div>
-                
-                
-                <div class="usernameInput">
-                    <p:inputText id="Username" value="#{accountBackingBean.userNameInput}" onchange="inputValue('usernameInput')">
-                    </p:inputText>
-                    <label for="Username">Username</label>
-                </div>
+                    <h1>Best Forum</h1>
 
-                <div class="passwordInput">
-                    <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" id="Password"
-                                redisplay="true"
-                                autocomplete="off"
-                                onchange="inputValue('passwordInput')"
-                                >
-                    </p:password>
-                    <label for="Password">Password</label>
-                </div>
+                    <div class="logOrReg">
+                        <p onclick="switchForm('reg')">login</p>
+                        <p onclick="switchForm('log')">Register</p>
+                    </div>
 
-                <div class="buttonLogin">
-                    <h:commandButton value="Login" id="loginButton" action="#{accountBackingBean.validateAccount()}" styleClass="btn btn-dark" />
-                </div>
 
-                <p:message for="loginButton" style="color: red"/>
+                    <div class="usernameInput">
+                        <p:inputText id="Username" value="#{accountBackingBean.userNameInput}" onchange="inputValue('usernameInput')">
+                        </p:inputText>
+                        <label for="Username">Username</label>
+                    </div>
 
-                <components:footer class="loginFormFooter"  value="loginFormFooter">
-                    <f:facet name="singInLink">
-                        <p>Don't have an account?</p>
-                        <h:commandButton value="Sign up"  action="register" styleClass="btn btn-primary" />
-                    </f:facet>
-                </components:footer>
+                    <div class="passwordInput">
+                        <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" id="Password"
+                                    redisplay="true"
+                                    autocomplete="off"
+                                    onchange="inputValue('passwordInput')"
+                                    >
+                        </p:password>
+                        <label for="Password">Password</label>
+                    </div>
 
+                    <div class="buttonLogin">
+
+                        <p:commandButton value="Login" id="loginButton" 
+                                         action="#{accountBackingBean.validateAccount()}" 
+                                         styleClass="btn btn-dark" 
+                                         update="logPanel" />
+                    </div>
+
+                    <p:message for="loginButton" style="color: red" />
+
+                    <components:footer class="loginFormFooter"  value="loginFormFooter">
+                        <f:facet name="singInLink">
+                            <p>Don't have an account?</p>
+                            <h:commandButton value="Sign up"  action="register" styleClass="btn btn-primary" />
+                        </f:facet>
+                    </components:footer>
+
+                </h:panelGroup>
             </h:form>
-            
-            
+
+
             <h:form id="registerForm" class="regForm">
-                
-                <p class="closeForm" onclick="displayForm('close')">X</p>
+                <h:panelGroup id="regPanel">
+                    <p class="closeForm" onclick="displayForm('close')">X</p>
 
 
-                <h1>Best Forum</h1>
-                
-                <div class="logOrReg">
-                    <p onclick="switchForm('reg')">login</p>
-                    <p onclick="switchForm('log')">Register</p>
-                </div>
-                
-                
-                <div class="regUsername">
-                    <p:inputText id="userName" value="#{accountBackingBean.userNameInput}" styleClass="form-control" 
-                                 required="true"
-                                 requiredMessage="Username is required"
-                                 onchange="inputValue('regUsername')"
-                                 />
-                    <label for="userName">Username</label>
-                    <h:message for="userName" style="color: red"/>
-                </div>
-                
-                
-                <div class="regFirstname">
-                    <p:inputText id="firstName" value="#{accountBackingBean.firstName}" styleClass="form-control" 
-                                 required="true"
-                                 requiredMessage="Please enter your firstname"
-                                 onchange="inputValue('regFirstname')"
-                                 />
-                    <label for="firstName">Firstname</label>
-                    <h:message for="firstName" style="color: red"/>
-                </div>
-                
-                
-                <div class="regLastname">
-                    <p:inputText id="lastName" value="#{accountBackingBean.lastName}" styleClass="form-control" 
-                                 required="true"
-                                 requiredMessage="Please enter your lastname"
-                                 onchange="inputValue('regLastname')"
-                                 />
-                    <label for="lastName">Lastname</label>
-                    <h:message for="lastName" style="color: red"/>
-                </div>
-                
-                
-                
-                <div class="regEmail">
-                    <p:inputText id="email" value="#{accountBackingBean.email}" styleClass="form-control" required="true" 
-                                 requiredMessage="Email is required"
-                                 validatorMessage="Email is invalid"
-                                 onchange="inputValue('regEmail')">
-                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                    </p:inputText>
-                    <label for="email">Email</label>
-                    <h:message for="email" style="color: red" />
-                </div>
-                    
-                
-                
-                <div class="regPassword">
-                    <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" 
-                                id="password"
-                                required="true"
-                                requiredMessage="Password is required"
-                                promptLabel="Password should contain atleast 8 characters and 1 number"
-                                feedback="true"
-                                validatorMessage="Password is invalid"
-                                autocomplete="off"
-                                redisplay="true"
-                                onchange="inputValue('regPassword')"
-                                >
-                        <f:validateRegex pattern="((?=.*\d)(?=.*[a-z]).{8,20})" />
-                    </p:password>
-                    <label for="password">Password</label>
-                    <h:message for="password" style="color: red"/>
-                </div>
-                    
-                
-                
-                <div class="regPasswordConfirm">
-                    <p:password value="#{accountBackingBean.confirmPassword}" styleClass="form-control" 
-                                id="confirmPassword"
-                                required="true"
-                                requiredMessage="Please confirm your password"
-                                redisplay="true"
-                                autocomplete="off"
-                                onchange="inputValue('regPasswordConfirm')"
-                                />
-                    <label for="confirmPassword">Confirm Password</label>
-                    <h:message for="confirmPassword" style="color: red"/>
-                </div>
+                    <h1>Best Forum</h1>
 
-<!--
-                <h:outputLabel value="Choose Profile Picture" styleClass="" />
--->
-                <div class="profileAlternative"> 
-                    <h:selectOneRadio value="#{accountBackingBean.chooseProfilePicture}" id="chooseProfilePicture" required="true" requiredMessage="Please choose a profile picture">
-                        <f:selectItem itemValue="1" itemLabel="Picture 1" />
-                        <h:graphicImage library="images" name="profile1.png" alt="picture not found" />  
-                        <f:selectItem itemValue="2" itemLabel="Picture 2" />
-                        <h:graphicImage library="images" name="profile2.png" alt="picture not found" /> 
-                        <f:selectItem itemValue="3" itemLabel="Picture 3" />
-                        <h:graphicImage library="images" name="profile3.png" alt="picture not found" /> 
-                    </h:selectOneRadio>
-                    <h:message for="chooseProfilePicture" style="color: red"/>
-                </div>
-                    
-                
-                <div class="buttonLogin">
-                    <h:commandButton value="Create Account" id="createAccountButton" action="#{accountBackingBean.checkAccountInfo()}" class="" />
-                </div>
-                
-                <p:message for="createAccountButton" style="color:red"/>
+                    <div class="logOrReg">
+                        <p onclick="switchForm('reg')">login</p>
+                        <p onclick="switchForm('log')">Register</p>
+                    </div>
+
+                    <div class="regUsername">
+                        <p:inputText id="userName" value="#{accountBackingBean.userNameInput}" styleClass="form-control" 
+                                     required="true"
+                                     requiredMessage="Username is required"
+                                     onchange="inputValue('regUsername')"
+                                     />
+                        <label for="userName">Username</label>
+                        <h:message for="userName" style="color: red"/>
+                    </div>
+
+
+                    <div class="regFirstname">
+                        <p:inputText id="firstName" value="#{accountBackingBean.firstName}" styleClass="form-control" 
+                                     required="true"
+                                     requiredMessage="Please enter your firstname"
+                                     onchange="inputValue('regFirstname')"
+                                     />
+                        <label for="firstName">Firstname</label>
+                        <h:message for="firstName" style="color: red"/>
+                    </div>
+
+
+                    <div class="regLastname">
+                        <p:inputText id="lastName" value="#{accountBackingBean.lastName}" styleClass="form-control" 
+                                     required="true"
+                                     requiredMessage="Please enter your lastname"
+                                     onchange="inputValue('regLastname')"
+                                     />
+                        <label for="lastName">Lastname</label>
+                        <h:message for="lastName" style="color: red"/>
+                    </div>
+
+
+
+                    <div class="regEmail">
+                        <p:inputText id="email" value="#{accountBackingBean.email}" styleClass="form-control" required="true" 
+                                     requiredMessage="Email is required"
+                                     validatorMessage="Email is invalid"
+                                     onchange="inputValue('regEmail')">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </p:inputText>
+                        <label for="email">Email</label>
+                        <h:message for="email" style="color: red" />
+                    </div>
+
+
+
+                    <div class="regPassword">
+                        <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" 
+                                    id="password"
+                                    required="true"
+                                    requiredMessage="Password is required"
+                                    promptLabel="Password should contain atleast 8 characters and 1 number"
+                                    feedback="true"
+                                    validatorMessage="Password is invalid"
+                                    autocomplete="off"
+                                    redisplay="true"
+                                    onchange="inputValue('regPassword')"
+                                    >
+                            <f:validateRegex pattern="((?=.*\d)(?=.*[a-z]).{8,20})" />
+                        </p:password>
+                        <label for="password">Password</label>
+                        <h:message for="password" style="color: red"/>
+                    </div>
+
+
+
+                    <div class="regPasswordConfirm">
+                        <p:password value="#{accountBackingBean.confirmPassword}" styleClass="form-control" 
+                                    id="confirmPassword"
+                                    required="true"
+                                    requiredMessage="Please confirm your password"
+                                    redisplay="true"
+                                    autocomplete="off"
+                                    onchange="inputValue('regPasswordConfirm')"
+                                    />
+                        <label for="confirmPassword">Confirm Password</label>
+                        <h:message for="confirmPassword" style="color: red"/>
+                    </div>
+
+                    <!--
+                                    <h:outputLabel value="Choose Profile Picture" styleClass="" />
+                    -->
+                    <div class="profileAlternative"> 
+                        <h:selectOneRadio value="#{accountBackingBean.chooseProfilePicture}" id="chooseProfilePicture" required="true" requiredMessage="Please choose a profile picture">
+                            <f:selectItem itemValue="1" itemLabel="Picture 1" />
+                            <h:graphicImage library="images" name="profile1.png" alt="picture not found" />  
+                            <f:selectItem itemValue="2" itemLabel="Picture 2" />
+                            <h:graphicImage library="images" name="profile2.png" alt="picture not found" /> 
+                            <f:selectItem itemValue="3" itemLabel="Picture 3" />
+                            <h:graphicImage library="images" name="profile3.png" alt="picture not found" /> 
+                        </h:selectOneRadio>
+                        <h:message for="chooseProfilePicture" style="color: red"/>
+                    </div>
+
+                    <div class="buttonLogin">
+                        <p:commandButton value="Create Account" id="createAccountButton" 
+                                         action="#{accountBackingBean.checkAccountInfo}" 
+                                         styleClass="btn btn-dark" update="regPanel" />
+                    </div>
+
+                    <p:message for="createAccountButton" style="color:red"/>
+                    <f:verbatim>
+                        <script type="text/javascript">
+
+                            controllError();
+                        </script>
+
+                    </f:verbatim>
+                </h:panelGroup>
             </h:form>
 
 

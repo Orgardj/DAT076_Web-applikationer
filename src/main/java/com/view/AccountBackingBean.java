@@ -74,16 +74,15 @@ public class AccountBackingBean implements Serializable {
 
     public static final String SALT = "saltSecurityText";
 
-    public String checkAccountInfo() throws NoSuchAlgorithmException {
+    public void checkAccountInfo() throws NoSuchAlgorithmException {
+        
         hashPassword(passwordInput);
         checkIfAccountExists();
         checkIfEmailExists();
         checkIfPasswordsMatch(passwordInput);
         if (passwordValid && emailDontExist && accountDontExist) {
             addAccount();
-            return "login";
         }
-        return "";
     }
 
     public void hashPassword(String password) throws NoSuchAlgorithmException {
@@ -241,7 +240,7 @@ public class AccountBackingBean implements Serializable {
                     ec.addResponseCookie("selector", selector, Map.of("maxAge", 604800));
                     ec.addResponseCookie("validator", hashedValidator, Map.of("maxAge", 604800));
                 }
-                return "index";
+                return "";
             }
             Messages.addError("studentForm:loginButton", "Please enter a correct username and password");
             return "";

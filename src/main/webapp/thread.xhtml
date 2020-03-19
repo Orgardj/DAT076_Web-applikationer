@@ -66,7 +66,7 @@
                                     <!-- ui-inputgroup has to be removed if you don't want textEditor
                                         and commandButton on the same row. -->
                                     <div class="ui-inputgroup">
-                                        <p:textEditor class="te-edit" value="#{postBackingBean.editedMessage}" placeholder="#{post.text}">
+                                        <p:textEditor class="te-edit" value="#{post.text}" valueChangeListener="#{postController.changeHandler}" placeholder="Edit your comment here">
                                             <f:facet name="toolbar">
                                                 <span>
                                                     <button class="ql-bold"></button>

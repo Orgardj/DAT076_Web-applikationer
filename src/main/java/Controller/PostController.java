@@ -3,6 +3,7 @@ package controller;
 import com.view.PostBackingBean;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import model.entity.Post;
@@ -36,5 +37,9 @@ public class PostController implements Serializable {
             postBackingBean.editPost(post);
         push.send("update_posts");
         postBackingBean.setEditedMessage("");
+    }
+    
+    public void changeHandler(ValueChangeEvent event) {
+        postBackingBean.setEditedMessage(event.getNewValue().toString());
     }
 }

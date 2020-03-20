@@ -41,10 +41,9 @@ public class CategoryBackingBean implements Serializable {
     }
 
     public void createCategory() {
-        if (!userBean.getAccount().getRole().equals("administrator")) {
-            return;
+        if (userBean.getAccount().getRole().equals("administrator") && !enteredTitle.isEmpty() && !enteredDescription.isEmpty()) {
+            categoryDAO.create(new Category(enteredTitle, enteredDescription, new ArrayList<>()));
         }
-        categoryDAO.create(new Category(enteredTitle, enteredDescription, new ArrayList<>()));
     }
 
     public Category findMatchingCategory() {

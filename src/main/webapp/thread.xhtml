@@ -92,8 +92,7 @@
                 </c:forEach>
             </h:panelGroup>
 
-
-            <h:form rendered="#{userBean.loggedIn}">
+            <h:form id="te-test" rendered="#{userBean.loggedIn}">
                 <!-- ui-inputgroup has to be removed if you don't want textEditor
                     and commandButton on the same row. -->
                 <div class="ui-inputgroup">
@@ -123,6 +122,6 @@
         </ui:define>
     </ui:decorate>
     <o:socket scope="application" channel="main">
-        <f:ajax event="update_posts" render=":posts"/>
+        <f:ajax event="update_posts" render=":posts te-test"/>
     </o:socket>
 </html>

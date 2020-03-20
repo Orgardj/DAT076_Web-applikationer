@@ -9,3 +9,8 @@
     width: 620px;
     margin-bottom: 50px;
 }
+
+.editing-content-hide {
+    visibility: hidden;
+    height: 0px;
+}

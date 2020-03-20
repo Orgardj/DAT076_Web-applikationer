@@ -33,7 +33,9 @@
                                      paginator="true" rows="10">
                             <p:column headerText="Thread" sortBy="#{post.thread.title}"> <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{post.thread.TId}">#{post.thread.title}</a></p:column>
                             <p:column headerText="Thread Views" sortBy="#{post.thread.views}">#{post.thread.views}</p:column>
-                            <p:column headerText="Comment" >#{post.text}</p:column>
+                            <p:column headerText="Comment" >
+                                <h:outputText value="#{post.text}" escape="false" />
+                            </p:column>
                             <p:column headerText="Posted" sortBy="#{post.creationTimestamp}">#{post.creationTimestamp}</p:column>
                             <p:column headerText="Remove" rendered="#{userBean.account.role == 'administrator'}">
                                 <p:commandButton value="Remove Post" action="#{postController.removePost(post)}" />

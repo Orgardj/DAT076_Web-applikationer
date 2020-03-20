@@ -174,17 +174,11 @@
                     <div class="buttonLogin">
                         <p:commandButton value="Create Account" id="createAccountButton" 
                                          action="#{accountBackingBean.checkAccountInfo}" 
-                                         styleClass="btn btn-dark" update="regPanel" />
+                                         styleClass="btn btn-dark" update="regPanel" oncomplete="controllError();" />
                     </div>
 
                     <p:message for="createAccountButton" style="color:red"/>
-                    <f:verbatim>
-                        <script type="text/javascript">
-
-                            controllError();
-                        </script>
-
-                    </f:verbatim>
+                    
                 </h:panelGroup>
             </h:form>
 

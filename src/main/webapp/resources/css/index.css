@@ -260,9 +260,11 @@ html {
     width: 50%;
     left: 25%;
     position: relative;
+    float: left;
+    padding: 20px 0px;
 }
 
-.buttonLogin input {
+.buttonLogin button {
     width: 100%;
     height: 35px;
 }
@@ -413,7 +415,11 @@ footer {
 }
 
 .threadTable {
-    width: 50%;
+    width: 25%;
+}
+
+.ui-paginator-top {
+    display: none;
 }
 
 .threadTableName a {
@@ -422,4 +428,8 @@ footer {
 
 .threadTableName a:hover {
     text-decoration: underline;
+}
+
+.threadTableRemoveCategory {
+    display: none;
 }

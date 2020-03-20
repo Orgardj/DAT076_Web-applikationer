@@ -33,9 +33,10 @@
                         <div class="dropContent">
                             <p>Well hello there</p>
                             <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
-
+                            <h:form>
                             <h:commandButton value="Account settings" action="settings" />
-                            <h:commandButton value="logout" action="#{userBean.setAccount(none)}" />
+                            <h:commandButton value="logout" action="#{accountBackingBean.logout()}" />
+                            </h:form>
                         </div>
                     </div>
                     <p:inputText placeholder="Search..." class="searchBar" value=""/>

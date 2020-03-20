@@ -46,8 +46,13 @@ public class AccountDAO extends AbstractDAO<Account, String> {
     }
 
     public Account findAccountMatchingEmail(String email) {
-        return (Account) entityManager.createQuery("SELECT a FROM Account a WHERE a.email = :email")
-                .setParameter("email", email).getSingleResult();
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+        QAccount account = QAccount.account;
+
+        Account l = queryFactory.selectFrom(account)
+                .where(account.email.eq(email))
+                .fetchFirst();
+        return l;
     }
 
     public List<Account> findAccountsMatchingRole(String role) {

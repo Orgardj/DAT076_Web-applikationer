@@ -3,6 +3,7 @@ package model.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -41,8 +43,17 @@ public class Account implements Serializable {
 
     @NonNull
     private Date registerDate;
+    
+    @NonNull
+    private int profilePicture;
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "account", orphanRemoval = true, cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<AccountAuth> accountAuths;
 }

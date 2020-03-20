@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="WEB-INF/template/common.xhtml">
+        <ui:define name="title">Register</ui:define>
+        <ui:define name="content">
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+            <h:outputScript library="js" name="register.js" target="head" />
+            <h:outputStylesheet library="css" name = "register.css" />
+            <h:outputStylesheet library="css" name="bootstrap.min.css" />
+            <div class="container">
+                <div class="navbar navbar-inverse">
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-xs-updated">
+                        <h:form id="registerForm" styleClass="form-horizontal">
+                            <div class="form-group">
+                                <h:outputLabel value="Username" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10">
+                                    <p:inputText id="userName" value="#{accountBackingBean.userNameInput}" styleClass="form-control" 
+                                                 required="true"
+                                                 requiredMessage="Username is required"
+                                                 />
+                                    <h:message for="userName" style="color: red"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Firstname" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10">
+                                    <p:inputText id="firstName" value="#{accountBackingBean.firstName}" styleClass="form-control" 
+                                                 required="true"
+                                                 requiredMessage="Please enter your firstname"
+                                                 />
+                                    <h:message for="firstName" style="color: red"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Lastname" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10">
+                                    <p:inputText id="lastName" value="#{accountBackingBean.lastName}" styleClass="form-control" 
+                                                 required="true"
+                                                 requiredMessage="Please enter your lastname"
+                                                 />
+                                    <h:message for="lastName" style="color: red"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Email" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10">
+                                    <p:inputText id="email" value="#{accountBackingBean.email}" styleClass="form-control" required="true" 
+                                                 requiredMessage="Email is required"
+                                                 validatorMessage="Email is invalid">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    </p:inputText>
+                                    <h:message for="email" style="color: red" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Password" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10">
+                                    <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" 
+                                                id="password"
+                                                required="true"
+                                                requiredMessage="Password is required"
+                                                promptLabel="Password should contain atleast 8 characters and 1 number"
+                                                feedback="true"
+                                                validatorMessage="Password is invalid"
+                                                autocomplete="off"
+                                                redisplay="true"
+                                                >
+                                        <f:validateRegex pattern="((?=.*\d)(?=.*[a-z]).{8,20})" />
+                                    </p:password>
+                                    <h:message for="password" style="color: red"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Confirm Password" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10">
+                                    <p:password value="#{accountBackingBean.confirmPassword}" styleClass="form-control" 
+                                                id="confirmPassword"
+                                                required="true"
+                                                requiredMessage="Please confirm your password"
+                                                redisplay="true"
+                                                autocomplete="off"
+                                                />
+                                    <h:message for="confirmPassword" style="color: red"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <h:outputLabel value="Choose Profile Picture" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10"> 
+                                    <h:selectOneRadio value="#{accountBackingBean.chooseProfilePicture}" id="chooseProfilePicture" required="true" requiredMessage="Please choose a profile picture">
+                                        <f:selectItem itemValue="1" itemLabel="Picture 1" />
+                                        <h:graphicImage library="images" name="profile1.png" alt="picture not found" />  
+                                        <f:selectItem itemValue="2" itemLabel="Picture 2" />
+                                        <h:graphicImage library="images" name="profile2.png" alt="picture not found" /> 
+                                        <f:selectItem itemValue="3" itemLabel="Picture 3" />
+                                        <h:graphicImage library="images" name="profile3.png" alt="picture not found" /> 
+                                    </h:selectOneRadio>
+                                    <h:message for="chooseProfilePicture" style="color: red"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <h:commandButton value="Create Account" id="createAccountButton" action="#{accountBackingBean.checkAccountInfo()}" styleClass="btn btn-dark" />
+                                </div>
+                            </div>
+                            <p:message for="createAccountButton" style="color:red"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:decorate>
+</html>

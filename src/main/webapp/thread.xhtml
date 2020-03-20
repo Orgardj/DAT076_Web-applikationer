@@ -1,42 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="WEB-INF/template/common.xhtml">
         <ui:define name="title">Thread</ui:define>
         <ui:define name="content">
-            <h:outputScript library="javascript" name="thread.js" target="head" />
+            <h:outputStylesheet library="css" name = "quill.css" />
             <h:outputStylesheet library="css" name = "thread.css" />
+            <h:outputScript library="js" name="thread.js" target="head" />
+
             <h1>#{postBackingBean.thread.title}</h1>
-            <c:forEach var="post" items="#{postBackingBean.posts}">
-                <div>#{post.creationTimestamp}</div>
-                <h:panelGrid id = "panel_#{post.PId}" columns = "2" border = "1"
-                             cellpadding = "10" cellspacing = "1">
-                    <h:panelGrid id = "panel2" columns = "1" border = "0"
+
+            <h:panelGroup id="posts">
+                <c:forEach var="post" items="#{postBackingBean.matchingPosts}">
+                    <div>#{post.creationTimestamp}</div>
+                    <h:panelGrid id = "panel_#{post.PId}" columns = "2" border = "1"
                                  cellpadding = "10" cellspacing = "1">
-                        <div>#{post.user.userName}</div>
-                        <div>#{post.user.role}</div>
+                        <h:panelGrid id = "panel2" columns = "1" border = "0"
+                                     cellpadding = "10" cellspacing = "1">
+                            <div>
+                                <a href="/DAT076_Web-applikationer/account_page?userName=#{post.user.userName}">
+                                    #{post.user.userName}
+                                </a>
+                            </div>
+
+                            <p:link href="/DAT076_Web-applikationer/account_page?userName=#{post.user.userName}">
+                                <div>
+                                    <h:graphicImage library="images" name="#{accountBackingBean.viewProfilePicture(post.user)}" alt="picture not found"/>
+                                </div>
+                            </p:link>
+
+                            <div>
+                                #{post.user.role}
+                            </div>
+                            <h:form rendered="#{userBean.account.role == 'administrator' and post.user.role != 'administrator' and post.user.role != 'banned'}">
+                                <p:commandButton value="Ban User" action="#{accountController.banAccount(post.user)}" />
+                            </h:form>
+                        </h:panelGrid>
+
+                        <h:panelGrid id = "panel3" columns = "1" border = "0"
+                                     cellpadding = "10" cellspacing = "1">
+                            <p:outputPanel id="regular-content-#{post.PId}">
+                                <div>
+                                    <h:outputText value="#{post.text}" escape="false" />
+                                </div>
+                                <h:form rendered="#{userBean.account.role == 'administrator'}">
+                                    <p:commandButton value="Remove Post" action="#{postController.removePost(post)}" />
+                                </h:form>
+                                <h:form rendered="#{post.editTimestamp != 0}">
+                                    <div>
+                                        #{post.editTimestamp}
+                                    </div>
+                                </h:form>
+                                <p:commandButton value="Edit" onclick="enterEditingMode('regular-content-#{post.PId}', 'editing-content-#{post.PId}')" 
+                                                 rendered="#{userBean.account.role == 'administrator' or post.user == userBean.account}"/>
+                            </p:outputPanel>
+
+                            <p:outputPanel id="editing-content-#{post.PId}" class="editing-content-hide">
+                                <h:form rendered="#{userBean.account.role == 'administrator' or post.user == userBean.account}">
+                                    <!-- ui-inputgroup has to be removed if you don't want textEditor
+                                        and commandButton on the same row. -->
+                                    <div class="ui-inputgroup">
+                                        <p:textEditor class="te-edit" value="#{post.text}" valueChangeListener="#{postController.changeHandler}" placeholder="Edit your comment here">
+                                            <f:facet name="toolbar">
+                                                <span>
+                                                    <button class="ql-bold"></button>
+                                                    <button class="ql-italic"></button>
+                                                    <button class="ql-underline"></button>
+                                                    <button class="ql-strike"></button>
+                                                </span>
+                                                <span class="ql-formats">
+                                                    <select class="ql-font"></select>
+                                                    <select class="ql-size"></select>
+                                                </span>
+                                            </f:facet>
+                                        </p:textEditor>
+                                        <p:commandButton value="Edit" action="#{postController.editPost(post)}" />
+                                    </div>
+                                </h:form>
+                                <p:commandButton value="Exit" onclick="exitEditingMode('regular-content-#{post.PId}', 'editing-content-#{post.PId}')"/>
+                            </p:outputPanel>
+                        </h:panelGrid>
                     </h:panelGrid>
-                    <h:panelGrid id = "panel3" columns = "1" border = "0"
-                                 cellpadding = "10" cellspacing = "1">
-                        <div>#{post.text}</div>
-                    </h:panelGrid>
-                </h:panelGrid>
-            </c:forEach>
+                </c:forEach>
+            </h:panelGroup>
+
 
             <h:form rendered="#{userBean.loggedIn}">
+                <!-- ui-inputgroup has to be removed if you don't want textEditor
+                    and commandButton on the same row. -->
                 <div class="ui-inputgroup">
-                    <p:inputText placeholder="comment" value="#{postBackingBean.enteredMessage}"/>  
-                    <p:commandButton value="Comment" action="#{postBackingBean.createComment()}" onclick="setTimeout(function () {
-                                window.location.reload();
-                            }, 200);"/>
+                    <p:textEditor class="te-comment" value="#{postBackingBean.enteredMessage}" placeholder="Write your comment here">
+                        <f:facet name="toolbar">
+                            <span>
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-strike"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-font"></select>
+                                <select class="ql-size"></select>
+                            </span>
+                        </f:facet>
+                    </p:textEditor>
+                    <p:commandButton value="Comment" action="#{postController.newPost()}"/>
                 </div>
             </h:form>
-            <h:form rendered="#{!userBean.loggedIn}">
+            <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">
                 <p>Login to add a response</p>
+            </h:form>
+            <h:form rendered="#{!userBean.loggedIn and userBean.account.role == 'banned'}">
+                <p>Banned users cannot add a response</p>
             </h:form>
         </ui:define>
     </ui:decorate>
+    <o:socket scope="application" channel="main">
+        <f:ajax event="update_posts" render=":posts"/>
+    </o:socket>
 </html>
-

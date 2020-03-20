@@ -1,0 +1,9 @@
+/* Temporary css to make the inputs look decent */
+.inputTitle, .editorPost {
+    width: 500px;
+}
+
+.editorPost {
+    height: 300px;
+    margin-bottom: 50px;
+}

@@ -1,0 +1,16 @@
+/* Temporary css to make the inputs look decent */
+.te-edit {
+    height: 100px;
+    margin-bottom: 30px;
+}
+
+.te-comment {
+    height: 300px;
+    width: 620px;
+    margin-bottom: 50px;
+}
+
+.editing-content-hide {
+    visibility: hidden;
+    height: 0px;
+}

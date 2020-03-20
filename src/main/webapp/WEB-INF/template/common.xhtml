@@ -4,28 +4,32 @@
     <h:head>
         <h:outputScript library="javascript" name="common.js" target="head" />
         <h:outputStylesheet library="css" name = "common.css" />
+        
         <title><ui:insert name="title">Title</ui:insert></title>
     </h:head>
     <h:body>
         <!-- TODO header -->
+        
         <div class="container">
             <ui:insert name="content" />
         </div>
-        <ui:fragment rendered="#{page.title != 'Forum'}">
-            <h:form>
-                <h:button value="home page" outcome="index" />
-            </h:form>
-            <p:button value="back" onclick="window.history.back();" />
-        </ui:fragment>
-        <div rendered="#{page.title != 'Login'}">
-            <h:form rendered="#{!userBean.loggedIn}">
-                <h:button value = "login" outcome="login" />
-            </h:form>
-            <h:form rendered="#{userBean.loggedIn}">
-                <h:commandButton value = "logout" action="#{userBean.setAccount(none)}" />
-            </h:form>
-            <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
-        </div>
+        <h:form>
+            <h:button value="Home Page" outcome="index" />
+        </h:form>
+        <p:button value="Back" onclick="window.history.back();" />
+        <h:form rendered="#{!userBean.loggedIn}">
+            <h:button value = "Login" outcome="login" />
+        </h:form>
+        <h:form rendered="#{!userBean.loggedIn}">
+            <h:button value = "Sign up" outcome="register" />
+        </h:form>
+        <h:form rendered="#{userBean.loggedIn}">
+            <h:commandButton value = "Logout" action="#{accountBackingBean.logout()}" />
+        </h:form>
+        <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
+        <h:form rendered="#{userBean.loggedIn}">
+            <h:commandButton value = "Account settings" action="settings" />
+        </h:form>
 
         <!-- TODO footer -->        
     </h:body>

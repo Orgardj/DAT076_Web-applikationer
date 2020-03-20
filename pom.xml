@@ -27,7 +27,7 @@
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-bom</artifactId>
-                <version>2.0.0.Beta1</version>
+                <version>2.1.0.Alpha1</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -60,6 +60,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.10</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-drone-api</artifactId>
+            <scope>test</scope>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -103,6 +109,20 @@
             <scope>test</scope>
             <version>2.0.0.Beta2</version>
         </dependency>
+        <version>2.1.0.Final</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jboss.arquillian.graphene</groupId>
+        <artifactId>arquillian-browser-screenshooter</artifactId>
+        <version>2.1.0.Final</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-phantom-binary</artifactId>
+        <version>2.1.1</version>
+        <scope>test</scope>
+        <classifier>windows</classifier>
     </dependencies>
     
     <build>
@@ -110,7 +130,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

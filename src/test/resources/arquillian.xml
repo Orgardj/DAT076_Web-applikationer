@@ -11,4 +11,17 @@ http://www.jboss.org/schema/arquillian/arquillian_1_0.xsd">
             <property name="resourcesXml">src/test/setup/glassfish-resources.xml</property>
         </configuration>
     </container>
+    <extension qualifier="webdriver">
+        <property name="browser">phantomjs</property>
+    </extension>
+    <extension qualifier="graphene">
+        <property name="waitAjaxInterval">5</property>
+        <property name="waitGuardInterval">5</property>
+        <property name="waitGuiInterval">5</property>
+    </extension>
+    <extension qualifier="screenshooter">
+        <property name="takeOnEveryAction">true</property>
+        <property name="takeBeforeTest">true</property>
+        <property name="takeAfterTest">true</property>
+    </extension>
 </arquillian>

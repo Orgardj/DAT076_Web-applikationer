@@ -14,49 +14,49 @@
         <div class="blackCover">
 
             <h:form id="studentForm" class="loginForm">
- <h:panelGroup id="logPanel">
-                <p class="closeForm" onclick="displayForm('close')">X</p>
+                <h:panelGroup id="logPanel">
+                    <p class="closeForm" onclick="displayForm('close')">X</p>
 
 
-                <h1>Best Forum</h1>
+                    <h1>Best Forum</h1>
 
-                <div class="logOrReg">
-                    <p onclick="switchForm('reg')">login</p>
-                    <p onclick="switchForm('log')">Register</p>
-                </div>
+                    <div class="logOrReg">
+                        <p onclick="switchForm('reg')">login</p>
+                        <p onclick="switchForm('log')">Register</p>
+                    </div>
 
 
-                <div class="usernameInput">
-                    <p:inputText id="Username" value="#{accountBackingBean.userNameInput}" onchange="inputValue('usernameInput')">
-                    </p:inputText>
-                    <label for="Username">Username</label>
-                </div>
+                    <div class="usernameInput">
+                        <p:inputText id="Username" value="#{accountBackingBean.userNameInput}" onchange="inputValue('usernameInput')">
+                        </p:inputText>
+                        <label for="Username">Username</label>
+                    </div>
 
-                <div class="passwordInput">
-                    <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" id="Password"
-                                redisplay="true"
-                                autocomplete="off"
-                                onchange="inputValue('passwordInput')"
-                                >
-                    </p:password>
-                    <label for="Password">Password</label>
-                </div>
+                    <div class="passwordInput">
+                        <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" id="Password"
+                                    redisplay="true"
+                                    autocomplete="off"
+                                    onchange="inputValue('passwordInput')"
+                                    >
+                        </p:password>
+                        <label for="Password">Password</label>
+                    </div>
 
-                <div class="buttonLogin">
-                    <p:commandButton value="Login" id="loginButton" 
+                    <div class="buttonLogin">
+                        <p:commandButton value="Login" id="loginButton" 
                                          action="#{accountBackingBean.validateAccount()}" 
                                          styleClass="btn btn-dark" 
                                          update="logPanel" />
-                </div>
+                    </div>
 
-                <p:message for="loginButton" style="color: red"/>
+                    <p:message for="loginButton" style="color: red"/>
 
-                <components:footer class="loginFormFooter"  value="loginFormFooter">
-                    <f:facet name="singInLink">
-                        <p>Don't have an account?</p>
-                        <h:commandButton value="Sign up"  action="register" styleClass="btn btn-primary" />
-                    </f:facet>
-                </components:footer>
+                    <components:footer class="loginFormFooter"  value="loginFormFooter">
+                        <f:facet name="singInLink">
+                            <p>Don't have an account?</p>
+                            <h:commandButton value="Sign up"  action="register" styleClass="btn btn-primary" />
+                        </f:facet>
+                    </components:footer>
                 </h:panelGroup>
 
             </h:form>
@@ -174,11 +174,11 @@
                     <div class="buttonLogin">
                         <p:commandButton value="Create Account" id="createAccountButton" 
                                          action="#{accountBackingBean.checkAccountInfo}" 
-                                         styleClass="btn btn-dark" update="regPanel" oncomplete="controllError();" />
+                                         styleClass="btn btn-dark" update="regPanel" oncomplete="controllError('update');" />
                     </div>
 
                     <p:message for="createAccountButton" style="color:red"/>
-                    
+
                 </h:panelGroup>
             </h:form>
 

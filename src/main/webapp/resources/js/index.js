@@ -63,20 +63,28 @@ function switchForm(type) {
     }
 }
 
-function controllError(){
+function controllError(input){
+    
+    var i;
+    
     if ($(".regForm span").length) {
         //alert($(".regForm span").length);
-
-        var i;
 
         for (i = 0; i < $(".regForm span").length; i++) {
             //console.log($(".regForm span").parent().get( 0 ).tagName);
             $(".regForm span").parent().children("label").css({"top": "calc(50% - 1em)", "transition": "0s"});
         }
     }
+    
+    if(i === 2 && input === "update"){ 
+        //alert(i);
+        location.reload();
+    }
 }
 
 controllError();
+
+
 
 for (i = 0; i <= $(".regForm div input").length; i++) {
     //console.log($(".regForm div:nth-child(" + i + ") input").val());

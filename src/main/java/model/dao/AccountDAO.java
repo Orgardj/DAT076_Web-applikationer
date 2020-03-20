@@ -34,17 +34,6 @@ public class AccountDAO extends AbstractDAO<Account, String> {
         return l;
     }
 
-    public Account findMatchingUserCredentials(String userName, String password) {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
-        QAccount account = QAccount.account;
-
-        Account l = queryFactory.selectFrom(account)
-                .where(account.userName.eq("john23")).where(account.password.eq("kakao20"))
-                .fetchFirst();
-        return l;
-
-    }
-
     public Account findAccountMatchingEmail(String email) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QAccount account = QAccount.account;

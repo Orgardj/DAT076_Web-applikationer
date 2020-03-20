@@ -22,11 +22,11 @@
 
             <section class="start" id="start">
                 <h:panelGroup id="categories">
-                    <p:dataTable value="#{categoryBackingBean.allCategories}" var="category"
+                    <p:dataTable value="#{categoryBackingBean.allCategories}" class="threadTable" var="category"
                                  paginator="true" rows="10">
-                        <p:column headerText="Name" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
-                        <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
-                        <p:column headerText="Latest Thread" sortBy="#{categoryBackingBean.latestThread(category).title}">
+                        <p:column headerText="Name" class="threadTableName" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
+                        <p:column headerText="Description" class="threadTableDescription" sortBy="#{category.description}">#{category.description}</p:column>
+                        <p:column headerText="Latest Thread" class="threadTableLatestThread" sortBy="#{categoryBackingBean.latestThread(category).title}">
                             <ui:fragment rendered="#{categoryBackingBean.latestThread(category) != null}">
                                 <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{categoryBackingBean.latestThread(category).TId}">
                                     #{categoryBackingBean.latestThread(category).title}

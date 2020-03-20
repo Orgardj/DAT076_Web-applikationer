@@ -74,16 +74,14 @@ public class AccountBackingBean implements Serializable {
 
     public static final String SALT = "saltSecurityText";
 
-    public String checkAccountInfo() throws NoSuchAlgorithmException {
+    public void checkAccountInfo() throws NoSuchAlgorithmException {
         hashPassword(passwordInput);
         checkIfAccountExists();
         checkIfEmailExists();
         checkIfPasswordsMatch(passwordInput);
         if (passwordValid && emailDontExist && accountDontExist) {
             addAccount();
-            return "login";
         }
-        return "";
     }
 
     public void hashPassword(String password) throws NoSuchAlgorithmException {

@@ -4,46 +4,47 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-	<cc:interface>
-		<cc:attribute name="value"/>
-	</cc:interface>
-	<cc:implementation>
-        
-          <header class="pageHeader">
-                <h1 class="headerStyle">Welcome to Forum</h1>
+    <cc:interface>
+        <cc:attribute name="value"/>
+    </cc:interface>
+    <cc:implementation>
 
-                <nav class="navBar">
-                    <a href="#start">Start</a>
-                    <a href="#posts">Posts</a>
-                    <a href="#create">Create</a>
-                    <a href="#about">About</a>
-                </nav>
+        <header class="pageHeader">
+            <h1 class="headerStyle">Welcome to Forum</h1>
 
-                <div class="iconHolder">
+            <nav class="navBar">
+                <a href="#start">Start</a>
+                <a href="#posts">Posts</a>
+                <a href="#create">Create</a>
+                <a href="#about">About</a>
+            </nav>
+
+            <div class="iconHolder">
+                <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
+                                onclick="displayForm('open')"
+                                class="userIcon"
+                                rendered="#{!userBean.loggedIn}" 
+                                />
+                <div class="dropMenu">
                     <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
-                        onclick="displayForm('open')"
-                        class="userIcon"
-                        rendered="#{!userBean.loggedIn}" 
-                        />
-                    <div class="dropMenu">
-                        <h:graphicImage library="images" name="account_icon.png" alt="Account icon"
-                            class="loggedInUserIcon"
-                            rendered="#{userBean.loggedIn}" 
-                            />
-                        <div class="dropContent">
-                            <p>Well hello there</p>
-                            <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
-
+                                    class="loggedInUserIcon"
+                                    rendered="#{userBean.loggedIn}" 
+                                    />
+                    <div class="dropContent">
+                        <p>Well hello there</p>
+                        <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
+                        <h:form>
                             <h:commandButton value="Account settings" action="settings" />
                             <h:commandButton value="logout" action="#{userBean.setAccount(none)}" />
-                        </div>
+                        </h:form>
                     </div>
-                    <p:inputText placeholder="Search..." class="searchBar" value=""/>
-                    <img src="./resources/images/search_icon.png" alt="Search icon" class="searchIcon"></img>
                 </div>
-            </header>
+                <p:inputText placeholder="Search..." class="searchBar" value=""/>
+                <img src="./resources/images/search_icon.png" alt="Search icon" class="searchIcon"></img>
+            </div>
+        </header>
 
-        
-        
-        </cc:implementation>
+
+
+    </cc:implementation>
 </html>

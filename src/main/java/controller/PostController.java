@@ -23,6 +23,7 @@ public class PostController implements Serializable {
 
     public void newPost() {
         postBackingBean.createPost();
+        postBackingBean.setEnteredMessage("");
         push.send("update_posts");
     }
 

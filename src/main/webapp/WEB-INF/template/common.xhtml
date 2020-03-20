@@ -8,15 +8,13 @@
         <title><ui:insert name="title">Title</ui:insert></title>
     </h:head>
     <h:body>
-        <!-- TODO header -->
-        
         <div class="container">
             <ui:insert name="content" />
         </div>
         <h:form>
             <h:button value="Home Page" outcome="index" />
         </h:form>
-        <p:button value="Back" onclick="window.history.back();" />
+        <p:button value="Back" onclick="window.history.go(-1); return false;"/>
         <h:form rendered="#{!userBean.loggedIn}">
             <h:button value = "Login" outcome="login" />
         </h:form>
@@ -31,6 +29,6 @@
             <h:commandButton value = "Account settings" action="settings" />
         </h:form>
 
-        <!-- TODO footer -->        
+        
     </h:body>
 </html>

@@ -10,7 +10,6 @@
     </cc:interface>
     <cc:implementation>
 
-        <ui:remove>
             <h:panelGroup id="categories">
                 <p:dataTable value="#{categoryBackingBean.allCategories}" class="threadTable" var="category"
                              paginator="true" rows="10">
@@ -46,17 +45,6 @@
                     </p:column>
                 </p:dataTable>
             </h:panelGroup>
-        </ui:remove>
-
-        <h:panelGroup id="categories">
-            <p:dataTable value="#{categoryBackingBean.allCategories}" class="threadTable" var="category" rows="5">
-                <p:column class="threadTableName" sortBy="#{category.name}"> 
-                    <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a>
-                </p:column>
-
-
-            </p:dataTable>
-        </h:panelGroup>
 
     </cc:implementation>
 </html>

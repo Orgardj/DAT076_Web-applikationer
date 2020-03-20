@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:cc="http://java.sun.com/jsf/composite"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -43,9 +43,9 @@
                     </div>
 
                     <div class="buttonLogin">
-                        <p:commandButton value="Login" id="loginButton" 
-                                         action="#{accountBackingBean.validateAccount()}" 
-                                         styleClass="btn btn-dark" 
+                        <p:commandButton value="Login" id="loginButton"
+                                         action="#{accountBackingBean.validateAccount()}"
+                                         styleClass="btn btn-dark"
                                          update="logPanel" oncomplete="controllLogin();" />
                     </div>
 
@@ -59,10 +59,12 @@
                     </components:footer>
                 </h:panelGroup>
 
+
             </h:form>
 
 
             <h:form id="registerForm" class="regForm">
+
                 <h:panelGroup id="regPanel">
                     <p class="closeForm" onclick="displayForm('close')">X</p>
 
@@ -76,7 +78,7 @@
 
 
                     <div class="regUsername">
-                        <p:inputText id="userName" value="#{accountBackingBean.userNameInput}" styleClass="form-control" 
+                        <p:inputText id="userName" value="#{accountBackingBean.userNameInput}" styleClass="form-control"
                                      required="true"
                                      requiredMessage="Username is required"
                                      onchange="inputValue('regUsername')"
@@ -87,7 +89,7 @@
 
 
                     <div class="regFirstname">
-                        <p:inputText id="firstName" value="#{accountBackingBean.firstName}" styleClass="form-control" 
+                        <p:inputText id="firstName" value="#{accountBackingBean.firstName}" styleClass="form-control"
                                      required="true"
                                      requiredMessage="Please enter your firstname"
                                      onchange="inputValue('regFirstname')"
@@ -98,7 +100,7 @@
 
 
                     <div class="regLastname">
-                        <p:inputText id="lastName" value="#{accountBackingBean.lastName}" styleClass="form-control" 
+                        <p:inputText id="lastName" value="#{accountBackingBean.lastName}" styleClass="form-control"
                                      required="true"
                                      requiredMessage="Please enter your lastname"
                                      onchange="inputValue('regLastname')"
@@ -110,7 +112,7 @@
 
 
                     <div class="regEmail">
-                        <p:inputText id="email" value="#{accountBackingBean.email}" styleClass="form-control" required="true" 
+                        <p:inputText id="email" value="#{accountBackingBean.email}" styleClass="form-control" required="true"
                                      requiredMessage="Email is required"
                                      validatorMessage="Email is invalid"
                                      onchange="inputValue('regEmail')">
@@ -123,7 +125,7 @@
 
 
                     <div class="regPassword">
-                        <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control" 
+                        <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control"
                                     id="password"
                                     required="true"
                                     requiredMessage="Password is required"
@@ -143,7 +145,7 @@
 
 
                     <div class="regPasswordConfirm">
-                        <p:password value="#{accountBackingBean.confirmPassword}" styleClass="form-control" 
+                        <p:password value="#{accountBackingBean.confirmPassword}" styleClass="form-control"
                                     id="confirmPassword"
                                     required="true"
                                     requiredMessage="Please confirm your password"
@@ -158,28 +160,29 @@
                     <!--
                                     <h:outputLabel value="Choose Profile Picture" styleClass="" />
                     -->
-                    <div class="profileAlternative"> 
+                    <div class="profileAlternative">
                         <h:selectOneRadio value="#{accountBackingBean.chooseProfilePicture}" id="chooseProfilePicture" required="true" requiredMessage="Please choose a profile picture">
                             <f:selectItem itemValue="1" itemLabel="Picture 1" />
-                            <h:graphicImage library="images" name="profile1.png" alt="picture not found" />  
+                            <h:graphicImage library="images" name="profile1.png" alt="picture not found" />
                             <f:selectItem itemValue="2" itemLabel="Picture 2" />
-                            <h:graphicImage library="images" name="profile2.png" alt="picture not found" /> 
+                            <h:graphicImage library="images" name="profile2.png" alt="picture not found" />
                             <f:selectItem itemValue="3" itemLabel="Picture 3" />
-                            <h:graphicImage library="images" name="profile3.png" alt="picture not found" /> 
+                            <h:graphicImage library="images" name="profile3.png" alt="picture not found" />
                         </h:selectOneRadio>
                         <h:message for="chooseProfilePicture" style="color: red"/>
                     </div>
 
 
                     <div class="buttonLogin">
-                        <p:commandButton value="Create Account" id="createAccountButton" 
-                                         action="#{accountBackingBean.checkAccountInfo}" 
+                        <p:commandButton value="Create Account" id="createAccountButton"
+                                         action="#{accountBackingBean.checkAccountInfo}"
                                          styleClass="btn btn-dark" update="regPanel" oncomplete="controllError('update');" />
                     </div>
 
                     <p:message for="createAccountButton" style="color:red"/>
 
                 </h:panelGroup>
+
             </h:form>
 
 

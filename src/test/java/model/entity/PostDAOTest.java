@@ -61,23 +61,17 @@ public class PostDAOTest {
     }
 
     @Test
-    public void checkThatFindPostMatchingTIdMatchesCorrectly() {
-        Assert.assertEquals(text, postDAO.findPostsMatchingTId(thread.getTId()).get(0).getText());
+    public void checkThatFindPostsMatchingThreaddMatchesCorrectly() {
+        Assert.assertEquals(text, postDAO.findPostsMatchingThread(thread.getTId()).get(0).getText());
     }
 
     @After
     public void clear() {
-        postDAO.findAll().forEach((post) -> {
-            postDAO.remove(post);
-        });
+        postDAO.findAll().forEach(postDAO::remove);
 
-        threadDAO.findAll().forEach((thread) -> {
-            threadDAO.remove(thread);
-        });
+        threadDAO.findAll().forEach(threadDAO::remove);
 
-        categoryDAO.findAll().forEach((category) -> {
-            categoryDAO.remove(category);
-        });
+        categoryDAO.findAll().forEach(categoryDAO::remove);
 
         accountDAO.remove(accountDAO.find("john23"));
     }

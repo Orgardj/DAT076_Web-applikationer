@@ -46,9 +46,7 @@ public class AccountAuthDAOTest {
 
     @After
     public void clear() {
-        accountAuthDAO.findAll().forEach((accountAuth) -> {
-            accountAuthDAO.remove(accountAuth);
-        });
+        accountAuthDAO.findAll().forEach(accountAuthDAO::remove);
         
         accountDAO.remove(accountDAO.find("john23"));
     }

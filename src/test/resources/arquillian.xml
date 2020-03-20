@@ -4,7 +4,7 @@
             xsi:schemaLocation="http://jboss.org/schema/arquillian
 http://www.jboss.org/schema/arquillian/arquillian_1_0.xsd">
     <defaultProtocol type="Servlet 3.0"/>
-    <container qualifier="glassfish" default="true">
+    <container qualifier="payara" default="true">
         <configuration>
             <property name="bindHttpPort">17070</property>
             <property name="bindHttpsPort">17075</property>
@@ -12,7 +12,8 @@ http://www.jboss.org/schema/arquillian/arquillian_1_0.xsd">
         </configuration>
     </container>
     <extension qualifier="webdriver">
-        <property name="browser">phantomjs</property>
+        <property name="browser">chrome</property>
+        <property name="dimensions">1920x1080</property>
     </extension>
     <extension qualifier="graphene">
         <property name="waitAjaxInterval">5</property>

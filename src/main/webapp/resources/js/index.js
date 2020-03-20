@@ -85,6 +85,11 @@ function controllError(input){
 controllError();
 
 
+function controllLogin(){
+    location.reload();
+}
+
+
 
 for (i = 0; i <= $(".regForm div input").length; i++) {
     //console.log($(".regForm div:nth-child(" + i + ") input").val());

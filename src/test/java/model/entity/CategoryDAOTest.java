@@ -45,8 +45,6 @@ public class CategoryDAOTest {
 
     @After
     public void clear() {
-        categoryDAO.findAll().forEach((category) -> {
-            categoryDAO.remove(category);
-        });
+        categoryDAO.findAll().forEach(categoryDAO::remove);
     }
 }

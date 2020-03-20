@@ -3,6 +3,7 @@ package model.entity;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.ejb.EJB;
+import model.dao.AccountDAO;
 import org.junit.Assert;
 import model.dao.PostDAO;
 import model.dao.CategoryDAO;
@@ -23,26 +24,42 @@ public class ThreadDAOTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(ThreadDAO.class, Thread.class, Post.class, Account.class, PostDAO.class, Category.class, CategoryDAO.class, AccountAuth.class)
+                .addClasses(PostDAO.class, AccountDAO.class, ThreadDAO.class,
+                        Post.class, Account.class, Thread.class, Category.class, CategoryDAO.class, AccountAuth.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     @EJB
     private ThreadDAO threadDAO;
+    
     @EJB
     private CategoryDAO categoryDAO;
+    
+    @EJB
+    private PostDAO postDAO;
+    
+    @EJB
+    private AccountDAO accountDAO;
 
-    Category category;
-    Thread thread;
+    private Category category;
+    private Thread thread;
+    private Post first_post;
+    private Post last_post;
 
     @Before
     public void init() {
+        Account user = new Account("john23", "kakao20", "douche@hotmail.com", "administrator", "John", "Douche", new Date(), 1);
+        accountDAO.create(user);
+        
         category = new Category("Douche", "Im a douche", new ArrayList<>());
         categoryDAO.create(category);
 
-        thread = new Thread("Data", Long.valueOf(5), new Date(), category, new ArrayList<>());
+        thread = new Thread("Data", Long.valueOf(0), new Date(), category, new ArrayList<>());
         threadDAO.create(thread);
+        
+        postDAO.create(new Post("first post", new Date(), user, thread, "0"));
+        postDAO.create(new Post("last post", new Date(), user, thread, "0"));
     }
 
     @Test
@@ -59,15 +76,25 @@ public class ThreadDAOTest {
     public void checkThatFindThreadMatchingTIdMatchesCorrectly() {
         Assert.assertEquals(thread.getTId(), threadDAO.findThreadMatchingTId(thread.getTId()).getTId());
     }
+    
+    @Test
+    public void checkThatFirstPostMatchesCorrectly() {
+        Assert.assertEquals(first_post, threadDAO.firstPost(thread));
+    }
+
+    @Test
+    public void checkThatLastPostMatchesCorrectly() {
+        Assert.assertEquals(last_post, threadDAO.latestPost(thread));
+    }
 
     @After
     public void clear() {
-        threadDAO.findAll().forEach((thread) -> {
-            threadDAO.remove(thread);
-        });
+        postDAO.findAll().forEach(postDAO::remove);
 
-        categoryDAO.findAll().forEach((category) -> {
-            categoryDAO.remove(category);
-        });
+        threadDAO.findAll().forEach(threadDAO::remove);
+
+        categoryDAO.findAll().forEach(categoryDAO::remove);
+        
+        accountDAO.remove(accountDAO.find("john23"));
     }
 }

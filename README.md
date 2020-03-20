@@ -19,3 +19,7 @@ https://discordapp.com/invite/qKBz3Ye
 
 ### Trello
 https://trello.com/invite/b/GVBg75BU/4418507a800ad4c06ea5088755438d64/dat076web-applikationer
+
+
+####
+Report: /Projektrapport_grupp_6 .docx

@@ -59,11 +59,11 @@
 
 
 
-                <h:form rendered="#{userBean.account.role == 'administrator'}">
+                <h:form id="create_category" rendered="#{userBean.account.role == 'administrator'}">
                     <div class="ui-inputgroup">
-                        <p:inputText placeholder="Category title" value="#{categoryBackingBean.enteredTitle}"/> 
-                        <p:inputText placeholder="Category description" value="#{categoryBackingBean.enteredDescription}"/> 
-                        <p:commandButton value="New Category" action="#{categoryController.createCategory()}" />
+                        <p:inputText id="category_title" placeholder="Category title" value="#{categoryBackingBean.enteredTitle}"/> 
+                        <p:inputText id="category_description" placeholder="Category description" value="#{categoryBackingBean.enteredDescription}"/> 
+                        <p:commandButton id="new_category_button" value="New Category" action="#{categoryController.createCategory()}" />
                     </div>
                 </h:form>
 

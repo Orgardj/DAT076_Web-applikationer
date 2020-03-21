@@ -74,7 +74,9 @@ public class AccountBackingBean implements Serializable {
 
     private Boolean rememberMe = true;
 
-    Boolean loginSuccessfully = false;
+    private Boolean loginSuccessfully = false;
+    
+    private Boolean registerSuccessfully = false;
 
     public static final String SALT = "saltSecurityText";
 
@@ -85,6 +87,7 @@ public class AccountBackingBean implements Serializable {
         checkIfPasswordsMatch(passwordInput);
         if (passwordValid && emailDontExist && accountDontExist) {
             addAccount();
+            registerSuccessfully = true;
         }
     }
 
@@ -206,7 +209,7 @@ public class AccountBackingBean implements Serializable {
     }
 
     public void addAccount() {
-        accountDAO.create(new Account(userNameInput, hashedPassword, email, "member", firstName, lastName, new Date(), chooseProfilePicture)); // hardcoded as member for now
+        accountDAO.create(new Account(userNameInput, hashedPassword, email, "member", firstName, lastName, new Date(), chooseProfilePicture));
     }
 
     public void validateAccount() throws NoSuchAlgorithmException {

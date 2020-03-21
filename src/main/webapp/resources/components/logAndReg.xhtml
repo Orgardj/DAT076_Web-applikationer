@@ -48,17 +48,6 @@
                     <h:inputHidden value="#{accountBackingBean.loginSuccessfully}" id="loginStatus"></h:inputHidden>  
                     <p:message for="loginButton" style="color: red"/>
 
-                    <script type="text/javascript">
-
-                        function controllLogin() {
-                            var see = document.getElementById("j_idt7:studentForm:loginStatus").value;
-                            if (see === "true") {
-                                location.reload();
-                            }
-
-                        }
-                    </script>
-
                     <components:footer class="loginFormFooter"  value="loginFormFooter">
                         <f:facet name="singInLink">
                             <p>Don't have an account?</p>
@@ -164,6 +153,7 @@
                         <h:message for="chooseProfilePicture" style="color: red"/>
                     </div>
 
+                    <h:inputHidden value="#{accountBackingBean.registerSuccessfully}" id="registerStatus"></h:inputHidden>  
                     <div class="buttonLogin">
                         <p:commandButton value="Create Account" id="createAccountButton"
                                          action="#{accountBackingBean.checkAccountInfo}"

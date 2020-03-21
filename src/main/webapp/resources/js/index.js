@@ -27,6 +27,20 @@ function displayForm(input) {
     }
 }
 
+function controllLogin() {
+    var see = document.getElementById("j_idt7:studentForm:loginStatus").value;
+    if (see === "true") {
+        location.reload();
+    }
+}
+
+function checkRegister() {
+    var see = document.getElementById("j_idt7:registerForm:registerStatus").value;
+    if (see === "true") {
+        location.reload();
+    }
+}
+
 function inputValue(input) {
     if ($("." + input + " input").val()) {
         $("." + input + " label").addClass("keepOverHeadPlaceholder");
@@ -54,12 +68,13 @@ function controllError(input) {
         }
     }
 
-    if (i === 2 && input === "update") {
-        location.reload();
+    if (input === "update") {
+        checkRegister();
     }
 }
 
 controllError();
+
 
 for (i = 0; i <= $(".regForm div input").length; i++) {
     if ($(".regForm div:nth-child(" + i + ") input").val() !== "j_idt7:studentForm" && $(".regForm div:nth-child(" + i + ") input").val() !== "") {

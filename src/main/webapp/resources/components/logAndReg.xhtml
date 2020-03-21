@@ -10,13 +10,10 @@
     </cc:interface>
     <cc:implementation>
 
-
         <div class="blackCover">
-
             <h:form id="studentForm" class="loginForm">
                 <h:panelGroup id="logPanel">
                     <p class="closeForm" onclick="displayForm('close')">X</p>
-
 
                     <h1>Best Forum</h1>
 
@@ -24,7 +21,6 @@
                         <p onclick="switchForm('reg')">login</p>
                         <p onclick="switchForm('log')">Register</p>
                     </div>
-
 
                     <div class="usernameInput">
                         <p:inputText id="Username" value="#{accountBackingBean.userNameInput}" onchange="inputValue('usernameInput')">
@@ -55,10 +51,7 @@
                     <script type="text/javascript">
 
                         function controllLogin() {
-
-                            var see = document.getElementById("j_idt13:studentForm:loginStatus").value;
-                            alert(see);
-
+                            var see = document.getElementById("j_idt7:studentForm:loginStatus").value;
                             if (see === "true") {
                                 location.reload();
                             }
@@ -74,23 +67,18 @@
                     </components:footer>
                 </h:panelGroup>
 
-
             </h:form>
-
 
             <h:form id="registerForm" class="regForm">
 
                 <h:panelGroup id="regPanel">
                     <p class="closeForm" onclick="displayForm('close')">X</p>
-
-
                     <h1>Best Forum</h1>
 
                     <div class="logOrReg">
                         <p onclick="switchForm('reg')">login</p>
                         <p onclick="switchForm('log')">Register</p>
                     </div>
-
 
                     <div class="regUsername">
                         <p:inputText id="userName" value="#{accountBackingBean.userNameInput}" styleClass="form-control"
@@ -102,7 +90,6 @@
                         <h:message for="userName" style="color: red"/>
                     </div>
 
-
                     <div class="regFirstname">
                         <p:inputText id="firstName" value="#{accountBackingBean.firstName}" styleClass="form-control"
                                      required="true"
@@ -112,7 +99,6 @@
                         <label for="firstName">Firstname</label>
                         <h:message for="firstName" style="color: red"/>
                     </div>
-
 
                     <div class="regLastname">
                         <p:inputText id="lastName" value="#{accountBackingBean.lastName}" styleClass="form-control"
@@ -124,8 +110,6 @@
                         <h:message for="lastName" style="color: red"/>
                     </div>
 
-
-
                     <div class="regEmail">
                         <p:inputText id="email" value="#{accountBackingBean.email}" styleClass="form-control" required="true"
                                      requiredMessage="Email is required"
@@ -136,8 +120,6 @@
                         <label for="email">Email</label>
                         <h:message for="email" style="color: red" />
                     </div>
-
-
 
                     <div class="regPassword">
                         <p:password value="#{accountBackingBean.passwordInput}" styleClass="form-control"
@@ -157,8 +139,6 @@
                         <h:message for="password" style="color: red"/>
                     </div>
 
-
-
                     <div class="regPasswordConfirm">
                         <p:password value="#{accountBackingBean.confirmPassword}" styleClass="form-control"
                                     id="confirmPassword"
@@ -172,9 +152,6 @@
                         <h:message for="confirmPassword" style="color: red"/>
                     </div>
 
-                    <!--
-                                    <h:outputLabel value="Choose Profile Picture" styleClass="" />
-                    -->
                     <div class="profileAlternative">
                         <h:selectOneRadio value="#{accountBackingBean.chooseProfilePicture}" id="chooseProfilePicture" required="true" requiredMessage="Please choose a profile picture">
                             <f:selectItem itemValue="1" itemLabel="Picture 1" />
@@ -187,7 +164,6 @@
                         <h:message for="chooseProfilePicture" style="color: red"/>
                     </div>
 
-
                     <div class="buttonLogin">
                         <p:commandButton value="Create Account" id="createAccountButton"
                                          action="#{accountBackingBean.checkAccountInfo}"
@@ -195,14 +171,8 @@
                     </div>
 
                     <p:message for="createAccountButton" style="color:red"/>
-
                 </h:panelGroup>
-
             </h:form>
-
-
         </div>
-
-
     </cc:implementation>
 </html>

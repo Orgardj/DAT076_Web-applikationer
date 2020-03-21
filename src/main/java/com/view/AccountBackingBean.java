@@ -18,9 +18,11 @@ import model.entity.Account;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.Map;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ExternalContext;
+import javax.servlet.http.Cookie;
 import model.dao.AccountAuthDAO;
 import model.entity.AccountAuth;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -71,7 +73,7 @@ public class AccountBackingBean implements Serializable {
     private Boolean showEmail = false;
 
     private Boolean rememberMe = true;
-    
+
     Boolean loginSuccessfully = false;
 
     public static final String SALT = "saltSecurityText";
@@ -208,7 +210,10 @@ public class AccountBackingBean implements Serializable {
     }
 
     public void validateAccount() throws NoSuchAlgorithmException {
-             
+        System.out.println("TESTING");
+        System.out.println(userNameInput);
+        System.out.println(passwordInput);
+
         if (userNameInput.isEmpty() || passwordInput.isEmpty()) {
             Messages.addError("studentForm:loginButton", "Please enter a username and Password");
         }
@@ -260,12 +265,19 @@ public class AccountBackingBean implements Serializable {
 
     public void logout() {
         userBean.setAccount(null);
-        
+
         //Remove cookies
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        HashMap map = new HashMap();
-        map.put("maxAge", 604800);
-        ec.addResponseCookie("selector", "", map);
-        ec.addResponseCookie("validator", "", map);
+        Map<String, Object> cookies = ec.getRequestCookieMap();
+        if (cookies.containsKey("selector") && cookies.containsKey("validator")) {
+            Cookie selector = (Cookie) cookies.get("selector");
+            Cookie validator = (Cookie) cookies.get("validator");
+            accountAuthDAO.remove(accountAuthDAO.findMatchingAccountAuth(selector.getValue(), validator.getValue()));
+
+            HashMap map = new HashMap();
+            map.put("maxAge", 0);
+            ec.addResponseCookie("selector", "", map);
+            ec.addResponseCookie("validator", "", map);
+        }
     }
 }

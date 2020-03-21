@@ -210,9 +210,6 @@ public class AccountBackingBean implements Serializable {
     }
 
     public void validateAccount() throws NoSuchAlgorithmException {
-        System.out.println("TESTING");
-        System.out.println(userNameInput);
-        System.out.println(passwordInput);
 
         if (userNameInput.isEmpty() || passwordInput.isEmpty()) {
             Messages.addError("studentForm:loginButton", "Please enter a username and Password");
@@ -225,6 +222,7 @@ public class AccountBackingBean implements Serializable {
             if (account.getPassword().equals(hashedPassword)) {
                 if (account.getRole().equals("banned")) {
                     Messages.addError("studentForm:loginButton", "Banned user");
+                    return;
                 }
                 userBean.setAccount(account);
                 if (rememberMe) {

@@ -18,9 +18,11 @@ import model.entity.Account;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.Map;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ExternalContext;
+import javax.servlet.http.Cookie;
 import model.dao.AccountAuthDAO;
 import model.entity.AccountAuth;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -72,18 +74,21 @@ public class AccountBackingBean implements Serializable {
 
     private Boolean rememberMe = true;
 
+    private Boolean loginSuccessfully = false;
+    
+    private Boolean registerSuccessfully = false;
+
     public static final String SALT = "saltSecurityText";
 
-    public String checkAccountInfo() throws NoSuchAlgorithmException {
+    public void checkAccountInfo() throws NoSuchAlgorithmException {
         hashPassword(passwordInput);
         checkIfAccountExists();
         checkIfEmailExists();
         checkIfPasswordsMatch(passwordInput);
         if (passwordValid && emailDontExist && accountDontExist) {
             addAccount();
-            return "login";
+            registerSuccessfully = true;
         }
-        return "";
     }
 
     public void hashPassword(String password) throws NoSuchAlgorithmException {
@@ -204,13 +209,13 @@ public class AccountBackingBean implements Serializable {
     }
 
     public void addAccount() {
-        accountDAO.create(new Account(userNameInput, hashedPassword, email, "member", firstName, lastName, new Date(), chooseProfilePicture)); // hardcoded as member for now
+        accountDAO.create(new Account(userNameInput, hashedPassword, email, "member", firstName, lastName, new Date(), chooseProfilePicture));
     }
 
-    public String validateAccount() throws NoSuchAlgorithmException {
+    public void validateAccount() throws NoSuchAlgorithmException {
+
         if (userNameInput.isEmpty() || passwordInput.isEmpty()) {
             Messages.addError("studentForm:loginButton", "Please enter a username and Password");
-            return "";
         }
         String passwordToHash = passwordInput;
         Account account = accountDAO.findAccountMatchingUserName(userNameInput);
@@ -220,7 +225,7 @@ public class AccountBackingBean implements Serializable {
             if (account.getPassword().equals(hashedPassword)) {
                 if (account.getRole().equals("banned")) {
                     Messages.addError("studentForm:loginButton", "Banned user");
-                    return "";
+                    return;
                 }
                 userBean.setAccount(account);
                 if (rememberMe) {
@@ -243,13 +248,11 @@ public class AccountBackingBean implements Serializable {
                     ec.addResponseCookie("selector", selector, map);
                     ec.addResponseCookie("validator", hashedValidator, map);
                 }
-                return "index";
+                loginSuccessfully = true;
             }
             Messages.addError("studentForm:loginButton", "Please enter a correct username and password");
-            return "";
         }
         Messages.addError("studentForm:loginButton", "Please enter a correct username and Password");
-        return "";
     }
 
     public void banAccount(Account account) {
@@ -263,12 +266,19 @@ public class AccountBackingBean implements Serializable {
 
     public void logout() {
         userBean.setAccount(null);
-        
+
         //Remove cookies
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        HashMap map = new HashMap();
-        map.put("maxAge", 604800);
-        ec.addResponseCookie("selector", "", map);
-        ec.addResponseCookie("validator", "", map);
+        Map<String, Object> cookies = ec.getRequestCookieMap();
+        if (cookies.containsKey("selector") && cookies.containsKey("validator")) {
+            Cookie selector = (Cookie) cookies.get("selector");
+            Cookie validator = (Cookie) cookies.get("validator");
+            accountAuthDAO.remove(accountAuthDAO.findMatchingAccountAuth(selector.getValue(), validator.getValue()));
+
+            HashMap map = new HashMap();
+            map.put("maxAge", 0);
+            ec.addResponseCookie("selector", "", map);
+            ec.addResponseCookie("validator", "", map);
+        }
     }
 }

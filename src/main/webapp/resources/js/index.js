@@ -1,36 +1,25 @@
 $(document).ready(function () {
-    //console.log( "ready!" );
-
     $(".searchIcon").click(function () {
         $(".searchBar").toggleClass("expandSearchBar");
     });
 
     $("a").on('click', function (event) {
         var hash = this.hash;
-        
         var scrollAmount = $(hash).offset().top - 70;
 
         if (this.hash !== "") {
-
             event.preventDefault();
-            
-            
+
             var hash = this.hash;
             $('html, body').animate({
                 scrollTop: scrollAmount
             }, 700, function () {
-                //window.location.hash = hash;
             });
         }
-
     });
-
 });
 
-
 function displayForm(input) {
-    //alert(input);
-
     if (input === "open") {
         $(".blackCover").css("display", "block");
     } else if (input === "close") {
@@ -38,20 +27,27 @@ function displayForm(input) {
     }
 }
 
+function controllLogin() {
+    var see = document.getElementById("j_idt7:studentForm:loginStatus").value;
+    if (see === "true") {
+        location.reload();
+    }
+}
 
+function checkRegister() {
+    var see = document.getElementById("j_idt7:registerForm:registerStatus").value;
+    if (see === "true") {
+        location.reload();
+    }
+}
 
 function inputValue(input) {
-    //alert(input);
-
     if ($("." + input + " input").val()) {
         $("." + input + " label").addClass("keepOverHeadPlaceholder");
     } else if (!$("." + input + " input").val()) {
         $("." + input + " label").removeClass("keepOverHeadPlaceholder");
     }
-
-    //alert($("." + input + " input").val());
 }
-
 
 function switchForm(type) {
     if (type === "log") {
@@ -63,21 +59,29 @@ function switchForm(type) {
     }
 }
 
-
-if ($(".regForm span").length) {
-    //alert($(".regForm span").length);
-
+function controllError(input) {
     var i;
 
-    for (i = 0; i < $(".regForm span").length; i++) {
-        //console.log($(".regForm span").parent().get( 0 ).tagName);
-        $(".regForm span").parent().children("label").css("top", "calc(50% - 1em)");
+    if ($(".regForm span").length) {
+        for (i = 0; i < $(".regForm span").length; i++) {
+            $(".regForm span").parent().children("label").css({"top": "calc(50% - 1em)", "transition": "0s"});
+        }
+    }
+
+    if (input === "update") {
+        checkRegister();
     }
 }
 
+controllError();
+
+
 for (i = 0; i <= $(".regForm div input").length; i++) {
-    //console.log($(".regForm div:nth-child(" + i + ") input").val());
-    if ($(".regForm div:nth-child(" + i + ") input").val() !== "j_idt13:studentForm" && $(".regForm div:nth-child(" + i + ") input").val() !== "") {
+    if ($(".regForm div:nth-child(" + i + ") input").val() !== "j_idt7:studentForm" && $(".regForm div:nth-child(" + i + ") input").val() !== "") {
         $(".regForm div:nth-child(" + i + ") label").addClass("keepOverHeadPlaceholder");
     }
+}
+
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
 }

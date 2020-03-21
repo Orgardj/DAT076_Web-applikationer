@@ -87,37 +87,37 @@ public class IndexPageTest {
     @FindBy(id = "j_idt56:userIcon")
     private WebElement userIcon;
 
-    @FindBy(id = "j_idt13:loginForm:Username")
+    @FindBy(id = "j_idt7:loginForm:Username")
     private WebElement userNameLoginInput;
 
-    @FindBy(id = "j_idt13:loginForm:Password")
+    @FindBy(id = "j_idt7:loginForm:Password")
     private WebElement passwordLoginInput;
 
-    @FindBy(id = "j_idt13:loginForm:loginButton")
+    @FindBy(id = "j_idt7:loginForm:loginButton")
     private WebElement loginButton;
 
-    @FindBy(id = "j_idt13:registerForm:userName")
+    @FindBy(id = "j_idt7:registerForm:userName")
     private WebElement userNameRegisterInput;
 
-    @FindBy(id = "j_idt13:registerForm:password")
+    @FindBy(id = "j_idt7:registerForm:password")
     private WebElement passwordRegisterInput;
 
-    @FindBy(id = "j_idt13:registerForm:confirmPassword")
+    @FindBy(id = "j_idt7:registerForm:confirmPassword")
     private WebElement confirmPasswordRegisterInput;
 
-    @FindBy(id = "j_idt13:registerForm:firstName")
+    @FindBy(id = "j_idt7:registerForm:firstName")
     private WebElement firstNameRegisterInput;
 
-    @FindBy(id = "j_idt13:registerForm:lastName")
+    @FindBy(id = "j_idt7:registerForm:lastName")
     private WebElement lastNameRegisterInput;
 
-    @FindBy(id = "j_idt13:registerForm:email")
+    @FindBy(id = "j_idt7:registerForm:email")
     private WebElement emailRegisterInput;
 
-    @FindBy(id = "j_idt13:registerForm:chooseProfilePicture:0")
+    @FindBy(id = "j_idt7:registerForm:chooseProfilePicture:0")
     private WebElement chooseProfilePictureRadioButton;
 
-    @FindBy(id = "j_idt13:registerForm:createAccountButton")
+    @FindBy(id = "j_idt7:registerForm:createAccountButton")
     private GrapheneElement registerButton;
 
     @FindBy(id = "registerSwitch")
@@ -146,6 +146,7 @@ public class IndexPageTest {
     }
 
     @Ignore
+    @Test
     public void login_successfully() {
         browser.get("http://localhost:17070/index");
 

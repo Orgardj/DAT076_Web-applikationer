@@ -7,82 +7,65 @@
       xmlns:o="http://omnifaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:components="http://xmlns.jcp.org/jsf/composite/components">
-    <ui:decorate template="WEB-INF/template/common.xhtml">
-        <ui:define name="title">Forum</ui:define>
-        <ui:define name="content">
-            <h:outputScript library="js" name="index.js" target="body" />
-            <h:outputStylesheet library="css" name = "index.css" />
-            
-            
-            <components:logAndReg /> 
-            
-            
-            <components:header />
-           
+    <h:head>
+        <h:outputScript library="js" name="index.js" target="body" />
+        <h:outputStylesheet library="css" name = "index.css" />
+        <title>Forum</title>
+    </h:head>
+    <h:body>
+        <components:logAndReg /> 
 
-            <section class="start" id="start">
-                <h:panelGroup id="categories">
-                    <p:dataTable value="#{categoryBackingBean.allCategories}" var="category"
-                                 paginator="true" rows="10">
-                        <p:column headerText="Name" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
-                        <p:column headerText="Description" sortBy="#{category.description}">#{category.description}</p:column>
-                        <p:column headerText="Latest Thread" sortBy="#{categoryBackingBean.latestThread(category).title}">
-                            <ui:fragment rendered="#{categoryBackingBean.latestThread(category) != null}">
-                                <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{categoryBackingBean.latestThread(category).TId}">
-                                    #{categoryBackingBean.latestThread(category).title}
+        <components:header />
+
+        <section class="start" id="start">
+            <h:panelGroup id="categories">
+                <p:dataTable value="#{categoryBackingBean.allCategories}" class="threadTable" var="category"
+                             paginator="true" rows="10">
+                    <p:column headerText="Name" class="threadTableName" sortBy="#{category.name}"> <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a></p:column>
+                    <p:column headerText="Description" class="threadTableDescription" sortBy="#{category.description}">#{category.description}</p:column>
+                    <p:column headerText="Latest Thread" class="threadTableLatestThread" sortBy="#{categoryBackingBean.latestThread(category).title}">
+                        <ui:fragment rendered="#{categoryBackingBean.latestThread(category) != null}">
+                            <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{categoryBackingBean.latestThread(category).TId}">
+                                #{categoryBackingBean.latestThread(category).title}
+                            </a>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{categoryBackingBean.latestThread(category) == null}">
+                            None
+                        </ui:fragment>
+                    </p:column>
+                    <p:column headerText="By user" sortBy="#{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)).user.userName}">
+                        <ui:fragment rendered="#{categoryBackingBean.latestThread(category) != null}">
+                            <ui:fragment rendered="#{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)) != null}">
+                                <a href="/DAT076_Web-applikationer/account_page?userName=#{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)).user.userName}">
+                                    #{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)).user.userName}
                                 </a>
                             </ui:fragment>
-                            <ui:fragment rendered="#{categoryBackingBean.latestThread(category) == null}">
+                            <ui:fragment rendered="#{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)) == null}">
                                 None
                             </ui:fragment>
-                        </p:column>
-                        <p:column headerText="By user" sortBy="#{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)).user.userName}">
-                            <ui:fragment rendered="#{categoryBackingBean.latestThread(category) != null}">
-                                <ui:fragment rendered="#{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)) != null}">
-                                    <a href="/DAT076_Web-applikationer/account_page?userName=#{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)).user.userName}">
-                                        #{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)).user.userName}
-                                    </a>
-                                </ui:fragment>
-                                <ui:fragment rendered="#{threadBackingBean.latestPost(categoryBackingBean.latestThread(category)) == null}">
-                                    None
-                                </ui:fragment>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{categoryBackingBean.latestThread(category) == null}">
-                                None
-                            </ui:fragment>
-                        </p:column>
-                        <p:column headerText="Remove" rendered="#{userBean.account.role == 'administrator'}">
-                            <p:commandButton value="Remove Category" action="#{categoryController.removeCategory(category)}" />
-                        </p:column>
-                    </p:dataTable>
-                </h:panelGroup>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{categoryBackingBean.latestThread(category) == null}">
+                            None
+                        </ui:fragment>
+                    </p:column>
+                    <p:column headerText="Remove" class="threadTableRemoveCategory" rendered="#{userBean.account.role == 'administrator'}">
+                        <p:commandButton value="Remove Category" action="#{categoryController.removeCategory(category)}" />
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
 
+            <h:form id="create_category" rendered="#{userBean.account.role == 'administrator'}">
+                <div class="ui-inputgroup">
+                    <p:inputText id="category_title" placeholder="Category title" value="#{categoryBackingBean.enteredTitle}"/> 
+                    <p:inputText id="category_description" placeholder="Category description" value="#{categoryBackingBean.enteredDescription}"/> 
+                    <p:commandButton id="new_category_button" value="New Category" action="#{categoryController.createCategory()}" />
+                </div>
+            </h:form>
+        </section>
 
+        <components:footer />
 
-                <h:form id="create_category" rendered="#{userBean.account.role == 'administrator'}">
-                    <div class="ui-inputgroup">
-                        <p:inputText id="category_title" placeholder="Category title" value="#{categoryBackingBean.enteredTitle}"/> 
-                        <p:inputText id="category_description" placeholder="Category description" value="#{categoryBackingBean.enteredDescription}"/> 
-                        <p:commandButton id="new_category_button" value="New Category" action="#{categoryController.createCategory()}" />
-                    </div>
-                </h:form>
-
-            </section>
-
-            <section class="posts" id="posts">
-            </section>
-
-            <section class="create" id="create">
-            </section>
-
-            <section class="about" id="about">
-            </section>
-
-            <components:footer />
-
-
-        </ui:define>
-    </ui:decorate>
+    </h:body>
 
     <o:socket scope="application" channel="main">
         <f:ajax event="update_categories" render=":categories"/>

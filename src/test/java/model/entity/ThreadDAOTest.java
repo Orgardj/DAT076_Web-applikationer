@@ -32,13 +32,13 @@ public class ThreadDAOTest {
 
     @EJB
     private ThreadDAO threadDAO;
-    
+
     @EJB
     private CategoryDAO categoryDAO;
-    
+
     @EJB
     private PostDAO postDAO;
-    
+
     @EJB
     private AccountDAO accountDAO;
 
@@ -51,13 +51,13 @@ public class ThreadDAOTest {
     public void init() {
         Account user = new Account("john23", "kakao20", "douche@hotmail.com", "administrator", "John", "Douche", new Date(), 1);
         accountDAO.create(user);
-        
+
         category = new Category("Douche", "Im a douche", new ArrayList<>());
         categoryDAO.create(category);
 
         thread = new Thread("Data", Long.valueOf(0), new Date(), category, new ArrayList<>());
         threadDAO.create(thread);
-        
+
         postDAO.create(new Post("first post", new Date(), user, thread, "0"));
         postDAO.create(new Post("last post", new Date(), user, thread, "0"));
     }
@@ -76,7 +76,7 @@ public class ThreadDAOTest {
     public void checkThatFindThreadMatchingTIdMatchesCorrectly() {
         Assert.assertEquals(thread.getTId(), threadDAO.findThreadMatchingTId(thread.getTId()).getTId());
     }
-    
+
     @Test
     public void checkThatFirstPostMatchesCorrectly() {
         Assert.assertEquals(first_post, threadDAO.firstPost(thread));
@@ -94,7 +94,7 @@ public class ThreadDAOTest {
         threadDAO.findAll().forEach(threadDAO::remove);
 
         categoryDAO.findAll().forEach(categoryDAO::remove);
-        
+
         accountDAO.remove(accountDAO.find("john23"));
     }
 }

@@ -46,10 +46,25 @@
                         <p:commandButton value="Login" id="loginButton"
                                          action="#{accountBackingBean.validateAccount()}"
                                          styleClass="btn btn-dark"
-                                         update="logPanel" oncomplete="controllLogin();" />
+                                         update="logPanel" oncomplete="controllLogin()" />
                     </div>
 
+                    <h:inputHidden value="#{accountBackingBean.loginSuccessfully}" id="loginStatus"></h:inputHidden>  
                     <p:message for="loginButton" style="color: red"/>
+
+                    <script type="text/javascript">
+
+                        function controllLogin() {
+
+                            var see = document.getElementById("j_idt13:studentForm:loginStatus").value;
+                            alert(see);
+
+                            if (see === "true") {
+                                location.reload();
+                            }
+
+                        }
+                    </script>
 
                     <components:footer class="loginFormFooter"  value="loginFormFooter">
                         <f:facet name="singInLink">

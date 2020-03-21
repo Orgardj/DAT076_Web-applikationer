@@ -7,14 +7,14 @@ $(document).ready(function () {
 
     $("a").on('click', function (event) {
         var hash = this.hash;
-        
+
         var scrollAmount = $(hash).offset().top - 70;
 
         if (this.hash !== "") {
 
             event.preventDefault();
-            
-            
+
+
             var hash = this.hash;
             $('html, body').animate({
                 scrollTop: scrollAmount
@@ -63,10 +63,10 @@ function switchForm(type) {
     }
 }
 
-function controllError(input){
-    
+function controllError(input) {
+
     var i;
-    
+
     if ($(".regForm span").length) {
         //alert($(".regForm span").length);
 
@@ -75,8 +75,8 @@ function controllError(input){
             $(".regForm span").parent().children("label").css({"top": "calc(50% - 1em)", "transition": "0s"});
         }
     }
-    
-    if(i === 2 && input === "update"){ 
+
+    if (i === 2 && input === "update") {
         //alert(i);
         location.reload();
     }
@@ -85,9 +85,6 @@ function controllError(input){
 controllError();
 
 
-function controllLogin(){
-    location.reload();
-}
 
 
 

@@ -71,6 +71,8 @@ public class AccountBackingBean implements Serializable {
     private Boolean showEmail = false;
 
     private Boolean rememberMe = true;
+    
+    Boolean loginSuccessfully = false;
 
     public static final String SALT = "saltSecurityText";
 
@@ -205,10 +207,10 @@ public class AccountBackingBean implements Serializable {
         accountDAO.create(new Account(userNameInput, hashedPassword, email, "member", firstName, lastName, new Date(), chooseProfilePicture)); // hardcoded as member for now
     }
 
-    public String validateAccount() throws NoSuchAlgorithmException {
+    public void validateAccount() throws NoSuchAlgorithmException {
+             
         if (userNameInput.isEmpty() || passwordInput.isEmpty()) {
             Messages.addError("studentForm:loginButton", "Please enter a username and Password");
-            return "";
         }
         String passwordToHash = passwordInput;
         Account account = accountDAO.findAccountMatchingUserName(userNameInput);
@@ -218,7 +220,6 @@ public class AccountBackingBean implements Serializable {
             if (account.getPassword().equals(hashedPassword)) {
                 if (account.getRole().equals("banned")) {
                     Messages.addError("studentForm:loginButton", "Banned user");
-                    return "";
                 }
                 userBean.setAccount(account);
                 if (rememberMe) {
@@ -241,13 +242,11 @@ public class AccountBackingBean implements Serializable {
                     ec.addResponseCookie("selector", selector, map);
                     ec.addResponseCookie("validator", hashedValidator, map);
                 }
-                return "index";
+                loginSuccessfully = true;
             }
             Messages.addError("studentForm:loginButton", "Please enter a correct username and password");
-            return "";
         }
         Messages.addError("studentForm:loginButton", "Please enter a correct username and Password");
-        return "";
     }
 
     public void banAccount(Account account) {

@@ -30,11 +30,11 @@ class footer extends React.Component {
            });
            
            
-           axios.get("http://localhost:8080/lab3/resources/ws/users").then(response => {
+           /*axios.get("http://localhost:8080/lab3/resources/ws/users").then(response => {
                this.setState({users : response.data}, () => {
                    console.log(this.state);
                });
-           });
+           });*/
     
     }
         
@@ -44,12 +44,6 @@ class footer extends React.Component {
             
                 This is the footer
             
-
-                {this.state.books}
-                
-                pomjpsao
-                        
-                        {this.state.users[0]}
                 
                 </footer>
         )

@@ -19,7 +19,8 @@ import lombok.RequiredArgsConstructor;
 public class Section implements Serializable {
      
     @NonNull
-    @OneToMany(mappedBy = "section") private List<Topic> topics;
+    @OneToMany(mappedBy = "section") 
+    private List<Topic> topics;
     
     @Id
     @GeneratedValue

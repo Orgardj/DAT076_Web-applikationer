@@ -22,14 +22,16 @@ public class Topic implements Serializable {
     
     @JoinColumn(name = "sId", nullable = false)
     @NonNull
-    @ManyToOne private Section section;
+    @ManyToOne 
+    private Section section;
     
     @Id
     @GeneratedValue
     private Long tId;
     
     @NonNull
-    @OneToMany(mappedBy = "topic") private List<Post> posts;
+    @OneToMany(mappedBy = "topic")  
+    private List<Post> posts;
     
     @NonNull
     private String title;

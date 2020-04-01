@@ -5,14 +5,22 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import model.dao.AccountDAO;
 import model.dao.PostDAO;
+import model.dao.TopicDAO;
 import model.entity.Account;
 import model.entity.Post;
+import model.entity.Section;
 import model.entity.Topic;
 
 /*
@@ -31,7 +39,9 @@ public class Resources extends Application{
     private AccountDAO accountDAO;
     @EJB
     private PostDAO postDAO;
-    //account.create(new Account("john23", "douche@hotmail.com","administrator","John","Douche","kakao20",new Date()));
+    @EJB
+    private TopicDAO topicDAO;
+    
 
 
     //http://localhost:8080/lab3/resources/ws/sayhello
@@ -55,24 +65,50 @@ public class Resources extends Application{
     //http://localhost:8080/lab3/resources/ws/getallposts
     @GET
     @Path("/getallposts")
+    @Consumes(MediaType.APPLICATION_JSON)
     public List<Post> GetAllPosts() {
         return postDAO.findAll();
     }
     
     //http://localhost:8080/lab3/resources/ws/createpost
-    /*@GET
-    @Path("/sayhello")
-    public void CreatePost(Account acc, Topic topic, String text, String title) {
-        postDAO.create(new Post(acc,topic,title,text,new Date()));
-    }*/
-    
+    @POST
+    @Path("/createpost/{topicId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response CreatePost(@PathParam("topicId") long topicId, Post post) {
+        final Topic topic = topicDAO.find(topicId);
+        final Account acc = accountDAO.find("john23");
+
+        if (topic == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        post.setTimestamp(new Date());
+        post.setUser(acc);
+        post.setTopic(topic);
+
+        postDAO.create(post);
+        return Response.ok().build();
+    }
+
+    //@Consumes(MediaType.APPLICATION_JSON)
+    //public void CreatePost(Post post) {
+
     //http://localhost:8080/lab3/resources/ws/editpost
-    /*@GET
-    @Path("/sayhello")
-    public void EditPost(String editedString, Post post) {
+    @POST
+    @Path("/editpost/{postId}")
+    public Response EditPost(@PathParam("postId") long postId, String editedString) {
+        
+        Post post = postDAO.find(postId);
+        
+        if (post == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        
         post.setText(editedString);
+        
         postDAO.update(post);
-    }*/
+        return Response.ok().build();
+    }
     
     
 

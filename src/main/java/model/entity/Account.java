@@ -21,7 +21,8 @@ import lombok.RequiredArgsConstructor;
 public class Account implements Serializable {
  
     
-    @OneToMany(mappedBy = "user") private List<Post> posts;
+    @OneToMany(mappedBy = "user") 
+    private List<Post> posts;
     
     @Id
     @NonNull

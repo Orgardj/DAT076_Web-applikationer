@@ -16,11 +16,14 @@ section section {
   overflow: hidden;
 }
 
-  section section:first-of-type {
+  section section:first-of-type,
+  .accountPage,
+  .showposts {
       margin-top: 170px;
       height: calc(100vh - 170px);
       background-color: white;
   }
+  
 
 .Start h3 {
   position: absolute;
@@ -609,20 +612,6 @@ textarea {
   resize: none !important;
 }
 
-.accountPage header {
-  height: 50px;
-  position: relative;
-}
-
-.accountPage header h1 {
-  font-size: 1.5em !important;
-  position: absolute;
-  top: 10px;
-  left: 15%;
-  width: 50%;
-  text-align: left;
-  transition: none !important;
-}
 
 .accountPage .dropdown {
   height: 50px;

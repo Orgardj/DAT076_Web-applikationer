@@ -2,23 +2,16 @@ import React from 'react';
 import { HashRouter, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 import Section from './Layout/Section';
-import Navigation from './Layout/Navigation';
 import Footer from './Layout/Footer';
-import AccountIcon from './Image/accountIcon.png';
-import SearchIcon from './Image/searchIcon.png';
+
+import Header from './Layout/Header';
+
 import Post from './Pages/Post';
 import addPost from './Pages/addPost';
 //import axios from 'axios';
 
 
         function App() {
-           
-           /* 
-            axios.get("http://localhost:8080/lab3/resources/ws/users").then(response => {
-               this.setState({users : response.data}, () => {
-                   console.log(this.state);
-               });
-           });*/
 
         return (
                 <HashRouter>
@@ -45,30 +38,7 @@ import addPost from './Pages/addPost';
          }
          */}
 
-        <header className="header">
-
-            <h1 className="">Forum</h1>
-            {/*
-             <div className="searchBar">                               
-             <img src={searchIcon} alt="Search icon"></img>
-             <input type="text" placeholder="Search..."></input>
-             </div>
-             */}
-            <div className="iconHolder">
-
-                <img src={AccountIcon} className="iconHolderIcon" alt="" onClick={() => { this.setState({ visibleForm: !this.state.visibleForm, type: "LogAndReg" }); }}></img>
-
-                <div className="searchBar">                               
-                    <img src={SearchIcon} alt=""></img>
-                    <input type="text" placeholder="Search..."></input>
-                </div>
-                {/*
-                 <img src={searchIcon} className="iconHolderIcon searchIcon" alt="Login or Register icon"></img>
-                 */}
-            </div>
-            <Navigation />
-
-        </header>
+            <Header/>
 
 
         <Section id="Start" value="Start">
@@ -82,34 +52,7 @@ import addPost from './Pages/addPost';
         <Section id="Posts" value="Posts">
             <Link to="/Post">Post</Link>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    
-                    {(() => {
-                        const options = [];
-                        for (let i = 0; i <= 1; i++) {
-                            //options.push(<option value={i}>{i}</option>);
-                            //alert("this.state.users");
-                        }
 
-                        return options;
-                        })()}
-                </tbody>
-            </table>
 
 
         </Section>

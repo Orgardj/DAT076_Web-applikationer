@@ -20,11 +20,13 @@ import lombok.RequiredArgsConstructor;
 public class Post implements Serializable {
     @JoinColumn(name = "userName", nullable = false)
     @NonNull
-    @ManyToOne private Account user;
+    @ManyToOne 
+    private Account user;
     
     @JoinColumn(name = "tId", nullable = false)
     @NonNull
-    @ManyToOne private Topic topic;
+    @ManyToOne 
+    private Topic topic;
 
     @Id
     @GeneratedValue

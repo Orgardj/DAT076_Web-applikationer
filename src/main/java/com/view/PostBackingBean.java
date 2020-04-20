@@ -16,6 +16,7 @@ import javax.inject.Named;
 import lombok.Data;
 import model.dao.PostDAO;
 import model.dao.ThreadDAO;
+import model.entity.Account;
 import model.entity.Post;
 import model.entity.Thread;
 import org.omnifaces.cdi.Param;
@@ -79,5 +80,10 @@ public class PostBackingBean implements Serializable {
     
     public List<Post> findPostsMatchingUserName(String userName) {
         return postDAO.findPostsMatchingUserName(userName);
+    }
+    
+    public String viewPostText(Account account, Post post) {
+        if(account.getRole().equals("deleted")) return "deleted user";
+        else return post.getText();
     }
 }

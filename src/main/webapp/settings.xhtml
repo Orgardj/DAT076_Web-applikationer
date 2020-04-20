@@ -149,6 +149,20 @@ and open the template in the editor.
         </h:form>
         <br></br>
         <h:form>
+            <h:commandButton value="Delete Account"  styleClass="btn btn-info" action="#{accountBackingBean.toggleRemoveWindow()}" 
+                             style="width: 150px;"
+                             />
+        </h:form>
+        <h:form id="removeAccountForm" styleClass="form-horizontal" rendered="#{accountBackingBean.showRemove}">
+            <div class="form-group">
+                <h:outputLabel styleClass="control-label col-sm-2">Are you sure you want to delete your account?</h:outputLabel>
+                <h:commandButton value="Delete account"  styleClass="btn btn-info" action="#{accountBackingBean.removeAccount(userBean.account)}" 
+                             style="width: 150px; color: red;"
+                             />
+            </div>
+        </h:form>
+        <br></br>
+        <h:form>
             <p:commandButton value="Home" action="index.xhtml" styleClass="btn btn-dark" />
         </h:form>
         <br></br>

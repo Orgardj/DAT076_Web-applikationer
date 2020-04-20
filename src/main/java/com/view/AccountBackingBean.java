@@ -24,7 +24,9 @@ import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ExternalContext;
 import javax.servlet.http.Cookie;
 import model.dao.AccountAuthDAO;
+import model.dao.PostDAO;
 import model.entity.AccountAuth;
+import model.entity.Post;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.omnifaces.util.Messages;
 
@@ -35,6 +37,9 @@ public class AccountBackingBean implements Serializable {
 
     @EJB
     private AccountDAO accountDAO;
+    
+    @EJB
+    private PostDAO postDAO;
 
     @EJB
     private AccountAuthDAO accountAuthDAO;
@@ -71,6 +76,8 @@ public class AccountBackingBean implements Serializable {
     private Boolean showPassword = false;
 
     private Boolean showEmail = false;
+    
+    private Boolean showRemove = false;
 
     private Boolean rememberMe = true;
 
@@ -159,12 +166,20 @@ public class AccountBackingBean implements Serializable {
 
     public void togglePasswordWindow() {
         showEmail = false;
+        showRemove = false;
         showPassword = !showPassword;
     }
 
     public void toggleEmailWindow() {
-        showEmail = !showEmail;
         showPassword = false;
+        showRemove = false;
+        showEmail = !showEmail;
+    }
+    
+    public void toggleRemoveWindow() {
+        showEmail = false;
+        showPassword = false;
+        showRemove = !showRemove;
     }
 
     public void changePassword(Account account) throws NoSuchAlgorithmException {
@@ -227,6 +242,10 @@ public class AccountBackingBean implements Serializable {
                     Messages.addError("studentForm:loginButton", "Banned user");
                     return;
                 }
+                else if(account.getRole().equals("deleted")) {
+                    Messages.addError("studentForm:loginButton", "deleted user");
+                    return;
+                }
                 userBean.setAccount(account);
                 if (rememberMe) {
                     AccountAuth newToken = new AccountAuth();
@@ -258,6 +277,14 @@ public class AccountBackingBean implements Serializable {
     public void banAccount(Account account) {
         account.setRole("banned");
         accountDAO.update(account);
+    }
+    
+    public void removeAccount(Account account) {
+        showRemove = false;
+        account.setRole("deleted");
+        accountDAO.update(account);
+        if(userBean.isLoggedIn()) 
+            logout();
     }
 
     public String viewProfilePicture(Account account) {

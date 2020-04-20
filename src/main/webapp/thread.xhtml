@@ -46,7 +46,7 @@
                         </h:panelGrid>
 
                         <h:panelGrid id = "panel3" columns = "1" border = "0"
-                                     cellpadding = "10" cellspacing = "1">
+                                     cellpadding = "10" cellspacing = "1" rendered = "#{post.user.role != 'deleted'}">
                             <p:outputPanel id="regular-content-#{post.PId}">
                                 <div>
                                     <h:outputText value="#{post.text}" escape="false" />
@@ -88,11 +88,25 @@
                                 <p:commandButton value="Exit" onclick="exitEditingMode('regular-content-#{post.PId}', 'editing-content-#{post.PId}')"/>
                             </p:outputPanel>
                         </h:panelGrid>
+                        
+                        <h:panelGrid id = "deletedpanel" columns = "1" border = "0"
+                                     cellpadding = "10" cellspacing = "1" rendered = "#{post.user.role == 'deleted'}">
+                            
+                            <p:outputPanel id="regular-content-deleted#{post.PId}">
+                                <div>
+                                    <h:outputText value="deleted user" escape="false" />
+                                </div>
+                                <h:form rendered="#{userBean.account.role == 'administrator'}">
+                                    <p:commandButton value="Remove Post" action="#{postController.removePost(post)}" />
+                                </h:form>
+                            </p:outputPanel>
+                        </h:panelGrid>
                     </h:panelGrid>
+                    
                 </c:forEach>
             </h:panelGroup>
 
-            <h:form id="te-test" rendered="#{userBean.loggedIn}">
+            <h:form id="te-test" rendered="#{userBean.loggedIn and userBean.account.role != ('banned' || 'deleted')}">
                 <!-- ui-inputgroup has to be removed if you don't want textEditor
                     and commandButton on the same row. -->
                 <div class="ui-inputgroup">
@@ -113,11 +127,14 @@
                     <p:commandButton value="Comment" action="#{postController.newPost()}"/>
                 </div>
             </h:form>
-            <h:form rendered="#{!userBean.loggedIn and userBean.account.role != 'banned'}">
+            <h:form rendered="#{!userBean.loggedIn}">
                 <p>Login to add a response</p>
             </h:form>
-            <h:form rendered="#{!userBean.loggedIn and userBean.account.role == 'banned'}">
+            <h:form rendered="#{userBean.account.role == 'banned'}">
                 <p>Banned users cannot add a response</p>
+            </h:form>
+            <h:form rendered="#{userBean.account.role == 'deleted'}">
+                <p>Deleted users cannot add a response (how are you even logged in??)</p>
             </h:form>
         </ui:define>
     </ui:decorate>

@@ -4,18 +4,84 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-	<cc:interface>
-		<cc:attribute name="value"/>
-                <cc:facet name="singInLink" />
-	</cc:interface>
-	<cc:implementation>
-        
-            
-            <footer class="footer #{cc.attrs.value}">
-                <cc:renderFacet name="singInLink" />
-            </footer>
 
-        
-        
-        </cc:implementation>
+    <cc:interface>
+        <cc:attribute name="value"/>
+        <cc:facet name="singInLink" />
+    </cc:interface>
+    <cc:implementation>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+
+
+
+        <footer class="page-footer font-small #{cc.attrs.value}">
+            <cc:renderFacet name="singInLink" />
+
+
+            <!-- Footer Links -->
+            <div class="container text-center text-md-left">
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold mt-3 mb-4">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Contact us</a>
+                            </li>
+                            <li>
+                                <a href="#!">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="#!">Rules and Guidelines</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none"></hr>
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold mt-3 mb-4">Can't find what you're looking for? try searching here!</h5>
+
+                        <!-- Form -->
+                        <form class="form-inline">
+                            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+                                   aria-label="Search" value="#{backingBean.searchText}"/>
+                            <a href="#{backingBean.searchResult}">
+                                <h:commandButton value="Search"  styleClass="btn btn-info" action="#{controller.toggleSearchResult()}" 
+                                                 style="width: 150px;"
+                                                 />
+                            </a>
+                        </form>
+                        <!-- Form -->
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links -->
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="#"> Forum.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+
+
+
+    </cc:implementation>
 </html>

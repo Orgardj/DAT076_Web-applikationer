@@ -8,13 +8,13 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:components="http://xmlns.jcp.org/jsf/composite/components">
     <ui:decorate template="WEB-INF/template/common.xhtml">
-                <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
 
         <ui:define name="title">Category</ui:define>
         <h:outputScript library="js" name="category.js" target="head" />
         <h:outputStylesheet library="css" name = "quill.css" />
         <h:outputStylesheet library="css" name = "category.css" />
         <h:outputStylesheet library="css" name = "index.css" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
         <ui:define name="content">
             <h1>Categories</h1>
 
@@ -52,9 +52,11 @@
             <h:form rendered="#{!userBean.loggedIn and userBean.account.role == 'banned'}">
                 <p>Banned users cannot create threads</p>
             </h:form>
-
+            
         </ui:define>
+        
     </ui:decorate>
+    <components:footer />
     <o:socket scope="application" channel="main">
         <f:ajax event="update_threads" render=":threads"/>
     </o:socket>

@@ -109,7 +109,7 @@
                 </c:forEach>
             </h:panelGroup>
 
-            <h:form id="te-test" rendered="#{userBean.loggedIn and userBean.account.role != ('banned' || 'deleted')}">
+            <h:form id="te-test" rendered="#{userBean.loggedIn}">
                 <!-- ui-inputgroup has to be removed if you don't want textEditor
                     and commandButton on the same row. -->
                 <div class="ui-inputgroup">
@@ -140,7 +140,9 @@
                 <p>Deleted users cannot add a response (how are you even logged in??)</p>
             </h:form>
         </ui:define>
+        
     </ui:decorate>
+    <components:footer />
     <o:socket scope="application" channel="main">
         <f:ajax event="update_posts" render=":posts te-test"/>
     </o:socket>

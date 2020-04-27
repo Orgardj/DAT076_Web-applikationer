@@ -56,4 +56,8 @@ public class Account implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<AccountAuth> accountAuths;
+    
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<Thread> followingThreads;
 }

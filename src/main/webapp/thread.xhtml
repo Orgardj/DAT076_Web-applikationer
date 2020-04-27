@@ -9,7 +9,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:components="http://xmlns.jcp.org/jsf/composite/components">
     <ui:decorate template="WEB-INF/template/common.xhtml">
-                <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
 
         <ui:define name="title">Thread</ui:define>
         <ui:define name="content">
@@ -18,6 +18,7 @@
             <h:outputScript library="js" name="thread.js" target="head" />
 
             <h1>#{postBackingBean.thread.title}</h1>
+            <p:commandButton value="Follow" action="#{accountBackingBean.addFollowing(userBean.account, postBackingBean.thread)}"/>
 
             <h:panelGroup id="posts">
                 <c:forEach var="post" items="#{postBackingBean.matchingPosts}">
@@ -91,10 +92,10 @@
                                 <p:commandButton value="Exit" onclick="exitEditingMode('regular-content-#{post.PId}', 'editing-content-#{post.PId}')"/>
                             </p:outputPanel>
                         </h:panelGrid>
-                        
+
                         <h:panelGrid id = "deletedpanel" columns = "1" border = "0"
                                      cellpadding = "10" cellspacing = "1" rendered = "#{post.user.role == 'deleted'}">
-                            
+
                             <p:outputPanel id="regular-content-deleted#{post.PId}">
                                 <div>
                                     <h:outputText value="deleted user" escape="false" />
@@ -105,7 +106,7 @@
                             </p:outputPanel>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                 </c:forEach>
             </h:panelGroup>
 
@@ -140,7 +141,7 @@
                 <p>Deleted users cannot add a response (how are you even logged in??)</p>
             </h:form>
         </ui:define>
-        
+
     </ui:decorate>
     <components:footer />
     <o:socket scope="application" channel="main">

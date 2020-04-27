@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lombok.Getter;
 import model.entity.Account;
+import model.entity.Thread;
 import model.entity.QAccount;
 
 /**
@@ -47,5 +48,15 @@ public class AccountDAO extends AbstractDAO<Account, String> {
     public List<Account> findAccountsMatchingRole(String role) {
         return (List<Account>) entityManager.createQuery("SELECT a FROM Account a WHERE a.role = :role")
                 .setParameter("role", role).getResultList();
+    }
+    
+    public Account accountFollowingThread(Thread thread) {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+        QAccount account = QAccount.account;
+
+        Account l = queryFactory.selectFrom(account)
+                .where(account.followingThreads.contains(thread))
+                .fetchFirst();
+        return l;
     }
 }

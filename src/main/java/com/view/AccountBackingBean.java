@@ -18,7 +18,9 @@ import model.entity.Account;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ExternalContext;
@@ -27,6 +29,7 @@ import model.dao.AccountAuthDAO;
 import model.dao.PostDAO;
 import model.entity.AccountAuth;
 import model.entity.Post;
+import model.entity.Thread;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.omnifaces.util.Messages;
 
@@ -37,7 +40,7 @@ public class AccountBackingBean implements Serializable {
 
     @EJB
     private AccountDAO accountDAO;
-    
+
     @EJB
     private PostDAO postDAO;
 
@@ -76,14 +79,16 @@ public class AccountBackingBean implements Serializable {
     private Boolean showPassword = false;
 
     private Boolean showEmail = false;
-    
+
     private Boolean showRemove = false;
 
     private Boolean rememberMe = true;
 
     private Boolean loginSuccessfully = false;
-    
+
     private Boolean registerSuccessfully = false;
+
+    private String followingThreads = "";
 
     public static final String SALT = "saltSecurityText";
 
@@ -175,7 +180,7 @@ public class AccountBackingBean implements Serializable {
         showRemove = false;
         showEmail = !showEmail;
     }
-    
+
     public void toggleRemoveWindow() {
         showEmail = false;
         showPassword = false;
@@ -241,8 +246,7 @@ public class AccountBackingBean implements Serializable {
                 if (account.getRole().equals("banned")) {
                     Messages.addError("studentForm:loginButton", "Banned user");
                     return;
-                }
-                else if(account.getRole().equals("deleted")) {
+                } else if (account.getRole().equals("deleted")) {
                     Messages.addError("studentForm:loginButton", "deleted user");
                     return;
                 }
@@ -278,13 +282,14 @@ public class AccountBackingBean implements Serializable {
         account.setRole("banned");
         accountDAO.update(account);
     }
-    
+
     public void removeAccount(Account account) {
         showRemove = false;
         account.setRole("deleted");
         accountDAO.update(account);
-        if(userBean.isLoggedIn()) 
+        if (userBean.isLoggedIn()) {
             logout();
+        }
     }
 
     public String viewProfilePicture(Account account) {
@@ -307,5 +312,39 @@ public class AccountBackingBean implements Serializable {
             ec.addResponseCookie("selector", "", map);
             ec.addResponseCookie("validator", "", map);
         }
+    }
+
+    public void updateFollowingThreads(Account account) {
+        followingThreads = "";
+        for (Thread thread : account.getFollowingThreads()) {
+            if (followingThreads.equals("")) {
+                followingThreads = thread.getTitle();
+            } else {
+                followingThreads = "," + thread.getTitle();
+            }
+        }
+
+    }
+
+    public boolean isFollowing(Account account, Thread thread) {
+        if (accountDAO.accountFollowingThread(thread) == account) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void addFollowing(Account account, Thread thread) {
+        List<Thread> temp = account.getFollowingThreads();
+        temp.add(thread);
+        account.setFollowingThreads(temp);
+        accountDAO.update(account);
+        
+        followingThreads = "xd";
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("You can't delete it."));
+        
+        updateFollowingThreads(account);
     }
 }

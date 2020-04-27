@@ -27,6 +27,7 @@ public class Thread implements Serializable {
     @GeneratedValue
     private Long tId;
 
+    
     @NonNull
     private String title;
 

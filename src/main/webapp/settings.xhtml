@@ -57,6 +57,33 @@ and open the template in the editor.
             </div>
         </h:form>
         <h:form>
+            <h:commandButton value="Change First Name"  styleClass="btn btn-info" action="#{accountBackingBean.toggleFirstNameWindow()}" 
+                             style="width: 150px;"
+                             />
+        </h:form>
+        <h:form id="changeFirstNameForm" styleClass="form-horizontal" rendered="#{accountBackingBean.showFirstName}">
+            <div class="form-group">
+                <h:outputLabel value="New Name" styleClass="control-label col-sm-2" />
+                <div class="col-sm-10">
+                    <p:inputText id="firstName" value="#{accountBackingBean.firstName}" styleClass="form-control" required="true" 
+                                 requiredMessage="Please enter your new name"
+                                 validatorMessage="Name is invalid"
+                                 style="width: 300px;"
+                                 >
+                        <f:validateRegex pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" />
+                    </p:inputText>
+                    <h:message for="firstName" style="color: red"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <h:commandButton value="Save name" id="changeFirstNameButton" action="#{accountBackingBean.changeFirstName(userBean.account)}" styleClass="btn btn-primary" />
+                </div>
+                <p:message for="changeFirstNameButton" style="color: red"/>
+            </div>
+        </h:form>
+        <br></br>
+        <h:form>
             <h:commandButton value="Change password"  styleClass="btn btn-info"  action="#{accountBackingBean.togglePasswordWindow()}" 
                              style="width: 150px;"
                              />
@@ -161,9 +188,11 @@ and open the template in the editor.
         <h:form id="removeAccountForm" styleClass="form-horizontal" rendered="#{accountBackingBean.showRemove}">
             <div class="form-group">
                 <h:outputLabel styleClass="control-label col-sm-2">Are you sure you want to delete your account?</h:outputLabel>
-                <h:commandButton value="Delete account"  styleClass="btn btn-info" action="#{accountBackingBean.removeAccount(userBean.account)}" 
+                <h:link outcome = "index" >
+                    <h:commandButton value="Delete account"  styleClass="btn btn-info" action="#{accountBackingBean.removeAccount(userBean.account)}" 
                              style="width: 150px; color: red;"
                              />
+                </h:link>
             </div>
         </h:form>
         <br></br>

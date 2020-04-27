@@ -4,6 +4,7 @@ package com.view;
  *
  * @author jblom
  */
+import java.io.IOException;
 import model.UserBean;
 import java.io.Serializable;
 import java.util.Date;
@@ -81,6 +82,8 @@ public class AccountBackingBean implements Serializable {
     private Boolean showEmail = false;
 
     private Boolean showRemove = false;
+    
+    private Boolean showFirstName = false;
 
     private Boolean rememberMe = true;
 
@@ -186,6 +189,13 @@ public class AccountBackingBean implements Serializable {
         showPassword = false;
         showRemove = !showRemove;
     }
+    
+    public void toggleFirstNameWindow() {
+        showEmail = false;
+        showPassword = false;
+        showRemove = false;
+        showFirstName = !showFirstName;
+    }
 
     public void changePassword(Account account) throws NoSuchAlgorithmException {
         checkIfPasswordsMatch(passwordInput2);
@@ -226,6 +236,12 @@ public class AccountBackingBean implements Serializable {
             inputText = (HtmlInputText) uiViewRoot.findComponent("changePasswordForm:oldPassword");
             inputText.setValue("");
         }
+    }
+    
+    public void changeFirstName(Account account) {
+        account.setFirstName(firstName);
+        accountDAO.update(account);
+        toggleFirstNameWindow();
     }
 
     public void addAccount() {
@@ -283,13 +299,14 @@ public class AccountBackingBean implements Serializable {
         accountDAO.update(account);
     }
 
-    public void removeAccount(Account account) {
+    public void removeAccount(Account account) throws IOException {
         showRemove = false;
         account.setRole("deleted");
         accountDAO.update(account);
         if (userBean.isLoggedIn()) {
             logout();
         }
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/index");
     }
 
     public String viewProfilePicture(Account account) {

@@ -57,11 +57,9 @@
                         <form class="form-inline">
                             <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
                                    aria-label="Search" value="#{backingBean.searchText}"/>
-                            <a href="#{backingBean.searchResult}">
-                                <h:commandButton value="Search"  styleClass="btn btn-info" action="#{controller.toggleSearchResult()}" 
-                                                 style="width: 150px;"
-                                                 />
-                            </a>
+                            <h:commandButton value="Search"  styleClass="btn btn-info" action="#{controller.search()}" 
+                                             style="width: 150px;"
+                                             />
                         </form>
                         <!-- Form -->
 

@@ -1,0 +1,10 @@
+content {
+    height: 100%;
+    background-color: black;
+}
+
+footer {
+    position: fixed;
+    bottom: 300px;
+    width: 15px;
+}

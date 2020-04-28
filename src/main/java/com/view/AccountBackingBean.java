@@ -359,9 +359,6 @@ public class AccountBackingBean implements Serializable {
         
         followingThreads = "xd";
         
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("You can't delete it."));
-        
         updateFollowingThreads(account);
     }
 }

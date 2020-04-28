@@ -59,7 +59,7 @@ public class BackingBean implements Serializable {
     }
 
     public String Search() {
-        if(searchText.equals("index")) return "/DAT076_Web-applikationer/index.xhtml";
+        if(searchText.equals("index")) return "localhost:8080/DAT076_Web-applikationer/index.xhtml";
         else return "nothing found";
     }
 }

@@ -24,9 +24,9 @@ public class Controller implements Serializable {
         if(text.equals("index") || text.equals("settings"))FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/" + backingBean.Search());
         else */
         
-        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/index");
         
         
+        backingBean.Search();
     }
     
         public void toggleSearchResult() {

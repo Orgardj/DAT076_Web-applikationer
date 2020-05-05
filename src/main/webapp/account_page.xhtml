@@ -28,6 +28,7 @@
                         </h:form>
                     </h:panelGrid>
                 </h:panelGroup>
+                
                 <h:panelGrid id = "panel3" columns = "1" border = "0"
                              cellpadding = "10" cellspacing = "1">
                     <div>Latest posts</div>
@@ -45,6 +46,17 @@
                             </p:column>
                         </p:dataTable>
                     </h:panelGroup>
+                    
+                    <div>following threads</div>
+                    <h:panelGroup id="threads">
+                        <p:dataTable value="#{threadController.getFollowingThreads(accountPageBackingBean.account)}" var="thread"
+                                     paginator="true" rows="10">
+                            <p:column headerText="title" sortBy="#{thread.title}"> <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{thread.TId}">#{thread.title}</a></p:column>
+                            <p:column headerText="Thread Views" sortBy="#{thread.views}">#{thread.views}</p:column>
+                            <p:column headerText="Created" sortBy="#{thread.creationTimestamp}">#{thread.creationTimestamp}</p:column>
+                        </p:dataTable>
+                    </h:panelGroup>
+                    
                 </h:panelGrid>
             </h:panelGrid>
         </ui:define>

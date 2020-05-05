@@ -14,11 +14,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Data;
+import model.dao.AccountDAO;
 import model.dao.CategoryDAO;
 import model.dao.PostDAO;
 import model.dao.ThreadDAO;
 import model.entity.Post;
 import model.entity.Thread;
+import model.entity.Account;
 import org.omnifaces.cdi.Param;
 
 @Data
@@ -35,6 +37,9 @@ public class ThreadBackingBean implements Serializable {
 
     @EJB
     private CategoryDAO categoryDAO;
+    
+    @EJB
+    private AccountDAO accountDAO;
 
     @EJB
     private PostDAO postDAO;
@@ -84,5 +89,9 @@ public class ThreadBackingBean implements Serializable {
             return comment.substring(0, 50) + "...";
         }
         return comment;
+    }
+    
+    public List<Thread> getFollowingThreads(Account user) {
+        return user.getFollowingThreads();
     }
 }

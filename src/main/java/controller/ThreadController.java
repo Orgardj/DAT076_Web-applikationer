@@ -2,9 +2,11 @@ package controller;
 
 import com.view.ThreadBackingBean;
 import java.io.Serializable;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import model.entity.Account;
 import org.omnifaces.cdi.Push;
 import org.omnifaces.cdi.PushContext;
 import model.entity.Thread;
@@ -23,5 +25,9 @@ public class ThreadController implements Serializable {
     public void removeThread(Thread thread) {
         threadBackingBean.removeThread(thread);
         push.send("update_threads");
+    }
+    
+    public List<Thread> getFollowingThreads(Account account) {
+        return threadBackingBean.getFollowingThreads(account);
     }
 }

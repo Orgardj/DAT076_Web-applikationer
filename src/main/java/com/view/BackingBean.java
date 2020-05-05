@@ -4,6 +4,7 @@ package com.view;
  *
  * @author jblom
  */
+import java.io.IOException;
 import model.UserBean;
 import java.io.Serializable;
 import java.util.Date;
@@ -58,8 +59,11 @@ public class BackingBean implements Serializable {
         showSearchResult = !showSearchResult;
     }
 
-    public String Search() {
-        if(searchText.equals("index")) return "localhost:8080/DAT076_Web-applikationer/index.xhtml";
-        else return "nothing found";
+    public void Search() throws IOException {
+        
+        if(searchText.equals("settings")) FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/settings");
+        else if(searchText.equals("settings")) FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/settings");
+        else if(accountDAO.findAccountMatchingUserName(searchText).getUserName().equals(searchText)) FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/account_page?userName=" + searchText);
+        else FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/index");
     }
 }

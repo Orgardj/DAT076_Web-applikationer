@@ -73,4 +73,5 @@ public class ThreadDAO extends AbstractDAO<Thread, Long> {
         }
         return thread.getPosts().get(thread.getPosts().size() - 1);
     }
+    
 }

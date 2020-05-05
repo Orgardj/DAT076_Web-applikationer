@@ -1,6 +1,7 @@
 package controller;
 
 import com.view.AccountBackingBean;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -24,5 +25,21 @@ public class AccountController implements Serializable {
         accountBackingBean.banAccount(account);
         push.send("update_posts");
         push.send("update_users");
+    }
+    
+    public void addFollowing(Account account, String string) {
+        accountBackingBean.addFollowing(account, string);
+    }
+    
+    public void changeFirstName(Account account) {
+        accountBackingBean.changeFirstName(account);
+    }
+    
+    public void toggleRemoveWindow() {
+        accountBackingBean.toggleRemoveWindow();
+    }
+    
+    public void removeAccount(Account account) throws IOException {
+        accountBackingBean.removeAccount(account);
     }
 }

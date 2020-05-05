@@ -18,7 +18,7 @@
             <h:outputScript library="js" name="thread.js" target="head" />
 
             <h1>#{postBackingBean.thread.title}</h1>
-            <p:commandButton value="Follow" action="#{accountBackingBean.addFollowing(userBean.account, postBackingBean.thread)}"/>
+            <p:commandButton value="Follow" action="#{accountController.addFollowing(userBean.account, postBackingBean.thread.title)}"/>
 
             <h:panelGroup id="posts">
                 <c:forEach var="post" items="#{postBackingBean.matchingPosts}">

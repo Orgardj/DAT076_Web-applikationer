@@ -7,6 +7,7 @@ package com.view;
 import java.io.IOException;
 import model.UserBean;
 import java.io.Serializable;
+import static java.lang.System.console;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -28,6 +29,7 @@ import javax.faces.context.ExternalContext;
 import javax.servlet.http.Cookie;
 import model.dao.AccountAuthDAO;
 import model.dao.PostDAO;
+import model.dao.ThreadDAO;
 import model.entity.AccountAuth;
 import model.entity.Post;
 import model.entity.Thread;
@@ -44,6 +46,8 @@ public class AccountBackingBean implements Serializable {
 
     @EJB
     private PostDAO postDAO;
+    
+    @EJB ThreadDAO threadDAO;
 
     @EJB
     private AccountAuthDAO accountAuthDAO;
@@ -337,7 +341,7 @@ public class AccountBackingBean implements Serializable {
             if (followingThreads.equals("")) {
                 followingThreads = thread.getTitle();
             } else {
-                followingThreads = "," + thread.getTitle();
+                followingThreads += "," + thread.getTitle();
             }
         }
 
@@ -346,12 +350,15 @@ public class AccountBackingBean implements Serializable {
     public boolean isFollowing(Account account, Thread thread) {
         if (accountDAO.accountFollowingThread(thread) == account) {
             return true;
-        } else {
+        } else 
             return false;
-        }
+        
     }
 
-    public void addFollowing(Account account, Thread thread) {
+    public void addFollowing(Account account, String threadTitle) {
+
+        Thread thread = threadDAO.findThreadMatchingTitle(threadTitle);
+        
         List<Thread> temp = account.getFollowingThreads();
         temp.add(thread);
         account.setFollowingThreads(temp);

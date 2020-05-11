@@ -71,10 +71,10 @@ public class BackingBean implements Serializable {
             searchResult = "account_page?userName=" + searchText; 
         }
         else if(categoryDAO.findCategoryMatchingName(searchText) != null) {
-            searchResult = "category.xhtml?id=" + categoryDAO.findCategoryMatchingName(searchText).getCId(); 
+            searchResult = "category?id=" + categoryDAO.findCategoryMatchingName(searchText).getCId(); 
         }
         else if(threadDAO.findThreadMatchingTitle(searchText).getTitle().equals(searchText)) {
-            searchResult = "thread.xhtml?id=" + threadDAO.findThreadMatchingTitle(searchText).getTId(); 
+            searchResult = "thread?id=" + threadDAO.findThreadMatchingTitle(searchText).getTId(); 
         }
         else searchResult = "index";
         

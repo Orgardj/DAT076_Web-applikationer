@@ -61,23 +61,28 @@ public class BackingBean implements Serializable {
     
     private String searchResult;
 
-    public String search(){
-        
+    public void search(){
+       
         if(searchText.equals("index")) searchResult = "index";
         else if(searchText.equals("register")) searchResult = "register";
         else if(searchText.equals("login")) searchResult = "login";
         else if(accountDAO.findAccountMatchingUserName(searchText) != null) {
-            //accountPageBackingBean.setUserName(searchText);
             searchResult = "account_page?userName=" + searchText; 
         }
         else if(categoryDAO.findCategoryMatchingName(searchText) != null) {
             searchResult = "category?id=" + categoryDAO.findCategoryMatchingName(searchText).getCId(); 
         }
-        else if(threadDAO.findThreadMatchingTitle(searchText).getTitle().equals(searchText)) {
+        else if(threadDAO.findThreadMatchingTitle(searchText) != null) {
             searchResult = "thread?id=" + threadDAO.findThreadMatchingTitle(searchText).getTId(); 
         }
-        else searchResult = "index";
+        else {
+            searchResult = "index";
+            searchText = "nothing found for: " + searchText;
+        }
         
-        return searchResult;
+    }
+    
+    public void toggleSearchResult() {
+        showSearchResult = true;
     }
 }

@@ -63,10 +63,18 @@
                     <p:commandButton id="new_category_button" value="New Category" action="#{categoryController.createCategory()}" />
                 </div>
             </h:form>
-            <div>
-                <p:outputLabel>search result:</p:outputLabel>
-                <a href="/DAT076_Web-applikationer/account_page?userName=admin">haha#{BackingBean.searchText}</a>
-            </div>
+            
+            <h:form id="searchResultForm" styleClass="form-horizontal" rendered="#{backingBean.showSearchResult}">
+                <div class="form-group">
+                    <h:outputLabel value="Search Result" styleClass="control-label col-sm-2" />
+                    <div class="col-sm-10">
+                        <a href="/DAT076_Web-applikationer/#{backingBean.searchResult}">
+                            #{backingBean.searchText}
+                        </a>
+                    </div>
+                </div>
+
+            </h:form>
         </section>
 
         <components:footer />

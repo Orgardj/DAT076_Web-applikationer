@@ -19,7 +19,18 @@ public class Controller implements Serializable {
     @Inject
     private BackingBean backingBean;
 
-    public String search (){     
-        return backingBean.search();
+    public void search() {
+        backingBean.search();
+    }
+
+    public void toggleSearchResult() {
+        if (!backingBean.getSearchText().equals("")) {
+            search();
+
+        }
+        if (backingBean.getSearchResult() != null) {
+            backingBean.toggleSearchResult();
+        }
+
     }
 }

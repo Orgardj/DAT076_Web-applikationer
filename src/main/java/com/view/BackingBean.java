@@ -25,7 +25,8 @@ import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ExternalContext;
 import javax.servlet.http.Cookie;
 import model.dao.AccountAuthDAO;
-import model.dao.PostDAO;
+import model.dao.ThreadDAO;
+import model.dao.CategoryDAO;
 import model.entity.AccountAuth;
 import model.entity.Post;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -40,30 +41,43 @@ public class BackingBean implements Serializable {
     private AccountDAO accountDAO;
     
     @EJB
-    private PostDAO postDAO;
+    private ThreadDAO threadDAO;
+    
+    @EJB
+    private CategoryDAO categoryDAO;
 
     @EJB
     private AccountAuthDAO accountAuthDAO;
 
     @Inject
     UserBean userBean;
+
+    @Inject
+    AccountPageBackingBean accountPageBackingBean;
     
     private String searchText;
 
     private boolean showSearchResult;
-
+    
     private String searchResult;
 
-
-    public void toggleSearchResult() {
-        showSearchResult = !showSearchResult;
-    }
-
-    public void Search() throws IOException {
+    public String search(){
         
-        if(searchText.equals("settings")) FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/settings");
-        else if(searchText.equals("settings")) FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/settings");
-        else if(accountDAO.findAccountMatchingUserName(searchText).getUserName().equals(searchText)) FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/account_page?userName=" + searchText);
-        else FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/index");
+        if(searchText.equals("index")) searchResult = "index";
+        else if(searchText.equals("register")) searchResult = "register";
+        else if(searchText.equals("login")) searchResult = "login";
+        else if(accountDAO.findAccountMatchingUserName(searchText) != null) {
+            //accountPageBackingBean.setUserName(searchText);
+            searchResult = "account_page?userName=" + searchText; 
+        }
+        else if(categoryDAO.findCategoryMatchingName(searchText) != null) {
+            searchResult = "category.xhtml?id=" + categoryDAO.findCategoryMatchingName(searchText).getCId(); 
+        }
+        else if(threadDAO.findThreadMatchingTitle(searchText).getTitle().equals(searchText)) {
+            searchResult = "thread.xhtml?id=" + threadDAO.findThreadMatchingTitle(searchText).getTId(); 
+        }
+        else searchResult = "index";
+        
+        return searchResult;
     }
 }

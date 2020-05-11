@@ -25,9 +25,14 @@ public class ThreadDAO extends AbstractDAO<Thread, Long> {
         super(Thread.class);
     }
 
-    public Thread findThreadMatchingTitle(String title) {
-        return (Thread) entityManager.createQuery("SELECT t FROM Thread t WHERE t.title = :title")
-                .setParameter("title", title).getSingleResult();
+    public Thread findThreadMatchingTitle(String name) {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+        QThread thread = QThread.thread;
+
+        Thread l = queryFactory.selectFrom(thread)
+                .where(thread.title.eq(name))
+                .fetchFirst();
+        return l;
     }
 
     public List<Thread> findThreadsMatchingCategory(Long cId) {

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="WEB-INF/template/common.xhtml">
+        <ui:define name="title">Register</ui:define>
+        <ui:define name="content">
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+            <h:outputScript library="js" name="register.js" target="head" />
+            <h:outputStylesheet library="css" name = "register.css" />
+            <h:outputStylesheet library="css" name="bootstrap.min.css" />
+            <div class="container">
+                <div class="navbar navbar-inverse">
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-xs-updated">
+                        <h:form id="registerForm" styleClass="form-horizontal">
+                            <div class="form-group">
+                                <h:outputLabel value="Users Found" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10">
+                                    <a href="/DAT076_Web-applikationer/account_page?userName=#{post.user.userName}">
+                                        #{post.user.userName}
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Threads found" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10">
+                                    <a href="/DAT076_Web-applikationer/thread.xhtml?id=#{categoryBackingBean.latestThread(category).TId}">
+                                        #{categoryBackingBean.latestThread(category).title}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Categories found" styleClass="control-label col-sm-2" />
+                                <div class="col-sm-10">
+                                    <a href="/DAT076_Web-applikationer/category.xhtml?id=#{category.CId}">#{category.name}</a>
+                                </div>
+                            </div>
+                            
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:decorate>
+</html>

@@ -19,17 +19,7 @@ public class Controller implements Serializable {
     @Inject
     private BackingBean backingBean;
 
-    public void Search () throws IOException {
-        /*String text = backingBean.Search();
-        if(text.equals("index") || text.equals("settings"))FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DAT076_Web-applikationer/" + backingBean.Search());
-        else */
-        
-        
-        
-        backingBean.Search();
-    }
-    
-        public void toggleSearchResult() {
-        backingBean.toggleSearchResult();
+    public String search (){     
+        return backingBean.search();
     }
 }

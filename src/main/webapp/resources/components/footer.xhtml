@@ -54,13 +54,12 @@
                         <h5 class="font-weight-bold mt-3 mb-4">Can't find what you're looking for? try searching here!</h5>
 
                         <!-- Form -->
-                        <form class="form-inline">
-                            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-                                   aria-label="Search" value="#{backingBean.searchText}"/>
+                        <h:form class="form-inline">
+                            <h:inputText class="form-control form-control-sm mr-3 w-75" value="#{backingBean.searchText}"/>
                             <h:commandButton value="Search"  styleClass="btn btn-info" action="#{controller.search()}" 
                                              style="width: 150px;"
                                              />
-                        </form>
+                        </h:form>
                         <!-- Form -->
 
                     </div>

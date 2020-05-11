@@ -63,6 +63,10 @@
                     <p:commandButton id="new_category_button" value="New Category" action="#{categoryController.createCategory()}" />
                 </div>
             </h:form>
+            <div>
+                <p:outputLabel>search result:</p:outputLabel>
+                <a href="/DAT076_Web-applikationer/category.xhtml?id=51">haha#{BackingBean.searchText}</a>
+            </div>
         </section>
 
         <components:footer />

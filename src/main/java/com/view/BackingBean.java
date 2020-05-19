@@ -51,9 +51,6 @@ public class BackingBean implements Serializable {
 
     @Inject
     UserBean userBean;
-
-    @Inject
-    AccountPageBackingBean accountPageBackingBean;
     
     private String searchText;
 

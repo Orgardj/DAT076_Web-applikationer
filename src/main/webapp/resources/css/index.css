@@ -429,3 +429,7 @@ footer {
 .threadTableName a:hover {
     text-decoration: underline;
 }
+
+#searchResultForm div{
+    margin: 100px;
+}

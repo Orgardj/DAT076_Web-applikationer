@@ -368,4 +368,8 @@ public class AccountBackingBean implements Serializable {
         
         updateFollowingThreads(account);
     }
+    
+    public String toSettings() {
+        return "settings";
+    }
 }

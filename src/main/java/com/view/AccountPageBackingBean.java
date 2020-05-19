@@ -31,6 +31,6 @@ public class AccountPageBackingBean implements Serializable {
 
     @PostConstruct
     private void init() {
-        account = accountDAO.find(userName);
+        account = accountDAO.findAccountMatchingUserName(userName);
     }
 }

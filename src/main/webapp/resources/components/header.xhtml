@@ -27,7 +27,7 @@
                         <p>Well hello there</p>
                         <p rendered="#{userBean.loggedIn}">#{userBean.account.userName}</p>
                         <h:form>
-                            <h:commandButton value="Account settings" action="settings" />
+                            <h:commandButton value="Account settings" action="#{accountBackingBean.toSettings()}" />
                             <h:commandButton value="logout" action="#{accountBackingBean.logout()}" onclick="location.reload()"/>
                         </h:form>
                     </div>
